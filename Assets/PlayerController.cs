@@ -9,7 +9,6 @@ public class PlayerController : NetworkBehaviour
 {
     public float Speed = 5f;
     public float JumpForce = 0.5f;
-
     Rigidbody _rb;
     CapsuleCollider _cb;
     public GameObject camHold;  
@@ -26,23 +25,21 @@ public class PlayerController : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            _rb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
-        }
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift))  //accroupis
         {
             _cb.enabled = false;
             capsCrouch.SetActive(true);
             camHold.transform.position += Vector3.up * -0.75f;
+            Speed = 2f;
+            //ajout anim accroupis
         }
-        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        else if (Input.GetKeyUp(KeyCode.LeftShift)) //debout
         {
             _cb.enabled = true;
-            
             capsCrouch.SetActive(false);
             camHold.transform.position += Vector3.up * 0.75f;
+            Speed = 5f;
+            //ajout anim debout
         }
     }
 
