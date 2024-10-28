@@ -9,20 +9,31 @@ public class PlayerPickUp : NetworkBehaviour
     public float pickUpRange = 3f;
     public Transform handPosition;
     private Camera playerCamera;
+    private GameObject highlightedObject = null;
 
     private GameObject pickedUpObject = null;
 
     void Start()
     {
-        if (isLocalPlayer)
+            if (isLocalPlayer)
+            {
+                playerCamera = GameObject.Find("PlayerCamera").GetComponent<Camera>();
+            }
+            GameObject[] pickUpObjects = GameObject.FindGameObjectsWithTag("PickUp");
+        foreach (GameObject obj in pickUpObjects)
         {
-            playerCamera = GameObject.Find("PlayerCamera").GetComponent<Camera>();
+            var outline = obj.GetComponent<Outline>();
+            if (outline != null)
+            {
+                outline.enabled = false;
+            }
         }
     }
 
     void Update()
     {
         if (!isLocalPlayer) return;
+        HighlightObject();
         if (pickedUpObject == null)
         {
             if (Input.GetKeyDown(KeyCode.E))
@@ -112,6 +123,43 @@ public class PlayerPickUp : NetworkBehaviour
             pickedUpObject.transform.position = handPosition.position + handPosition.forward * 0.5f;
             pickedUpObject = null;
             Debug.Log("Objet lâché");
+        }
+    }
+    void HighlightObject()
+    {
+
+        Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, pickUpRange))
+        {
+            GameObject targetObject = hit.collider.gameObject;
+            if (targetObject.CompareTag("PickUp"))
+            {
+                if (highlightedObject != targetObject)
+                {
+                    if (highlightedObject != null)
+                    {
+                        highlightedObject.GetComponent<Outline>().enabled = false;
+                    }
+                    var outline = targetObject.GetComponent<Outline>();
+                    if (outline != null)
+                    {
+                        outline.enabled = true;
+                    }
+                    highlightedObject = targetObject;
+                }
+            }
+            else if (highlightedObject != null)
+            {
+                highlightedObject.GetComponent<Outline>().enabled = false;
+                highlightedObject = null;
+            }
+        }
+        else if (highlightedObject != null)
+        {
+            highlightedObject.GetComponent<Outline>().enabled = false;
+            highlightedObject = null;
         }
     }
 
