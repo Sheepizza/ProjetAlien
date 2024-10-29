@@ -3,37 +3,36 @@ using System.Collections.Generic;
 using Mirror.Examples.Common;
 using UnityEngine;
 using Mirror;
+using TMPro;
 
 public class PlayerPickUp : NetworkBehaviour
 {
-    public float pickUpRange = 3f;
+    public float pickUpRange = 2f;
     public Transform handPosition;
+    public TMP_Text handFullText;
+    public TMP_Text pickUpPromptText;
     private Camera playerCamera;
-    private GameObject highlightedObject = null;
-
     private GameObject pickedUpObject = null;
-
+    private GameObject highlightedObject = null;
+    [Header("Tags d'objets ramassables")]
+    public string[] pickableTags;
     void Start()
     {
-            if (isLocalPlayer)
-            {
-                playerCamera = GameObject.Find("PlayerCamera").GetComponent<Camera>();
-            }
-            GameObject[] pickUpObjects = GameObject.FindGameObjectsWithTag("PickUp");
-        foreach (GameObject obj in pickUpObjects)
+        if (isLocalPlayer)
         {
-            var outline = obj.GetComponent<Outline>();
-            if (outline != null)
+            playerCamera = GameObject.Find("PlayerCamera").GetComponent<Camera>();
+            if (handFullText != null) handFullText.enabled = false;
+            if (pickUpPromptText != null) pickUpPromptText.gameObject.SetActive(false);
+            foreach (string tag in pickableTags)
             {
-                outline.enabled = false;
+                DisableOutlineForTag(tag);
             }
         }
     }
-
     void Update()
     {
         if (!isLocalPlayer) return;
-        HighlightObject();
+
         if (pickedUpObject == null)
         {
             if (Input.GetKeyDown(KeyCode.E))
@@ -45,44 +44,44 @@ public class PlayerPickUp : NetworkBehaviour
         {
             if (Input.GetKeyDown(KeyCode.G))
             {
-                CmdDropObject();
+                RpcDropObject();
             }
         }
+        HighlightObject();
     }
-
     void TryPickUp()
     {
         Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         RaycastHit hit;
-
         if (Physics.Raycast(ray, out hit, pickUpRange))
         {
             GameObject targetObject = hit.collider.gameObject;
-            if (targetObject.CompareTag("PickUp"))
+            if (IsPickableObject(targetObject) && pickedUpObject == null)
             {
-                Debug.Log("Objet détecté : " + targetObject.name);
                 NetworkIdentity targetIdentity = targetObject.GetComponent<NetworkIdentity>();
 
                 if (targetIdentity != null)
                 {
                     CmdPickUp(targetIdentity);
                 }
-                else
-                {
-                    Debug.Log("Erreur : l'objet n'a pas de NetworkIdentity.");
-                }
             }
-            else
+            else if (pickedUpObject != null)
             {
-                Debug.Log("Aucun objet avec le tag 'PickUp' détecté.");
+                StartCoroutine(ShowHandFullMessage());
             }
-        }
-        else
-        {
-            Debug.Log("Aucun objet détecté.");
         }
     }
-
+    bool IsPickableObject(GameObject targetObject)
+    {
+        foreach (string tag in pickableTags)
+        {
+            if (targetObject.CompareTag(tag))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
     [Command]
     void CmdPickUp(NetworkIdentity targetIdentity)
     {
@@ -94,23 +93,16 @@ public class PlayerPickUp : NetworkBehaviour
         GameObject targetObject = targetIdentity.gameObject;
         if (targetObject != null)
         {
-            targetObject.transform.position = handPosition.position;
-            targetObject.transform.rotation = handPosition.rotation;
-            targetObject.transform.SetParent(handPosition); 
+            targetObject.transform.SetParent(handPosition);
+            targetObject.transform.localPosition = Vector3.zero;
+            targetObject.transform.localRotation = Quaternion.identity;
+
             targetObject.GetComponent<Collider>().enabled = false;
             targetObject.GetComponent<Rigidbody>().isKinematic = true;
 
-            pickedUpObject = targetObject; 
-            Debug.Log("Objet ramassé");
+            pickedUpObject = targetObject;
+            Debug.Log("Objet ramassé et placé dans la main !");
         }
-        else
-        {
-            Debug.Log("Erreur");
-        }
-    }
-    void CmdDropObject()
-    {
-        RpcDropObject();
     }
     [ClientRpc]
     void RpcDropObject()
@@ -121,20 +113,19 @@ public class PlayerPickUp : NetworkBehaviour
             pickedUpObject.GetComponent<Collider>().enabled = true;
             pickedUpObject.GetComponent<Rigidbody>().isKinematic = false;
             pickedUpObject.transform.position = handPosition.position + handPosition.forward * 0.5f;
+
             pickedUpObject = null;
-            Debug.Log("Objet lâché");
+            Debug.Log("Objet lâché au sol !");
         }
     }
     void HighlightObject()
     {
-
         Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         RaycastHit hit;
-
         if (Physics.Raycast(ray, out hit, pickUpRange))
         {
             GameObject targetObject = hit.collider.gameObject;
-            if (targetObject.CompareTag("PickUp"))
+            if (IsPickableObject(targetObject) && pickedUpObject == null)
             {
                 if (highlightedObject != targetObject)
                 {
@@ -142,6 +133,7 @@ public class PlayerPickUp : NetworkBehaviour
                     {
                         highlightedObject.GetComponent<Outline>().enabled = false;
                     }
+
                     var outline = targetObject.GetComponent<Outline>();
                     if (outline != null)
                     {
@@ -149,18 +141,47 @@ public class PlayerPickUp : NetworkBehaviour
                     }
                     highlightedObject = targetObject;
                 }
+                if (pickUpPromptText != null) pickUpPromptText.gameObject.SetActive(true);
             }
-            else if (highlightedObject != null)
+            else
+            {
+                if (highlightedObject != null)
+                {
+                    highlightedObject.GetComponent<Outline>().enabled = false;
+                    highlightedObject = null;
+                }
+                if (pickUpPromptText != null) pickUpPromptText.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            if (highlightedObject != null)
             {
                 highlightedObject.GetComponent<Outline>().enabled = false;
                 highlightedObject = null;
             }
-        }
-        else if (highlightedObject != null)
-        {
-            highlightedObject.GetComponent<Outline>().enabled = false;
-            highlightedObject = null;
+            if (pickUpPromptText != null) pickUpPromptText.gameObject.SetActive(false);
         }
     }
-
+    void DisableOutlineForTag(string tag)
+    {
+        GameObject[] objects = GameObject.FindGameObjectsWithTag(tag);
+        foreach (GameObject obj in objects)
+        {
+            var outline = obj.GetComponent<Outline>();
+            if (outline != null)
+            {
+                outline.enabled = false;
+            }
+        }
+    }
+    IEnumerator ShowHandFullMessage()
+    {
+        if (handFullText != null)
+        {
+            handFullText.gameObject.SetActive(true);
+            yield return new WaitForSeconds(2f);
+            handFullText.gameObject.SetActive(false);
+        }
+    }
 }
