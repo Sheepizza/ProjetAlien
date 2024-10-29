@@ -9,41 +9,44 @@ public class PlayerPickUp : NetworkBehaviour
 {
     public float pickUpRange = 2f;
     public Transform handPosition;
-    public TMP_Text handFullText;
-    public TMP_Text pickUpPromptText;
+    public GameObject  PickUpText;
     private Camera playerCamera;
     private GameObject pickedUpObject = null;
     private GameObject highlightedObject = null;
     [Header("Tags d'objets ramassables")]
     public string[] pickableTags;
-    void Awake()
-    {
-        if (handFullText != null)
-        {
-            handFullText.gameObject.SetActive(false);
-            Debug.Log("HandFullText désactivé au chargement");
-        }
-        if (pickUpPromptText != null)
-        {
-            pickUpPromptText.gameObject.SetActive(false);
-            Debug.Log("PickUpPromptText désactivé au chargement");
-        }
-    }
     void Start()
     {
-        if (isLocalPlayer)
+            if (isLocalPlayer)
+    {
+        playerCamera = GameObject.Find("PlayerCamera").GetComponent<Camera>();
+
+        // Trouver PickupText automatiquement
+        GameObject uiManager = GameObject.Find("UiManager");
+        if (uiManager != null)
         {
-            playerCamera = GameObject.Find("PlayerCamera").GetComponent<Camera>();
-            if (handFullText != null) handFullText.enabled = false;
-            Debug.Log("HandFullText désactivé au démarrage");
-            if (pickUpPromptText != null) pickUpPromptText.gameObject.SetActive(false);
-            Debug.Log("PickUpPromptText désactivé au démarrage");
-            foreach (string tag in pickableTags)
+            Canvas canvas = uiManager.GetComponentInChildren<Canvas>();
+            if (canvas != null)
             {
-                DisableOutlineForTag(tag);
+                PickUpText = canvas.transform.Find("PickUpText")?.gameObject;
             }
         }
+
+        if (PickUpText == null)
+        {
+            Debug.LogWarning("PickupText non trouvé dans UiManager. Assurez-vous que l'hiérarchie est correcte.");
+        }
+        else
+        {
+            PickUpText.SetActive(false); // Initialement caché
+        }
+
+        foreach (string tag in pickableTags)
+        {
+            DisableOutlineForTag(tag);
+        }
     }
+        }
     void Update()
     {
         if (!isLocalPlayer) return;
@@ -63,31 +66,29 @@ public class PlayerPickUp : NetworkBehaviour
             }
         }
         HighlightObject();
-    }
-    void TryPickUp()
-    {
-        Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, pickUpRange))
+        }
+        void TryPickUp()
         {
-            GameObject targetObject = hit.collider.gameObject;
-            if (IsPickableObject(targetObject) && pickedUpObject == null)
+            Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+            RaycastHit hit;
+            PickUpText.gameObject.SetActive(false);
+            if (Physics.Raycast(ray, out hit, pickUpRange))
             {
-                NetworkIdentity targetIdentity = targetObject.GetComponent<NetworkIdentity>();
-
-                if (targetIdentity != null)
+                GameObject targetObject = hit.collider.gameObject;
+                if (IsPickableObject(targetObject) && pickedUpObject == null)
                 {
-                    CmdPickUp(targetIdentity);
+                    NetworkIdentity targetIdentity = targetObject.GetComponent<NetworkIdentity>();
+
+
+                    if (targetIdentity != null)
+                    {
+                        CmdPickUp(targetIdentity);
+                    }
                 }
             }
-            else if (pickedUpObject != null)
-            {
-                StartCoroutine(ShowHandFullMessage());
-            }
         }
-    }
-    bool IsPickableObject(GameObject targetObject)
-    {
+        bool IsPickableObject(GameObject targetObject)
+        {
         foreach (string tag in pickableTags)
         {
             if (targetObject.CompareTag(tag))
@@ -147,8 +148,9 @@ public class PlayerPickUp : NetworkBehaviour
                     if (highlightedObject != null)
                     {
                         highlightedObject.GetComponent<Outline>().enabled = false;
+                        PickUpText.gameObject.SetActive(false);
                     }
-
+                    PickUpText.gameObject.SetActive(true);
                     var outline = targetObject.GetComponent<Outline>();
                     if (outline != null)
                     {
@@ -156,16 +158,15 @@ public class PlayerPickUp : NetworkBehaviour
                     }
                     highlightedObject = targetObject;
                 }
-                if (pickUpPromptText != null) pickUpPromptText.gameObject.SetActive(true);
             }
             else
             {
                 if (highlightedObject != null)
                 {
                     highlightedObject.GetComponent<Outline>().enabled = false;
+                    PickUpText.gameObject.SetActive(false);
                     highlightedObject = null;
                 }
-                if (pickUpPromptText != null) pickUpPromptText.gameObject.SetActive(false);
             }
         }
         else
@@ -173,9 +174,9 @@ public class PlayerPickUp : NetworkBehaviour
             if (highlightedObject != null)
             {
                 highlightedObject.GetComponent<Outline>().enabled = false;
+                PickUpText.gameObject.SetActive(false);
                 highlightedObject = null;
             }
-            if (pickUpPromptText != null) pickUpPromptText.gameObject.SetActive(false);
         }
     }
     void DisableOutlineForTag(string tag)
@@ -187,16 +188,8 @@ public class PlayerPickUp : NetworkBehaviour
             if (outline != null)
             {
                 outline.enabled = false;
+                PickUpText.gameObject.SetActive(false);
             }
-        }
-    }
-    IEnumerator ShowHandFullMessage()
-    {
-        if (handFullText != null)
-        {
-            handFullText.gameObject.SetActive(true);
-            yield return new WaitForSeconds(2f);
-            handFullText.gameObject.SetActive(false);
         }
     }
 }
