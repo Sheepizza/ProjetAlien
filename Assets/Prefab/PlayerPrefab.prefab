@@ -197,7 +197,7 @@ MonoBehaviour:
   pickableTags:
   - PickUp
   - Knife
-  - Sol
+  - Arm
 --- !u!1 &3918856271568550026
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,13 +16,28 @@ public class PlayerPickUp : NetworkBehaviour
     private GameObject highlightedObject = null;
     [Header("Tags d'objets ramassables")]
     public string[] pickableTags;
+    void Awake()
+    {
+        if (handFullText != null)
+        {
+            handFullText.gameObject.SetActive(false);
+            Debug.Log("HandFullText désactivé au chargement");
+        }
+        if (pickUpPromptText != null)
+        {
+            pickUpPromptText.gameObject.SetActive(false);
+            Debug.Log("PickUpPromptText désactivé au chargement");
+        }
+    }
     void Start()
     {
         if (isLocalPlayer)
         {
             playerCamera = GameObject.Find("PlayerCamera").GetComponent<Camera>();
             if (handFullText != null) handFullText.enabled = false;
+            Debug.Log("HandFullText désactivé au démarrage");
             if (pickUpPromptText != null) pickUpPromptText.gameObject.SetActive(false);
+            Debug.Log("PickUpPromptText désactivé au démarrage");
             foreach (string tag in pickableTags)
             {
                 DisableOutlineForTag(tag);
