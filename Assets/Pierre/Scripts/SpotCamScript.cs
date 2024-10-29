@@ -5,12 +5,9 @@ using UnityEngine;
 
 public class SpotCamScript : MonoBehaviour
 {
-    [SerializeField] 
-    private ScreenScript _screen;
-    [SerializeField] 
-    private Camera _securityCamera;
-    [SerializeField] 
-    private PlayerController _playerController;
+    [SerializeField] private ScreenScript _screen;
+    [SerializeField] private Camera _securityCamera;
+    [SerializeField] private PlayerController _playerController;
 
     private int _currentCamValue = 0;
 
@@ -26,7 +23,7 @@ public class SpotCamScript : MonoBehaviour
         _playerController = gameObject.GetComponentInChildren<PlayerController>();
     }
 
-    //Vérifie si la camera a une valeur et si la touche e est appuyé
+    //Vérifie si la camera a une valeur et si la touche f est appuyé
     //Si oui, met la caméra a son opposé (Si c'est faux on rentre, si c'est vrai on sort)
     void Update()
     {
@@ -106,6 +103,7 @@ public class SpotCamScript : MonoBehaviour
         }
     }
 
+    //Active/Désactive la caméra
     private void ToggleCamera()
     {
         _securityCamera.enabled = !_securityCamera.enabled;
