@@ -9,11 +9,11 @@ public class PlayerController : NetworkBehaviour
 {
     public float Speed = 5f;
     public float JumpForce = 0.5f;
-    Rigidbody _rb;
+    public float CrouchScale = 0.3f;
+        Rigidbody _rb;
     CapsuleCollider _cb;
     public GameObject camHold;  
     public GameObject caps;
-    public GameObject capsCrouch;
 
     // Start is called before the first frame update
     void Start()
@@ -27,20 +27,19 @@ public class PlayerController : NetworkBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))  //accroupis
         {
-            _cb.enabled = false;
-            capsCrouch.SetActive(true);
+            //_rb.transform.localScale = Vector3 (0, 1, 0); 
             camHold.transform.position += Vector3.up * -0.75f;
             Speed = 2f;
             //ajout anim accroupis
         }
         else if (Input.GetKeyUp(KeyCode.LeftShift)) //debout
         {
-            _cb.enabled = true;
-            capsCrouch.SetActive(false);
             camHold.transform.position += Vector3.up * 0.75f;
             Speed = 5f;
             //ajout anim debout
         }
+
+        //si il veut se relever mais qu'il touche un mur, il reste accroupit.
     }
 
     private void FixedUpdate()
