@@ -11,6 +11,8 @@ public class HighlightManager : MonoBehaviour
     GameObject[] _highlightInScene;
     GameObject highlightedObject = null;
 
+    public bool CanInteract = false;
+
     static HighlightManager instance = null;
     public static HighlightManager Instance => instance;
     private void Awake()
@@ -29,11 +31,6 @@ public class HighlightManager : MonoBehaviour
         _objectsToHighlight = _pickableObjects.PickableObjectsTagName;
     }
 
-    private void Start()
-    {
-        
-    }
-
     public void HighlightObject(Camera playerCamera)
     {
         Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
@@ -47,12 +44,16 @@ public class HighlightManager : MonoBehaviour
                 {
                     var _highlightOutline = highlightedObject.GetComponent<Outline>();
                     if (_highlightOutline != null)
-                    _highlightOutline.enabled = false;
+                    {
+                        CanInteract = false;
+                        _highlightOutline.enabled = false;
+                    }
                 }
 
                 var outline = targetObject.GetComponent<Outline>();
                 if (outline != null)
                 {
+                    CanInteract = true;
                     outline.enabled = true;
                 }
                 highlightedObject = targetObject;
@@ -61,7 +62,10 @@ public class HighlightManager : MonoBehaviour
         else
         {
             if (highlightedObject != null && highlightedObject.GetComponent<Outline>() != null)
+            {
+                CanInteract = false;
                 highlightedObject.GetComponent<Outline>().enabled = false;
+            }
             highlightedObject = null;
         }
 
@@ -92,5 +96,23 @@ public class HighlightManager : MonoBehaviour
             if (_object.CompareTag(tag)) return true;
         }
         return false;
+    }
+
+    public string GetObjectTag()
+    {
+        if (highlightedObject != null)
+        {
+            return highlightedObject.tag;
+        }
+        return null;
+    }
+
+    public string GetObjectName()
+    {
+        if (highlightedObject != null)
+        {
+            return highlightedObject.name;
+        }
+        return null;
     }
 }
