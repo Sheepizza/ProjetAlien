@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Screen
   - Room
+  - Knife
+  - Arm
+  - PickUp
+  - Cell
+  - CellPickUp
   layers:
   - Default
   - TransparentFX

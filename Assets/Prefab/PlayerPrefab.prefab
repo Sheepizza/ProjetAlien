@@ -200,6 +200,7 @@ MonoBehaviour:
   - PickUp
   - Knife
   - Arm
+  - CellPickUp
 --- !u!1 &1694546100000668775
 GameObject:
   m_ObjectHideFlags: 0
