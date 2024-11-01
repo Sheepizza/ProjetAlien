@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 89241300}
   - component: {fileID: 89241299}
   m_Layer: 0
-  m_Name: Screen
+  m_Name: ScreenJ1
   m_TagString: Screen
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -308,7 +308,7 @@ GameObject:
   - component: {fileID: 97766649}
   - component: {fileID: 97766648}
   m_Layer: 0
-  m_Name: Screen
+  m_Name: ScreenJ2
   m_TagString: Screen
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3274,7 +3274,7 @@ GameObject:
   - component: {fileID: 1464785447}
   - component: {fileID: 1464785446}
   m_Layer: 0
-  m_Name: CamScreen
+  m_Name: CamScreenJ1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4876,7 +4876,7 @@ GameObject:
   - component: {fileID: 2108779552}
   - component: {fileID: 2108779551}
   m_Layer: 0
-  m_Name: CamScreen
+  m_Name: CamScreenJ2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

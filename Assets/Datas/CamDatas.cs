@@ -1,34 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements.Experimental;
 
 [System.Serializable]
 public class CamKeyValuePair
 {
     public string key;
     public string value;
+
+    public Material CamMaterial;
 }
+
 
 [CreateAssetMenu(fileName = "Data", menuName = "Data/ButtonsCamCouples", order = 1)]
 public class CamDatas : ScriptableObject
 {
-    public List<KeyValuePair> J1BC = new List<KeyValuePair>();
-    public List<KeyValuePair> J2BC = new List<KeyValuePair>();
+    public List<CamKeyValuePair> J1BC = new List<CamKeyValuePair>();
+    public List<CamKeyValuePair> J2BC = new List<CamKeyValuePair>();
 
     public Dictionary<string, string> GetJ1Dictionary()
     {
         Dictionary<string, string> dict = new Dictionary<string, string>();
-        foreach (KeyValuePair pair in J1BC)
+        foreach (CamKeyValuePair pair in J1BC)
         {
             dict[pair.key] = pair.value;
         }
         return dict;
     }
-
+ 
     public Dictionary<string, string> GetJ2Dictionary()
     {
         Dictionary<string, string> dict = new Dictionary<string, string>();
-        foreach (KeyValuePair pair in J2BC)
+        foreach (CamKeyValuePair pair in J2BC)
         {
             dict[pair.key] = pair.value;
         }
