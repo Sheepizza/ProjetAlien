@@ -5,10 +5,12 @@ using UnityEngine;
 public class PlayerInteraction : MonoBehaviour
 {
     DoorManager _doorManager;
+    LightManager _lightManager;
 
     private void Start()
     {
         _doorManager = GetComponent<DoorManager>();
+        _lightManager = GetComponent<LightManager>();
     }
 
     // Update is called once per frame
@@ -28,11 +30,14 @@ public class PlayerInteraction : MonoBehaviour
                     break;
 
                 case "DoorButton":
-                    Debug.Log(HighlightManager.Instance.GetObjectName());
                     _doorManager.ChangeDoorState(HighlightManager.Instance.GetObjectName());
                     break;
 
                 case "VentButton":
+                    break;
+
+                case "LightButton":
+                    _lightManager.ChangeLightState(HighlightManager.Instance.GetObjectName());
                     break;
 
                 default:

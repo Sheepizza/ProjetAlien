@@ -6,10 +6,9 @@ using UnityEngine;
 
 public class DoorManager : NetworkBehaviour
 {
-    public DoorsDatas doorsDatas;
+    public DictionariesDatas doorsDatas;
     Dictionary<string, string> ButtonsDoors;
 
-    [SyncVar]
     GameObject _door;
 
     public override void OnStartLocalPlayer()

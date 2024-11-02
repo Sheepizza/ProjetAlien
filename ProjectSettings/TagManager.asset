@@ -10,6 +10,7 @@ TagManager:
   - Arm
   - PickUp
   - DoorButton
+  - LightButton
   layers:
   - Default
   - TransparentFX

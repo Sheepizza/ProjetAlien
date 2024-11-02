@@ -9,8 +9,8 @@ public class KeyValuePair
     public string value;
 }
 
-[CreateAssetMenu(fileName = "Data", menuName = "Data/ButtonsDoorsCouples", order = 1)]
-public class DoorsDatas : ScriptableObject
+[CreateAssetMenu(fileName = "Data", menuName = "Data/DictionariesDatas", order = 1)]
+public class DictionariesDatas : ScriptableObject
 {
     public List<KeyValuePair> J1BD = new List<KeyValuePair>();
     public List<KeyValuePair> J2BD = new List<KeyValuePair>();
