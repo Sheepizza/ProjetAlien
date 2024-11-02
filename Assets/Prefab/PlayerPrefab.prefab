@@ -12,10 +12,9 @@ GameObject:
   - component: {fileID: 8253320459446734062}
   - component: {fileID: 2355557690931110011}
   - component: {fileID: 3533911329781195653}
-  - component: {fileID: 4489196583225817687}
   - component: {fileID: 2503041113498875816}
   - component: {fileID: 8245925273576053905}
-  - component: {fileID: 3287045485611788853}
+  - component: {fileID: 7969843924632224536}
   m_Layer: 0
   m_Name: PlayerBody
   m_TagString: Untagged
@@ -106,30 +105,10 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   componentsToDisable:
-  - {fileID: 4489196583225817687}
+  - {fileID: 0}
   - {fileID: 1298140023208789708}
   - {fileID: 5052462979821838715}
   - {fileID: 4292158778610426544}
---- !u!114 &4489196583225817687
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 65310136675079440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7dd5a27984e7b84194ed187ba304355, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
-  Speed: 5
-  JumpForce: 8
-  _cbCrouch: {fileID: 1538698608272504889}
-  camCrouch: {fileID: 1553799043939701877}
-  camHold: {fileID: 6237637883642238685}
 --- !u!114 &2503041113498875816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,10 +158,28 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   Door: {fileID: 0}
+--- !u!114 &7969843924632224536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65310136675079440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7dd5a27984e7b84194ed187ba304355, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  t: 0.2
+  Speed: 5
+  _cbCrouch: {fileID: 1538698608272504889}
+  camCrouch: {fileID: 1553799043939701877}
+  camHold: {fileID: 6237637883642238685}
 --- !u!1 &1553799043939701877
 GameObject:
---- !u!114 &3287045485611788853
-MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -206,28 +203,12 @@ Transform:
   m_GameObject: {fileID: 1553799043939701877}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0.3, z: 0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1197187575146129295}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_GameObject: {fileID: 65310136675079440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d704eed438d3cbc46b7409a962d258e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
-  pickUpRange: 2
-  handPosition: {fileID: 6210997497083980593}
-  PickUpText: {fileID: 0}
-  pickableTags:
-  - PickUp
-  - Knife
-  - Arm
 --- !u!1 &1694546100000668775
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,9 +313,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 1.5
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.800128, z: 0}
 --- !u!1 &3918856271568550026
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,10 +349,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2553044472551124238}
   - {fileID: 1197187575146129295}
   - {fileID: 3523309235982246152}
   - {fileID: 7067982298241320224}
-  - {fileID: 2553044472551124238}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6270987477027013902
@@ -411,7 +392,7 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 3
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &8625532473962581398
@@ -512,7 +493,7 @@ Transform:
   m_GameObject: {fileID: 6237637883642238685}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 1.05, z: 0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
