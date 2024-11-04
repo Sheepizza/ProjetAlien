@@ -6,6 +6,12 @@ TagManager:
   tags:
   - Screen
   - Room
+  - Knife
+  - Arm
+  - PickUp
+  - DoorButton
+  - LightButton
+  - CamButton
   layers:
   - Default
   - TransparentFX
@@ -13,7 +19,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Target
+  - Obstruction
+  - PostProcessing
   - 
   - 
   - 

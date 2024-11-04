@@ -11,10 +11,14 @@ public class PlayerCamera : MonoBehaviour
     public GameObject Player;
     public GameObject CameraHolder;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-
+        HighlightManager.Instance.DisableOutlineForTag();
+    }
+    // Start is called before the first frame update
+    void Update()
+    {
+        HighlightManager.Instance.HighlightObject(GetComponent<Camera>());
     }
 
     // Update is called once per frame
