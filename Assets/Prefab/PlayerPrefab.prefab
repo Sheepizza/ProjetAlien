@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 3287045485611788853}
   - component: {fileID: 8358763297223810707}
   - component: {fileID: 8168762561723947600}
+  - component: {fileID: 2456586336837627206}
   m_Layer: 0
   m_Name: PlayerBody
   m_TagString: Untagged
@@ -229,9 +230,24 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  lightsDatas: {fileID: 11400000, guid: 1149a2a1166f555448921923275db8e9, type: 2}
   camDatas: {fileID: 11400000, guid: 4fceb5ff058506f46b2f76ae616262fe, type: 2}
   screen: {fileID: 0}
+--- !u!114 &2456586336837627206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65310136675079440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ada0f4009e31fbb48b84685e294fb7c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  lightsDatas: {fileID: 11400000, guid: 1149a2a1166f555448921923275db8e9, type: 2}
 --- !u!1 &1694546100000668775
 GameObject:
   m_ObjectHideFlags: 0
