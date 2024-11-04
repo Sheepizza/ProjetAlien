@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyPathway : MonoBehaviour
+public class EnemyPathway : NetworkBehaviour
 {
     public List<GameObject> pathways = new List<GameObject>();
-    private NavMeshAgent enemy;
+    public NavMeshAgent enemy;
     int pathChosen;
-    bool pathwayOver;
+    public bool pathwayOver;
     public int pathwayTiming;
     int pathwayCountdown;
     Vector3 roomPosition;
@@ -27,13 +28,10 @@ public class EnemyPathway : MonoBehaviour
     // Update is called once per frame
     void Update()
     {  
-        if (pathwayOver && pathways.Count > 0)
-        {
-            FindRoom();
-        }   
+        
     }
 
-    void FindRoom()
+    public void FindRoom()
     {
         pathwayOver = false;
         pathChosen = Random.Range(0, pathways.Count);

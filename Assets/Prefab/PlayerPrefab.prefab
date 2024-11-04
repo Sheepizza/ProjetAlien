@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4489196583225817687}
   - component: {fileID: 2503041113498875816}
   - component: {fileID: 8245925273576053905}
+  m_Layer: 6
   - component: {fileID: 3287045485611788853}
   - component: {fileID: 8358763297223810707}
   - component: {fileID: 8168762561723947600}
@@ -260,7 +261,7 @@ GameObject:
   - component: {fileID: 7275831678451321248}
   - component: {fileID: 2125691719295168679}
   - component: {fileID: 1538698608272504889}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CapsuleCrouch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -367,6 +368,8 @@ GameObject:
   - component: {fileID: 6270987477027013902}
   - component: {fileID: 4867533481040309908}
   - component: {fileID: 8625532473962581398}
+  - component: {fileID: -5530734180077786040}
+  m_Layer: 6
   m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Player
@@ -469,7 +472,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6210997497083980593}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: handPosition
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -500,7 +503,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2669499881089678799}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CameraHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -533,7 +536,7 @@ GameObject:
   - component: {fileID: 7067982298241320224}
   - component: {fileID: 1027498296711734905}
   - component: {fileID: 77018370190449251}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerPatrolRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -602,6 +605,7 @@ GameObject:
   - component: {fileID: 4292158778610426544}
   - component: {fileID: 1298140023208789708}
   - component: {fileID: 6526303527490658937}
+  m_Layer: 6
   - component: {fileID: 7016276582000417304}
   - component: {fileID: 3523274982133214470}
   m_Layer: 0
