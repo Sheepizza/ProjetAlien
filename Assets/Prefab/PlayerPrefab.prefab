@@ -15,8 +15,7 @@ GameObject:
   - component: {fileID: 4489196583225817687}
   - component: {fileID: 2503041113498875816}
   - component: {fileID: 8245925273576053905}
-  - component: {fileID: 2387197236503211400}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,9 +125,9 @@ MonoBehaviour:
   syncInterval: 0
   Speed: 5
   JumpForce: 8
+  CrouchScale: 0.3
   camHold: {fileID: 6237637883642238685}
   caps: {fileID: 3918856271568550026}
-  capsCrouch: {fileID: 1694546100000668775}
 --- !u!114 &2503041113498875816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,7 +189,7 @@ GameObject:
   - component: {fileID: 7275831678451321248}
   - component: {fileID: 2125691719295168679}
   - component: {fileID: 1538698608272504889}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CapsuleCrouch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -298,7 +297,7 @@ GameObject:
   - component: {fileID: 4867533481040309908}
   - component: {fileID: 8625532473962581398}
   - component: {fileID: -5530734180077786040}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerPrefab
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -321,6 +320,7 @@ Transform:
   - {fileID: 1197187575146129295}
   - {fileID: 3523309235982246152}
   - {fileID: 7067982298241320224}
+  - {fileID: 2553044472551124238}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6270987477027013902
@@ -414,7 +414,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6210997497083980593}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: handPosition
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -445,7 +445,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2669499881089678799}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CameraHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -478,7 +478,7 @@ GameObject:
   - component: {fileID: 7067982298241320224}
   - component: {fileID: 1027498296711734905}
   - component: {fileID: 77018370190449251}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerPatrolRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -547,7 +547,7 @@ GameObject:
   - component: {fileID: 4292158778610426544}
   - component: {fileID: 1298140023208789708}
   - component: {fileID: 6526303527490658937}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
