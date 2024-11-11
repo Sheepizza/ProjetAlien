@@ -223,6 +223,8 @@ GameObject:
   - component: {fileID: 7222486272085879540}
   - component: {fileID: 4915649385942875091}
   - component: {fileID: -1538764148936680502}
+  - component: {fileID: 8501513943489172341}
+  - component: {fileID: 4029241674278631203}
   m_Layer: 0
   m_Name: SpotCam
   m_TagString: Untagged
@@ -342,3 +344,29 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &8501513943489172341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8058398245988432206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 874784116422d6e48817c3aefc1dbf16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isBroke: 0
+  CamVolume: {fileID: 0}
+--- !u!114 &4029241674278631203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8058398245988432206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebe9106215ccd44448bb1195e02eac87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

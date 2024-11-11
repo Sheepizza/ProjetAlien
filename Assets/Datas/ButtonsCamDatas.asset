@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: ButtonsCamDatas
   m_EditorClassIdentifier: 
   J1BC:
-  - key: ButPrev
+  - key: ButPrevJ1
     value: 0
-  - key: ButNext
+  - key: ButNextJ1
     value: 1
   J2BC:
-  - key: ButPrev
+  - key: ButPrevJ2
     value: 0
-  - key: ButNext
+  - key: ButNextJ2
     value: 1
   CamMaterialJ1:
   - {fileID: 2100000, guid: 43502de526bb96f4fb95ee5655c9866d, type: 2}

@@ -7,16 +7,17 @@ using UnityEngine;
 
 public class CamManager : NetworkBehaviour
 {
+    public Material ButtonOnMaterial;
+    public Material ButtonOffMaterial;
     public CamDatas camDatas;
     Dictionary<string, string> CamButtons;
-
     List<CamKeyValuePair> CamList;
 
     List<Material> CamMaterialsList;
 
     [SerializeField]
     private GameObject screen;
-
+    GameObject _button;
     uint _id;
     int CamMaterialsIndex = 0;
 
@@ -58,22 +59,54 @@ public class CamManager : NetworkBehaviour
 
             switch (key)
             {
-                case "ButPrev" : 
+                case "ButPrevJ1" : 
+                    Debug.Log(key);
+                    _button = GameObject.Find("ButPrevJ1");
+                    Debug.Log("J'ai le button : " + _button.name);
+                    StartCoroutine(SwapButtonColor(_button));
                     Debug.Log(CamMaterialsIndex);
                     if (CamMaterialsIndex > 0)
                     {
                         CamMaterialsIndex -=1;
-                        screen.GetComponent<MeshRenderer>().material = CamMaterialsList[CamMaterialsIndex];
+                        StartCoroutine(SwapScreenMaterial(screen));
                     }
                     else Debug.Log("Pas possbile mon fraté");
                 break;
 
-                case "ButNext" : 
+                case "ButNextJ1" : 
+                    _button = GameObject.Find("ButNextJ1");
+                    StartCoroutine(SwapButtonColor(_button));
                     Debug.Log(CamMaterialsIndex);
                     if(CamMaterialsIndex < CamMaterialsList.Count-1)
                     {
                         CamMaterialsIndex++;
-                        screen.GetComponent<MeshRenderer>().material = CamMaterialsList[CamMaterialsIndex];
+                        StartCoroutine(SwapScreenMaterial(screen));
+                    }
+                    else Debug.Log("Pas Possible mon fraté");
+                break;
+
+                case "ButPrevJ2" : 
+                    Debug.Log(key);
+                    _button = GameObject.Find("ButPrevJ2");
+                    Debug.Log("J'ai le button : " + _button.name);
+                    StartCoroutine(SwapButtonColor(_button));
+                    Debug.Log(CamMaterialsIndex);
+                    if (CamMaterialsIndex > 0)
+                    {
+                        CamMaterialsIndex -=1;
+                        StartCoroutine(SwapScreenMaterial(screen));
+                    }
+                    else Debug.Log("Pas possbile mon fraté");
+                break;
+
+                case "ButNextJ2" : 
+                    _button = GameObject.Find("ButNextJ2");
+                    StartCoroutine(SwapButtonColor(_button));
+                    Debug.Log(CamMaterialsIndex);
+                    if(CamMaterialsIndex < CamMaterialsList.Count-1)
+                    {
+                        CamMaterialsIndex++;
+                        StartCoroutine(SwapScreenMaterial(screen));
                     }
                     else Debug.Log("Pas Possible mon fraté");
                 break;
@@ -104,4 +137,23 @@ public class CamManager : NetworkBehaviour
             Debug.LogWarning("Cl� introuvable dans le dictionnaire ou dictionnaire non initialis�.");
         }
     }
+
+    public IEnumerator SwapButtonColor(GameObject _button)
+    {
+        Debug.Log("change couleur");
+        //Passe la couleur à rouge
+        _button.GetComponent<MeshRenderer>().material = ButtonOnMaterial;
+        yield return new WaitForSeconds(1);
+        //Enlève le rouge
+        _button.GetComponent<MeshRenderer>().material = ButtonOffMaterial;
+
+    }
+
+    public IEnumerator SwapScreenMaterial(GameObject _screen)
+    {
+        screen.GetComponent<MeshRenderer>().material = CamMaterialsList[0];
+        yield return new WaitForSeconds(1);
+        screen.GetComponent<MeshRenderer>().material = CamMaterialsList[CamMaterialsIndex];
+    }
+
 }
