@@ -14,6 +14,7 @@ public class PlayerCamera : NetworkBehaviour
 
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         HighlightManager.Instance.DisableOutlineForTag();
     }
     // Start is called before the first frame update

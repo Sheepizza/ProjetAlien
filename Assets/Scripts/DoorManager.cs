@@ -32,7 +32,7 @@ public class DoorManager : NetworkBehaviour
         {
             _door = GameObject.Find(ButtonsDoors[key]);
             bool _isButtonActive = GameObject.Find(key).GetComponent<IsActivate>().IsActive;
-            if (_door != null)
+            if (_door != null && !_door.GetComponent<BreakManager>().IsBreak)
             {
                 CmdChangeDoorPos(_door,_isButtonActive);
                 GameObject.Find(key).GetComponent<IsActivate>().IsActive = !_isButtonActive;

@@ -8,6 +8,7 @@ public class PlayerInteraction : MonoBehaviour
     LightManager _lightManager;
     CamManager _camManager;
     PickUpManager _pickUpManager;
+    RepairManager _repairManager;
 
     private void Start()
     {
@@ -15,6 +16,7 @@ public class PlayerInteraction : MonoBehaviour
         _lightManager = GetComponent<LightManager>();
         _camManager = GetComponent<CamManager>();
         _pickUpManager = GetComponent<PickUpManager>();
+        _repairManager = GetComponent<RepairManager>();
     }
 
     // Update is called once per frame

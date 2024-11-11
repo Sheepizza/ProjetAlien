@@ -12,6 +12,7 @@ TagManager:
   - DoorButton
   - LightButton
   - CamButton
+  - ToRepair
   layers:
   - Default
   - TransparentFX
@@ -22,8 +23,6 @@ TagManager:
   - Target
   - Obstruction
   - PostProcessing
-  - 
-  - 
   - 
   - 
   - 
