@@ -11,6 +11,7 @@ TagManager:
   - PickUp
   - Cell
   - CellPickUp
+  - Broken
   layers:
   - Default
   - TransparentFX
