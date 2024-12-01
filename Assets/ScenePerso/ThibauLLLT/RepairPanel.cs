@@ -9,76 +9,139 @@ using UnityEngine.UI;
 
 public class RepairPanel : NetworkBehaviour
 {
-    public GameObject repairText; // Référence au texte de réparation
-    public GameObject repairMiniGamePanel; // Référence au panel de mini-jeu
+    public float pickUpRange = 2f;
+    public string[] brokenTags;
+    private Camera playerCamera;
+    private GameObject highlightedObject = null;
 
-    private Camera playerCamera; // Référence à la caméra du joueur
-    private PlayerController playerController; // Référence au contrôleur du joueur
-    private PlayerCamera playerCameraScript; // Référence au script de la caméra
+    private GameObject repairText;
+    private GameObject repairMiniGamePanel;
+    private PlayerController playerController;
+    private PlayerCamera playerCameraScript;
 
     void Start()
     {
-        // Vérifie si ce script est attaché à l'objet du joueur local
         if (isLocalPlayer)
         {
-            // Trouve la caméra appelée "PlayerCamera" dans le prefab du joueur
-            playerCamera = GameObject.Find("PlayerCamera")?.GetComponent<Camera>();
-            if (playerCamera != null)
+            playerCamera = GameObject.Find("PlayerCamera").GetComponent<Camera>();
+            playerCameraScript = playerCamera.GetComponent<PlayerCamera>(); // Référence le script de la caméra
+
+            GameObject uiManager = GameObject.Find("UiManager");
+            if (uiManager != null)
             {
-                playerCameraScript = playerCamera.GetComponent<PlayerCamera>();
+                Canvas canvas = uiManager.GetComponentInChildren<Canvas>();
+                if (canvas != null)
+                {
+                    repairText = canvas.transform.Find("RepairText")?.gameObject;
+                    repairMiniGamePanel = canvas.transform.Find("RepairMiniGame")?.gameObject;
+
+                    if (repairText != null)
+                    {
+                        repairText.SetActive(false);
+                    }
+
+                    if (repairMiniGamePanel != null)
+                    {
+                        repairMiniGamePanel.SetActive(false);
+                    }
+                }
             }
 
-            playerController = GetComponent<PlayerController>(); // Trouve le contrôleur du joueur dans la scène
-
-            // Désactive les éléments au départ
-            if (repairText != null) repairText.SetActive(false);
-            if (repairMiniGamePanel != null) repairMiniGamePanel.SetActive(false);
+            playerController = GetComponent<PlayerController>();
         }
     }
 
     void Update()
     {
-        // Vérifie que le script est pour le joueur local
         if (!isLocalPlayer) return;
 
         Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         RaycastHit hit;
 
-        // Si l'objet est visé par le rayon, on active le texte
-        if (Physics.Raycast(ray, out hit, 10f))
+        if (Physics.Raycast(ray, out hit, pickUpRange))
         {
             GameObject targetObject = hit.collider.gameObject;
-            if (targetObject == this.gameObject) // Vérifie que l'objet visé est le bon
+            if (IsBrokenObject(targetObject))
             {
                 if (repairText != null) repairText.SetActive(true);
 
-                // Ouvre le panel si la touche 'E' est pressée
+                HighlightObject(targetObject);
+
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    CmdOpenRepairPanel();
+                    OpenRepairPanel();
                 }
             }
             else
             {
-                // Désactive le texte si l'objet n'est pas visé
                 if (repairText != null) repairText.SetActive(false);
+                if (highlightedObject != null)
+                {
+                    var outlineComponent = highlightedObject.GetComponent<Outline>();
+                    if (outlineComponent != null)
+                    {
+                        outlineComponent.enabled = false;
+                    }
+                    highlightedObject = null;
+                }
             }
         }
         else
         {
-            // Désactive le texte si aucun objet n'est visé
             if (repairText != null) repairText.SetActive(false);
+            if (highlightedObject != null)
+            {
+                var outlineComponent = highlightedObject.GetComponent<Outline>();
+                if (outlineComponent != null)
+                {
+                    outlineComponent.enabled = false;
+                }
+                highlightedObject = null;
+            }
         }
 
         // Ferme le panel si la touche Échap est pressée
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            CmdCloseRepairPanel();
+            CloseRepairPanel();
         }
     }
 
-    [Command]
-    void CmdOpenRepairPanel()
+    void HighlightObject(GameObject targetObject)
+    {
+        if (highlightedObject != targetObject)
+        {
+            if (highlightedObject != null)
+            {
+                var previousOutline = highlightedObject.GetComponent<Outline>();
+                if (previousOutline != null)
+                {
+                    previousOutline.enabled = false;
+                }
+            }
+
+            var currentOutline = targetObject.GetComponent<Outline>();
+            if (currentOutline != null)
+            {
+                currentOutline.enabled = true;
+            }
+            highlightedObject = targetObject;
+        }
+    }
+
+    bool IsBrokenObject(GameObject targetObject)
+    {
+        foreach (string tag in brokenTags)
+        {
+            if (targetObject.CompareTag(tag))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void OpenRepairPanel()
     {
         if (repairMiniGamePanel != null)
         {
@@ -96,8 +159,7 @@ public class RepairPanel : NetworkBehaviour
         }
     }
 
-    [Command]
-    public void CmdCloseRepairPanel()
+    public void CloseRepairPanel()
     {
         if (repairMiniGamePanel != null)
         {

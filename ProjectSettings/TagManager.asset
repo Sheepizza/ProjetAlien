@@ -12,6 +12,9 @@ TagManager:
   - Cell
   - CellPickUp
   - Broken
+  - Fixed
+  - Red
+  - Green
   layers:
   - Default
   - TransparentFX

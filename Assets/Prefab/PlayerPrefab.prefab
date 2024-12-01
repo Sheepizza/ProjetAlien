@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 2503041113498875816}
   - component: {fileID: 8245925273576053905}
   - component: {fileID: 3287045485611788853}
+  - component: {fileID: 3305788117373877924}
+  - component: {fileID: 307199898029337678}
   m_Layer: 0
   m_Name: PlayerBody
   m_TagString: Untagged
@@ -202,6 +204,42 @@ MonoBehaviour:
   - Knife
   - Arm
   - CellPickUp
+--- !u!114 &3305788117373877924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65310136675079440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e662f22db070bec458cc4d77035017aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  pickUpRange: 2
+  brokenTags:
+  - Broken
+--- !u!114 &307199898029337678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65310136675079440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e662f22db070bec458cc4d77035017aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  pickUpRange: 2
+  brokenTags:
+  - Broken
 --- !u!1 &1694546100000668775
 GameObject:
   m_ObjectHideFlags: 0
