@@ -1,18 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using Mirror.Examples.Billiards;
 using UnityEngine;
 
 public class PlayerSound : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public AudioSource walkSound;
+    private Rigidbody rb;
+    public void Start()
     {
-        
+        rb = gameObject.GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Update()
     {
-        
+        Debug.Log(walkSound.isPlaying);
+        if(rb.velocity.magnitude > 0.1f)
+            {
+                walkSound.Play();
+            }
+        else
+            {
+                walkSound.Stop();
+            }
     }
 }

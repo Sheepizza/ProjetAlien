@@ -41,16 +41,18 @@ public class EnemyHunt : NetworkBehaviour
         {
             Hunt();
         }
-        else
+        else if (!isHunting)
         {
-        if (enemyPathway.pathwayOver && enemyPathway.pathways.Count > 0)
-        {
-            enemyPathway.FindRoom();
-        }   
-        }
+            if(enemyPathway.pathwayOver && enemyPathway.pathways.Count > 0)
+            {
+                enemyPathway.FindRoom();
+            }  
+        } 
+        
     }
     void Hunt()
     {
+        enemyPathway.pathwayOver = true;
         enemyPathway.enemy.destination = playerRef.transform.position;
     }
 
@@ -67,7 +69,7 @@ public class EnemyHunt : NetworkBehaviour
             //animator.Play("root|Anim_monster_scavenger_attack");
             Debug.Log("Attacking");
             yield return new WaitForSeconds(1);
-            playerRef.SetActive(false);
+            //playerRef.SetActive(false);
     }
 
     IEnumerator HuntStateTimer()
