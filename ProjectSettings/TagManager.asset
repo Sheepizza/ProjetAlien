@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Screen
   - Room
+  - Knife
+  - Arm
+  - PickUp
+  - DoorButton
+  - LightButton
   layers:
   - Default
   - TransparentFX

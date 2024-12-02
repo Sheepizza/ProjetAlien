@@ -15,7 +15,10 @@ GameObject:
   - component: {fileID: 4489196583225817687}
   - component: {fileID: 2503041113498875816}
   - component: {fileID: 8245925273576053905}
-  m_Layer: 6
+  - component: {fileID: 3287045485611788853}
+  - component: {fileID: 8358763297223810707}
+  - component: {fileID: 4260276918105299834}
+  m_Layer: 0
   m_Name: PlayerBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +179,57 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  Door: {fileID: 0}
+  doorsDatas: {fileID: 11400000, guid: a4b8bbf098179d24f95b0d2651b87494, type: 2}
+--- !u!114 &3287045485611788853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65310136675079440}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d704eed438d3cbc46b7409a962d258e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  pickUpRange: 2
+  handPosition: {fileID: 6210997497083980593}
+  PickUpText: {fileID: 0}
+  pickableTags:
+  - PickUp
+  - Knife
+  - Arm
+--- !u!114 &8358763297223810707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65310136675079440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01d4ede5aeea30d4f975a23500354666, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4260276918105299834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65310136675079440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ada0f4009e31fbb48b84685e294fb7c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  lightsDatas: {fileID: 11400000, guid: 1149a2a1166f555448921923275db8e9, type: 2}
 --- !u!1 &1694546100000668775
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,8 +632,8 @@ Camera:
   m_GameObject: {fileID: 7855403626883156039}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
