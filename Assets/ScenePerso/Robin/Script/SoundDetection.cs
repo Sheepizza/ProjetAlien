@@ -19,7 +19,6 @@ public class SoundDetection : MonoBehaviour
 
         if(distanceToTarget < playerSound.walkSound.maxDistance && playerRef.GetComponentInChildren<AudioSource>().isPlaying)
         {
-            Debug.Log("Entendu, j'arriiiiiiiive, hehehehe");
             enemyPathway.enemy.destination = playerRef.transform.position;
         }
     }
