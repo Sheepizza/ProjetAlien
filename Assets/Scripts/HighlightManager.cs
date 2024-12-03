@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class HighlightManager : MonoBehaviour
 {
-    public PickableObjects _pickableObjects;
+    public TagsDatas _pickableObjects;
     List<string> _objectsToHighlight;
     GameObject[] _highlightInScene;
     GameObject highlightedObject = null;
@@ -28,7 +28,7 @@ public class HighlightManager : MonoBehaviour
         }
         DontDestroyOnLoad(this.gameObject);
 
-        _objectsToHighlight = _pickableObjects.PickableObjectsTagName;
+        _objectsToHighlight = _pickableObjects.TagsNames;
     }
 
     public void HighlightObject(Camera playerCamera)

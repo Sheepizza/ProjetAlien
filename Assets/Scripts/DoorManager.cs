@@ -15,6 +15,8 @@ public class DoorManager : NetworkBehaviour
 
     GameObject _door;
 
+    bool _canUse = true;
+
     public override void OnStartLocalPlayer()
     {
         if (isServer && isLocalPlayer)
@@ -31,14 +33,15 @@ public class DoorManager : NetworkBehaviour
     public void ChangeDoorState(string key)
     {
 
-        if (ButtonsDoors != null && ButtonsDoors.ContainsKey(key))
+        if (ButtonsDoors != null && ButtonsDoors.ContainsKey(key) && _canUse)
         {
             _door = GameObject.Find(ButtonsDoors[key]);
             bool _isButtonActive = GameObject.Find(key).GetComponent<IsActivate>().IsActive;
-            if (_door != null)
+            if (_door != null && !_door.GetComponent<BreakManager>().IsBreak)
             {
                 CmdChangeDoorPos(_door,_isButtonActive);
                 GameObject.Find(key).GetComponent<IsActivate>().IsActive = !_isButtonActive;
+                _canUse = false;
             }
         }
     }
@@ -76,6 +79,7 @@ public class DoorManager : NetworkBehaviour
         }
 
         _door.transform.position = _startPos + Vector3.up * 3 * _direction;
+        _canUse = true;
     }
 
     void ChangeSASPos()//GameObject _door, bool _isActive)

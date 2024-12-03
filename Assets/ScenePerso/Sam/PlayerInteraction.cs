@@ -7,12 +7,16 @@ public class PlayerInteraction : MonoBehaviour
     DoorManager _doorManager;
     LightManager _lightManager;
     CamManager _camManager;
+    PickUpManager _pickUpManager;
+    RepairManager _repairManager;
 
     private void Start()
     {
         _doorManager = GetComponent<DoorManager>();
         _lightManager = GetComponent<LightManager>();
         _camManager = GetComponent<CamManager>();
+        _pickUpManager = GetComponent<PickUpManager>();
+        _repairManager = GetComponent<RepairManager>();
     }
 
     // Update is called once per frame
@@ -24,7 +28,8 @@ public class PlayerInteraction : MonoBehaviour
             switch (HighlightManager.Instance.GetObjectTag())
             {
 
-                case "InteractiveObject":
+                case "PickUp":
+                    _pickUpManager.PickUpObject(HighlightManager.Instance.GetObjectName());
                     break;
 
                 case "CamButton":
