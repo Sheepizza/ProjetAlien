@@ -6003,6 +6003,7 @@ GameObject:
   - component: {fileID: 1947648802}
   - component: {fileID: 1947648801}
   - component: {fileID: 1947648803}
+  - component: {fileID: 1947648804}
   m_Layer: 0
   m_Name: SAS1
   m_TagString: SAS
@@ -6203,6 +6204,23 @@ MonoBehaviour:
   syncInterval: 0
   DoorBreakDatas: {fileID: 11400000, guid: f286114b421d86e4ea7a09995434091a, type: 2}
   IsBreak: 0
+--- !u!114 &1947648804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947648794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0
+  clientAuthority: 0
+  animator: {fileID: 1947648801}
 --- !u!1 &1952513360
 GameObject:
   m_ObjectHideFlags: 0
