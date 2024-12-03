@@ -7,8 +7,7 @@ using UnityEngine;
 public class MinimapCursor : NetworkBehaviour
 {
     public GameObject Cursor;
-
-    public GameObject Player;
+    
 
     // Start is called before the first frame update
     public override void OnStartLocalPlayer()
@@ -16,12 +15,10 @@ public class MinimapCursor : NetworkBehaviour
         if (isServer && isLocalPlayer)
         {
             Cursor = GameObject.Find("CursorPlayer1");
-            Player = GameObject.Find("Player1");
         }
         else if (isLocalPlayer)
         {
             Cursor =  GameObject.Find("CursorPlayer2");
-            Player = GameObject.Find("Player2");
         }
     }
 
@@ -40,6 +37,6 @@ public class MinimapCursor : NetworkBehaviour
     [ClientRpc]
     void RpcChangeCursorPos()
     {
-        Cursor.transform.position = new Vector3(Player.transform.position.x,8,Player.transform.position.z);
+        Cursor.transform.position = new Vector3(gameObject.transform.position.x,8,gameObject.transform.position.z);
     }
 }
