@@ -3,10 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class DoorManager : NetworkBehaviour
 {
     public DictionariesDatas doorsDatas;
+
+    public PlayableDirector playableDirector;
+
     Dictionary<string, string> ButtonsDoors;
 
     GameObject _door;
@@ -16,6 +20,7 @@ public class DoorManager : NetworkBehaviour
         if (isServer && isLocalPlayer)
         {
             ButtonsDoors = doorsDatas.GetJ1Dictionary();
+            playableDirector = GameObject.Find("SAS1").GetComponent<PlayableDirector>();
         }
         else if (isLocalPlayer)
         {
@@ -51,7 +56,7 @@ public class DoorManager : NetworkBehaviour
         //_door.transform.position = _door.transform.position + Vector3.up * 3 * (_isActive ? -1 : 1);
         if(_door.tag == "SAS")
         {
-            StartCoroutine(ChangeSASPos(_door, _isActive));
+            ChangeSASPos();//_door, _isActive));
         }
         else
         StartCoroutine(ChangeDoorPos(_door, _isActive));
@@ -73,9 +78,9 @@ public class DoorManager : NetworkBehaviour
         _door.transform.position = _startPos + Vector3.up * 3 * _direction;
     }
 
-    IEnumerator ChangeSASPos(GameObject _door, bool _isActive)
+    void ChangeSASPos()//GameObject _door, bool _isActive)
     {
-        Vector3 _startPos = _door.transform.position;
+        /*Vector3 _startPos = _door.transform.position;
         float _elapsedTime = 0f;
         int _direction = _isActive ? -1 : 1;
 
@@ -86,6 +91,9 @@ public class DoorManager : NetworkBehaviour
             yield return null;
         }
 
-        _door.transform.position = _startPos + Vector3.up * 3 * _direction;
+        _door.transform.position = _startPos + Vector3.up * 3 * _direction;*/
+
+        playableDirector.Play();
+
     }
 }
