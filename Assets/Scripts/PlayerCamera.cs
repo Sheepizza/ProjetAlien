@@ -1,9 +1,10 @@
+using Mirror;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCamera : MonoBehaviour
+public class PlayerCamera : NetworkBehaviour
 {
     public float Sensitivity = 350f;
     float X, Y;
@@ -11,10 +12,15 @@ public class PlayerCamera : MonoBehaviour
     public GameObject Player;
     public GameObject CameraHolder;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-
+        Cursor.lockState = CursorLockMode.Locked;
+        HighlightManager.Instance.DisableOutlineForTag();
+    }
+    // Start is called before the first frame update
+    void Update()
+    {
+        HighlightManager.Instance.HighlightObject(GetComponent<Camera>());
     }
 
     // Update is called once per frame

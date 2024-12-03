@@ -6,6 +6,14 @@ TagManager:
   tags:
   - Screen
   - Room
+  - Knife
+  - Arm
+  - PickUp
+  - DoorButton
+  - LightButton
+  - CamButton
+  - SAS
+  - ToRepair
   layers:
   - Default
   - TransparentFX
@@ -13,9 +21,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Target
+  - Obstruction
+  - PostProcessing
   - 
   - 
   - 
