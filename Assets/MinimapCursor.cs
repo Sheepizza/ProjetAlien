@@ -37,6 +37,7 @@ public class MinimapCursor : NetworkBehaviour
     [ClientRpc]
     void RpcChangeCursorPos()
     {
-        Cursor.transform.position = new Vector3(gameObject.transform.position.x,8,gameObject.transform.position.z);
+        if (Cursor != null)
+            Cursor.transform.position = new Vector3(gameObject.transform.position.x,8,gameObject.transform.position.z);
     }
 }
