@@ -61,11 +61,12 @@ public class DoorManager : NetworkBehaviour
     void RpcChangeDoorPos(GameObject _door, bool _isActive)
     {
         //_door.transform.position = _door.transform.position + Vector3.up * 3 * (_isActive ? -1 : 1);
-        if(_door.tag == "SAS")
+        /*if(_door.tag == "SAS")
         {
-            StartCoroutine(ChangeSASPos(_door, _isActive));
+
+            ChangeSASPos();//_door, _isActive));
         }
-        else
+        else*/
         StartCoroutine(ChangeDoorPos(_door, _isActive));
     }
 
@@ -86,9 +87,9 @@ public class DoorManager : NetworkBehaviour
         _canUse = true;
     }
 
-    IEnumerator ChangeSASPos(GameObject _door, bool _isActive)
+    void ChangeSASPos()//GameObject _door, bool _isActive)
     {
-        Vector3 _startPos = _door.transform.position;
+        /*Vector3 _startPos = _door.transform.position;
         float _elapsedTime = 0f;
         int _direction = _isActive ? -1 : 1;
 
@@ -99,9 +100,9 @@ public class DoorManager : NetworkBehaviour
             yield return null;
         }
 
-        _door.transform.position = _startPos + Vector3.up * 3 * _direction;
+        _door.transform.position = _startPos + Vector3.up * 3 * _direction;*/
 
-        //playableDirector.Play();
-
+        playableDirector.Play();
+        
     }
 }
