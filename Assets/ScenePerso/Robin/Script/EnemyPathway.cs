@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Mirror;
+using Unity.AI.Navigation;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.AI;

@@ -17,7 +17,7 @@ public class SoundDetection : MonoBehaviour
         }
         float distanceToTarget = Vector3.Distance(transform.position, playerSound.walkSound.transform.position);
 
-        if(distanceToTarget < playerSound.walkSound.maxDistance && playerSound.walkSound.isPlaying)
+        if(distanceToTarget < playerSound.walkSound.maxDistance && playerRef.GetComponentInChildren<AudioSource>().isPlaying)
         {
             Debug.Log("Entendu, j'arriiiiiiiive, hehehehe");
             enemyPathway.enemy.destination = playerRef.transform.position;
