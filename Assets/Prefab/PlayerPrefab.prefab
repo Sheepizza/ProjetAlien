@@ -39,6 +39,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2669499881089678799}
+  - {fileID: 9082704997340065872}
   m_Father: {fileID: 6274537183807283025}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8253320459446734062
@@ -367,7 +368,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6274537183807283025}
+  m_Father: {fileID: 1197187575146129295}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &7512011527036762271
 AudioSource:
@@ -379,7 +380,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f3e3ab51de24adb47ae7c389959c412a, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -478,7 +479,7 @@ GameObject:
   - component: {fileID: 4867533481040309908}
   - component: {fileID: 8625532473962581398}
   - component: {fileID: -5530734180077786040}
-  - component: {fileID: -1540570458278276251}
+  - component: {fileID: 3117110279985846047}
   m_Layer: 6
   m_Name: PlayerPrefab
   m_TagString: Player
@@ -503,7 +504,6 @@ Transform:
   - {fileID: 3523309235982246152}
   - {fileID: 7067982298241320224}
   - {fileID: 2553044472551124238}
-  - {fileID: 9082704997340065872}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6270987477027013902
@@ -588,7 +588,7 @@ MonoBehaviour:
   _screen: {fileID: 0}
   _securityCamera: {fileID: 0}
   _playerController: {fileID: 0}
---- !u!114 &-1540570458278276251
+--- !u!114 &3117110279985846047
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

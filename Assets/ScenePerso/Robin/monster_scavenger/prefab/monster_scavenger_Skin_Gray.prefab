@@ -746,6 +746,7 @@ GameObject:
   - component: {fileID: 8590996047788979764}
   - component: {fileID: 1325787565347080203}
   - component: {fileID: 966933808944460834}
+  - component: {fileID: 1825747130618183639}
   m_Layer: 0
   m_Name: monster_scavenger_Skin_Gray
   m_TagString: Untagged
@@ -808,6 +809,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3d211c84b624f049863d7305ee363c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   pathways: []
   enemy: {fileID: 0}
   pathwayOver: 0
@@ -846,6 +850,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0da874e2ffd2324cb16bb4e818a2eef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   playerRef: {fileID: 0}
 --- !u!114 &8590996047788979764
 MonoBehaviour:
@@ -924,6 +931,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &1825747130618183639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3595625012628118935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 696c6961413b466438e663820f7eaf49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerRef: {fileID: 3918856271568550026, guid: 25578e6ca0f668b4bb8854093da19108, type: 3}
+  playerSound: {fileID: 3117110279985846047, guid: 25578e6ca0f668b4bb8854093da19108, type: 3}
+  enemyPathway: {fileID: 2637614690213565209}
 --- !u!1 &3994217530261323971
 GameObject:
   m_ObjectHideFlags: 0

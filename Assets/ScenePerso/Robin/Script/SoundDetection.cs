@@ -4,27 +4,23 @@ using UnityEngine;
 
 public class SoundDetection : MonoBehaviour
 {
-    AudioSource walkSound;
-    EnemyPathway enemyPathway;
+    GameObject playerRef;
+    public PlayerSound playerSound;
+    public EnemyPathway enemyPathway;
 
-    void Start()
-    {
-        enemyPathway = GetComponent<EnemyPathway>();
-    }
 
-    void Update()
+    public void Update()
     {
-        if(walkSound == null)
+        if (playerRef == null)
         {
-            walkSound = GameObject.Find("WalkSound").GetComponent<AudioSource>();
+            playerRef = GameObject.FindGameObjectWithTag("Player");
         }
+        float distanceToTarget = Vector3.Distance(transform.position, playerSound.walkSound.transform.position);
 
-        float distanceToTarget = Vector3.Distance(transform.position, walkSound.transform.position);
-
-        if(distanceToTarget < walkSound.maxDistance && walkSound.isPlaying)
+        if(distanceToTarget < playerSound.walkSound.maxDistance && playerSound.walkSound.isPlaying)
         {
-            Debug.Log("Entendu !");
-            enemyPathway.enemy.destination = walkSound.transform.position;
+            Debug.Log("Entendu, j'arriiiiiiiive, hehehehe");
+            enemyPathway.enemy.destination = playerRef.transform.position;
         }
     }
 }

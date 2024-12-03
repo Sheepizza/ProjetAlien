@@ -18,17 +18,11 @@ public class EnemyPathway : NetworkBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         enemy = GetComponent<NavMeshAgent>();
         pathwayOver = true;
         pathwayCountdown = pathwayTiming;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {  
-        
     }
 
     public void FindRoom()

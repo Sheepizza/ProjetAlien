@@ -19,7 +19,7 @@ public class FieldOfView : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(canSeePlayer);
+        //Debug.Log(canSeePlayer);
         if (playerRef == null)
         {
             playerRef = GameObject.FindGameObjectWithTag("Player");
