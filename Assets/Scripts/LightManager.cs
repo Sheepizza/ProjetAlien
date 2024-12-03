@@ -11,6 +11,8 @@ public class LightManager : NetworkBehaviour
 
     GameObject _light;
 
+    bool _canUse = true;
+
     public override void OnStartLocalPlayer()
     {
         if (isServer && isLocalPlayer)
@@ -25,7 +27,7 @@ public class LightManager : NetworkBehaviour
 
     public void ChangeLightState(string key)
     {
-        if (ButtonsLights != null && ButtonsLights.ContainsKey(key))
+        if (ButtonsLights != null && ButtonsLights.ContainsKey(key) && _canUse)
         {
             _light = GameObject.Find(ButtonsLights[key]);
             bool _isButtonActive = GameObject.Find(key).GetComponent<IsActivate>().IsActive;
@@ -33,6 +35,7 @@ public class LightManager : NetworkBehaviour
             {
                 CmdChangeLightPos(_light, _isButtonActive);
                 GameObject.Find(key).GetComponent<IsActivate>().IsActive = !_isButtonActive;
+                _canUse = false;
             }
         }
     }
@@ -46,7 +49,34 @@ public class LightManager : NetworkBehaviour
     [ClientRpc]
     void RpcChangeLightPos(GameObject _light, bool _isActive)
     {
-        if (_light.GetComponent<Light>() != null)
-        _light.GetComponent<Light>().enabled = !_isActive;
+        Debug.Log(_isActive);
+        if (_light.GetComponent<Light>() != null && _isActive)
+        {
+            _light.GetComponent<Light>().enabled = !_isActive;
+            _canUse = true;
+        }
+
+        else if (_light.GetComponent<Light>() != null)
+        {
+            StartCoroutine(LightGlitched(_light));
+        }
+    }
+
+    IEnumerator LightGlitched(GameObject _light)
+    {
+        _light.GetComponent<Light>().enabled = true;
+        yield return new WaitForSeconds(0.025f);
+        _light.GetComponent<Light>().enabled = false;
+        yield return new WaitForSeconds(0.05f);
+        _light.GetComponent<Light>().enabled = true;
+        yield return new WaitForSeconds(0.025f);
+        _light.GetComponent<Light>().enabled = false;
+        yield return new WaitForSeconds(0.6f);
+        _light.GetComponent<Light>().enabled = true;
+        yield return new WaitForSeconds(0.05f);
+        _light.GetComponent<Light>().enabled = false;
+        yield return new WaitForSeconds(0.2f);
+        _light.GetComponent<Light>().enabled = true;
+        _canUse = true;
     }
 }

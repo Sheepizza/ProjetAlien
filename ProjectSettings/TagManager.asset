@@ -11,6 +11,8 @@ TagManager:
   - PickUp
   - DoorButton
   - LightButton
+  - CamButton
+  - ToRepair
   layers:
   - Default
   - TransparentFX
@@ -20,7 +22,7 @@ TagManager:
   - UI
   - Target
   - Obstruction
-  - 
+  - PostProcessing
   - 
   - 
   - 
