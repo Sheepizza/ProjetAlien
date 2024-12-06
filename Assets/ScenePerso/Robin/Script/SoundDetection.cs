@@ -6,8 +6,9 @@ public class SoundDetection : MonoBehaviour
 {
     GameObject playerRef;
     public PlayerSound playerSound;
+    AudioSource[] audioSources;
     public EnemyPathway enemyPathway;
-
+    public AudioDatas AudioDatas;
 
     public void Update()
     {
@@ -15,11 +16,18 @@ public class SoundDetection : MonoBehaviour
         {
             playerRef = GameObject.FindGameObjectWithTag("Player");
         }
-        float distanceToTarget = Vector3.Distance(transform.position, playerSound.walkSound.transform.position);
 
-        if(distanceToTarget < playerSound.walkSound.maxDistance && playerRef.GetComponentInChildren<AudioSource>().isPlaying)
+        for (int i = 0; i < audioSources.Length; i++)
         {
-            enemyPathway.enemy.destination = playerRef.transform.position;
+            audioSources[i].clip = AudioDatas.audioParams[i].Clip;
+            audioSources[i].maxDistance = AudioDatas.audioParams[i].MaxRange;
+            audioSources[i].volume = AudioDatas.audioParams[i].Volume;
+                
+                float distanceToTarget = Vector3.Distance(transform.position, audioSources[i].transform.position);
+            if (distanceToTarget < audioSources[i].maxDistance)
+            {
+                enemyPathway.enemy.destination = audioSources[i].transform.position;
+            }
         }
     }
 }
