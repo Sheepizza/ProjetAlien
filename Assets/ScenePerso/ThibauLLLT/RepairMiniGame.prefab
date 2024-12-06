@@ -224,11 +224,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0425da883f1e074d87be051db081f1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  redRectangle: {fileID: 8348446784605907710}
-  greenZone: {fileID: 8851819034609097825}
-  cursor: {fileID: 1696543988223186858}
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
   cursorSpeed: 1000
-  failureSoundSource: {fileID: 0}
+  failureSoundSource: {fileID: 4935758710633678186, guid: af1c752c9beba804e81bb56fcfc68da7, type: 3}
+  cursorCoroutine: 0
 --- !u!1 &7275155995566639866
 GameObject:
   m_ObjectHideFlags: 0

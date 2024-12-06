@@ -10,7 +10,6 @@ public class SetupPlayer : NetworkBehaviour
 
     Camera _mainCam;
 
-    // Start is called before the first frame update
     void Start()
     {
         if (!isLocalPlayer)

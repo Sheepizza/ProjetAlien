@@ -13,6 +13,7 @@ public class PlayerCamera : MonoBehaviour
 
     private void Start()
     {
+        GameManager.Instance.SetPlayerCamera(GetComponent<Camera>());
         HighlightManager.Instance.DisableOutlineForTag();
     }
 
@@ -25,7 +26,7 @@ public class PlayerCamera : MonoBehaviour
         }
     }
 
-    // FixedUpdate est appelé à un intervalle fixe, utilisé pour les calculs de physique
+    // FixedUpdate est appelï¿½ ï¿½ un intervalle fixe, utilisï¿½ pour les calculs de physique
     void FixedUpdate()
     {
         if (CanMove)

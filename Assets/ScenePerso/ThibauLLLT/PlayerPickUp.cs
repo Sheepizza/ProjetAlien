@@ -9,9 +9,9 @@ public class PlayerPickUp : NetworkBehaviour
 {
     public float pickUpRange = 2f;
     public Transform handPosition;
-    public GameObject PickUpText;
-    public GameObject PlaceText;
-    private Camera playerCamera;
+    private GameObject PickUpText;
+    private GameObject PlaceText;
+    public Camera playerCamera;
     private GameObject pickedUpObject = null;
     private GameObject highlightedObject = null;
 
@@ -20,29 +20,15 @@ public class PlayerPickUp : NetworkBehaviour
 
     void Start()
     {
-        if (isLocalPlayer)
-        {
-            playerCamera = GameObject.Find("PlayerCamera").GetComponent<Camera>();
 
-            GameObject uiManager = GameObject.Find("UiManager");
-            if (uiManager != null)
-            {
-                Canvas canvas = uiManager.GetComponentInChildren<Canvas>();
-                if (canvas != null)
-                {
-                    PickUpText = canvas.transform.Find("PickUpText")?.gameObject;
-                    PlaceText = canvas.transform.Find("PlaceText")?.gameObject;
-                }
-            }
+    if (playerCamera == null)
+    {
+        Debug.LogError("La caméra principale (MainCamera) n'a pas été trouvée !");
+    }
 
-            if (PickUpText != null) PickUpText.SetActive(false);
-            else Debug.LogWarning("PickupText non trouvé dans UiManager.");
-            
-            if (PlaceText != null) PlaceText.SetActive(false);
-            else Debug.LogWarning("PlaceText non trouvé dans UiManager.");
-
-            foreach (string tag in pickableTags) DisableOutlineForTag(tag);
-        }
+    //playerCamera = GameManager.Instance.GetPlayerCamera();
+    PickUpText = UIManager.Instance.PickUpText;
+    PlaceText = UIManager.Instance.PlaceText;
     }
 
     void Update()
@@ -66,22 +52,28 @@ public class PlayerPickUp : NetworkBehaviour
     }
 
     void TryPickUp()
+{
+    if (playerCamera == null)
     {
-        Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-        RaycastHit hit;
-        PickUpText.SetActive(false);
-        PlaceText.SetActive(false);
+        Debug.LogError("playerCamera est null dans TryPickUp !");
+        return;
+    }
 
-        if (Physics.Raycast(ray, out hit, pickUpRange))
+    Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+    RaycastHit hit;
+    PickUpText.SetActive(false);
+    PlaceText.SetActive(false);
+
+    if (Physics.Raycast(ray, out hit, pickUpRange))
+    {
+        GameObject targetObject = hit.collider.gameObject;
+        if (IsPickableObject(targetObject) && pickedUpObject == null)
         {
-            GameObject targetObject = hit.collider.gameObject;
-            if (IsPickableObject(targetObject) && pickedUpObject == null)
-            {
-                NetworkIdentity targetIdentity = targetObject.GetComponent<NetworkIdentity>();
-                if (targetIdentity != null) CmdPickUp(targetIdentity);
-            }
+            NetworkIdentity targetIdentity = targetObject.GetComponent<NetworkIdentity>();
+            if (targetIdentity != null) CmdPickUp(targetIdentity);
         }
     }
+}
 
     [Command]
     void CmdPickUp(NetworkIdentity targetIdentity)

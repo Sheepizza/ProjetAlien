@@ -3,79 +3,93 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using Mirror;
 
-public class MiniGameController : MonoBehaviour
+
+public class MiniGameController : NetworkBehaviour
 {
     [Header("UI Elements")]
-    [SerializeField] private RectTransform redRectangle; // Rectangle rouge
-    [SerializeField] private RectTransform greenZone; // Zone verte
-    [SerializeField] private RectTransform cursor; // Curseur qui se déplace
+    private RectTransform redRectangle;
+    private RectTransform greenZone; 
+    private RectTransform cursor; // Curseur qui se dÃ©place
 
     [Header("Game Settings")]
-    [SerializeField] private float cursorSpeed = 100f; // Vitesse du curseur
-    [SerializeField] private AudioSource failureSoundSource; // Audio source pour jouer le son d'échec
+    [SerializeField] private float cursorSpeed = 100f; 
+    [SerializeField] private AudioSource failureSoundSource;
 
     private Vector2 greenZonePosition;
     private bool movingRight = true;
-    private Coroutine cursorCoroutine; // Référence à la coroutine du curseur
 
     void Start()
     {
-        if (redRectangle == null || greenZone == null || cursor == null || failureSoundSource == null)
-        {
-            Debug.LogError("Tous les éléments UI doivent être assignés dans l'inspecteur.");
-            return;
-        }
-
+        greenZone = UIManager.Instance.greenZone;
+        redRectangle = UIManager.Instance.redRectangle;
+        cursor = UIManager.Instance.cursor;
         SetupGreenZone();
-        StartCursorCoroutine();
+        StartCursorCoroutine(false);
     }
 
-    public void OpenMiniGame()
-    {
-        gameObject.SetActive(true);
-        failureSoundSource.gameObject.SetActive(true);
-        failureSoundSource.Stop();
-        failureSoundSource.gameObject.SetActive(false);
-
-        // Relance la coroutine du curseur si elle est arrêtée
-        if (cursorCoroutine == null)
-        {
-            StartCursorCoroutine();
-        }
-    }
+    // public void OpenMiniGame()
+    // {
+    //     gameObject.SetActive(true);
+    //     failureSoundSource.gameObject.SetActive(true);
+    //     failureSoundSource.Stop();
+    //     failureSoundSource.gameObject.SetActive(false);
+    // }
 
     void Update()
     {
-        if (!gameObject.activeInHierarchy) return; // Ne pas exécuter si le panel est inactif
 
-        if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0))
+        if (!gameObject.activeInHierarchy) return;
+
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
-            StopCursor();
+            
+            // StopCursor();
             CheckCursorPosition();
         }
     }
 
-    private void StartCursorCoroutine()
+    public void StartCursorCoroutine(bool cursorCoroutine)
     {
-        if (cursorCoroutine == null)
-        {
-            cursorCoroutine = StartCoroutine(MoveCursor());
-        }
+         if (cursorCoroutine == false)
+         {
+            cursorCoroutine = true;
+            StartCoroutine(MoveCursor());
+            
+         }
+        else
+         {
+            cursorCoroutine = false;
+            StopCoroutine(MoveCursor());
+            
+         }
     }
 
-    private void StopCursor()
+    void OnEnable()
     {
-        if (cursorCoroutine != null)
-        {
-            StopCoroutine(cursorCoroutine);
-            cursorCoroutine = null; // Réinitialise la référence de la coroutine
-        }
+        StartCursorCoroutine(false);
+        SetupGreenZone();
     }
 
-    private IEnumerator MoveCursor()
+
+    void OnDisable()
     {
-        while (true) // La boucle continue pour faire bouger le curseur indéfiniment
+        StartCursorCoroutine(true);
+    }
+
+    // private void StopCursor()
+    // {
+    //     if (cursorCoroutine == true)
+    //     {
+    //         StopCoroutine(MoveCursor());
+    //         cursorCoroutine = false;
+    //     }
+    // }
+
+    public IEnumerator MoveCursor()
+    {
+        while (true) // La boucle continue pour faire bouger le curseur indÃ©finiment
         {
             Vector2 currentPosition = cursor.anchoredPosition;
             if (movingRight)
@@ -107,19 +121,15 @@ public class MiniGameController : MonoBehaviour
         float cursorPosition = cursor.anchoredPosition.x;
         float greenStart = greenZonePosition.x;
         float greenEnd = greenStart + greenZone.rect.width;
-
-        // Vérifie si le curseur est sur la zone verte ou rouge
-        if (cursorPosition >= greenStart && cursorPosition <= greenEnd)
+        if (cursorPosition >= greenStart && cursorPosition <= greenEnd) // VÃ©rifie si le curseur est sur le rectangle vert. Si c'est le cas, rÃ©ussi.
         {
-            // Réussite
-            Debug.Log("Réussi!");
+            Debug.Log("RÃ©ussi!");
             ClosePanel();
             ActivateObjects();
         }
         else
         {
-            // Échec
-            Debug.Log("Échec!");
+            Debug.Log("Ã©chec!");
             ClosePanel();
             PlayFailureSound();
         }
@@ -128,8 +138,6 @@ public class MiniGameController : MonoBehaviour
     private void ClosePanel()
     {
         gameObject.SetActive(false);
-
-        // Réactive les contrôles du joueur et de la caméra
         PlayerController playerController = FindObjectOfType<PlayerController>();
         PlayerCamera playerCameraScript = FindObjectOfType<PlayerCamera>();
         if (playerController != null)
@@ -141,54 +149,35 @@ public class MiniGameController : MonoBehaviour
             playerCameraScript.SetCameraMovement(true);
         }
     }
-
     private void PlayFailureSound()
+{
+    if (failureSoundSource != null)
     {
-        if (failureSoundSource != null)
-        {
-            // Active l'AudioSource, joue le son, et le désactive après 2 secondes
-            failureSoundSource.gameObject.SetActive(true);
-            failureSoundSource.Play();
-            StartCoroutine(DisableAudioSourceAfterDelay(2f));
-        }
-        else
-        {
-            Debug.LogError("L'audio source pour le son d'échec n'est pas assignée.");
-        }
+        failureSoundSource.gameObject.SetActive(true);
+        failureSoundSource.Play();
     }
-
-    private IEnumerator DisableAudioSourceAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        if (failureSoundSource != null)
-        {
-            failureSoundSource.gameObject.SetActive(false);
-        }
-    }
+}
 
     private void ActivateObjects()
     {
-        // Désactive les objets Broken et active les objets Fixed
+        // DÃ©sactive les objets Broken et active les objets Fixed autour du joueur
         GameObject[] brokenObjects = GameObject.FindGameObjectsWithTag("Broken");
         foreach (GameObject obj in brokenObjects)
         {
             obj.SetActive(false);
         }
-
         GameObject[] fixedObjects = GameObject.FindGameObjectsWithTag("Fixed");
         foreach (GameObject obj in fixedObjects)
         {
             obj.SetActive(true);
         }
     }
-
     private void SetupGreenZone()
     {
-        // Positionne la zone verte à un endroit aléatoire sur le rectangle rouge
         float maxWidth = redRectangle.rect.width;
         float greenWidth = greenZone.rect.width;
         float xPosition = Random.Range(0, maxWidth - greenWidth);
-        greenZone.anchoredPosition = new Vector2(xPosition, greenZone.anchoredPosition.y);
+        greenZone.anchoredPosition = new Vector2(xPosition, greenZone.anchoredPosition.y); //Met la Zone verte en random sur la rouge
 
         greenZonePosition = greenZone.anchoredPosition;
     }

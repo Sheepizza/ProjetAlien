@@ -13,20 +13,20 @@ public class RepairPanel : NetworkBehaviour
     public string[] brokenTags;
     private Camera playerCamera;
     private GameObject highlightedObject = null;
-
     private GameObject repairText;
     private GameObject repairMiniGamePanel;
     private PlayerController playerController;
     private PlayerCamera playerCameraScript;
+    public MiniGameController miniGame;
 
     void Start()
     {
         if (isLocalPlayer)
         {
             playerCamera = GameObject.Find("PlayerCamera").GetComponent<Camera>();
-            playerCameraScript = playerCamera.GetComponent<PlayerCamera>(); // Référence le script de la caméra
+            playerCameraScript = playerCamera.GetComponent<PlayerCamera>(); 
 
-            GameObject uiManager = GameObject.Find("UiManager");
+            GameObject uiManager = GameObject.Find("UIManager");
             if (uiManager != null)
             {
                 Canvas canvas = uiManager.GetComponentInChildren<Canvas>();
@@ -34,6 +34,7 @@ public class RepairPanel : NetworkBehaviour
                 {
                     repairText = canvas.transform.Find("RepairText")?.gameObject;
                     repairMiniGamePanel = canvas.transform.Find("RepairMiniGame")?.gameObject;
+                    
 
                     if (repairText != null)
                     {
@@ -100,7 +101,6 @@ public class RepairPanel : NetworkBehaviour
             }
         }
 
-        // Ferme le panel si la touche Échap est pressée
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             CloseRepairPanel();
@@ -130,24 +130,17 @@ public class RepairPanel : NetworkBehaviour
     }
 
     bool IsBrokenObject(GameObject targetObject)
-    {
-        foreach (string tag in brokenTags)
-        {
-            if (targetObject.CompareTag(tag))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
+{
+    return targetObject.CompareTag("Broken");
+}
 
-    void OpenRepairPanel()
+    public void OpenRepairPanel()
     {
-        if (repairMiniGamePanel != null)
+        if (!repairMiniGamePanel.activeSelf)
         {
             repairMiniGamePanel.SetActive(true);
-
-            // Désactive les contrôles du joueur et de la caméra
+            
+            //dÃ©sactive camÃ©ra
             if (playerController != null)
             {
                 playerController.enabled = false;
@@ -161,11 +154,10 @@ public class RepairPanel : NetworkBehaviour
 
     public void CloseRepairPanel()
     {
-        if (repairMiniGamePanel != null)
+        if (repairMiniGamePanel.activeSelf)
         {
             repairMiniGamePanel.SetActive(false);
 
-            // Réactive les contrôles du joueur et de la caméra
             if (playerController != null)
             {
                 playerController.enabled = true;
