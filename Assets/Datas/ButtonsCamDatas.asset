@@ -13,28 +13,20 @@ MonoBehaviour:
   m_Name: ButtonsCamDatas
   m_EditorClassIdentifier: 
   J1BC:
-  - key: ButC1J1
-    value: SpotCamR2.1
-    CamMaterial: {fileID: 2100000, guid: 5d21099f2f032044a9b64d05b3de4048, type: 2}
-  - key: ButC2J1
-    value: SpotCamR2.2
-    CamMaterial: {fileID: 2100000, guid: 88b9a0497f607904caf239cbe5d2091f, type: 2}
-  - key: ButPrev
+  - key: ButPrevJ1
     value: 0
-    CamMaterial: {fileID: 0}
-  - key: ButNext
+  - key: ButNextJ1
     value: 1
-    CamMaterial: {fileID: 0}
   J2BC:
-  - key: ButC1J2
-    value: SpotCamR3.1
-    CamMaterial: {fileID: 2100000, guid: 3e95014c187d1144496f4a7bb747f2b8, type: 2}
-  - key: ButC2J2
-    value: SpotCamR3.2
-    CamMaterial: {fileID: 2100000, guid: d6fc0af23e05e8940a3153dc4e709220, type: 2}
-  - key: ButPrev
+  - key: ButPrevJ2
     value: 0
-    CamMaterial: {fileID: 0}
-  - key: ButNext
+  - key: ButNextJ2
     value: 1
-    CamMaterial: {fileID: 0}
+  CamMaterialJ1:
+  - {fileID: 2100000, guid: 43502de526bb96f4fb95ee5655c9866d, type: 2}
+  - {fileID: 2100000, guid: 5d21099f2f032044a9b64d05b3de4048, type: 2}
+  - {fileID: 2100000, guid: 88b9a0497f607904caf239cbe5d2091f, type: 2}
+  CamMaterialJ2:
+  - {fileID: 2100000, guid: 43502de526bb96f4fb95ee5655c9866d, type: 2}
+  - {fileID: 2100000, guid: 3e95014c187d1144496f4a7bb747f2b8, type: 2}
+  - {fileID: 2100000, guid: d6fc0af23e05e8940a3153dc4e709220, type: 2}

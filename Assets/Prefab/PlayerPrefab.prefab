@@ -19,7 +19,11 @@ GameObject:
   - component: {fileID: 3287045485611788853}
   - component: {fileID: 8168762561723947600}
   - component: {fileID: 8358763297223810707}
-  - component: {fileID: 4260276918105299834}
+  - component: {fileID: 391863423177865471}
+  - component: {fileID: 846784659857172597}
+  - component: {fileID: 3269179333850583370}
+  - component: {fileID: 3825348792330176891}
+  - component: {fileID: 5482099421820317264}
   m_Layer: 0
   m_Name: PlayerBody
   m_TagString: Untagged
@@ -182,6 +186,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   doorsDatas: {fileID: 11400000, guid: a4b8bbf098179d24f95b0d2651b87494, type: 2}
+  playableDirector: {fileID: 0}
 --- !u!114 &2456586336837627206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,6 +240,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  ButtonOnMaterial: {fileID: 2100000, guid: 03bc8c934e87eb34fa79c97f4dbc510a, type: 2}
+  ButtonOffMaterial: {fileID: 2100000, guid: 8b1d8b6d37bff5948b0c409f2020589f, type: 2}
   camDatas: {fileID: 11400000, guid: 4fceb5ff058506f46b2f76ae616262fe, type: 2}
   screen: {fileID: 0}
 --- !u!114 &8358763297223810707
@@ -328,6 +335,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InGaz: 0
+--- !u!114 &5482099421820317264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65310136675079440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6942c4dd067f67b4d95c4dc011c2ebeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  Cursor: {fileID: 0}
 --- !u!1 &1694546100000668775
 GameObject:
   m_ObjectHideFlags: 0

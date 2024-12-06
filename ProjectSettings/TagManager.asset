@@ -12,6 +12,7 @@ TagManager:
   - DoorButton
   - LightButton
   - CamButton
+  - SAS
   - ToRepair
   layers:
   - Default
