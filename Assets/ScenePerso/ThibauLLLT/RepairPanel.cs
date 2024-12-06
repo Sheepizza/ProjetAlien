@@ -139,16 +139,6 @@ public class RepairPanel : NetworkBehaviour
         if (!repairMiniGamePanel.activeSelf)
         {
             repairMiniGamePanel.SetActive(true);
-            
-            //désactive caméra
-            if (playerController != null)
-            {
-                playerController.enabled = false;
-            }
-            if (playerCameraScript != null)
-            {
-                playerCameraScript.SetCameraMovement(false);
-            }
         }
     }
 
@@ -157,15 +147,6 @@ public class RepairPanel : NetworkBehaviour
         if (repairMiniGamePanel.activeSelf)
         {
             repairMiniGamePanel.SetActive(false);
-
-            if (playerController != null)
-            {
-                playerController.enabled = true;
-            }
-            if (playerCameraScript != null)
-            {
-                playerCameraScript.SetCameraMovement(true);
-            }
         }
     }
 }

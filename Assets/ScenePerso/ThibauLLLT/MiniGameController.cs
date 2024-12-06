@@ -138,16 +138,6 @@ public class MiniGameController : NetworkBehaviour
     private void ClosePanel()
     {
         gameObject.SetActive(false);
-        PlayerController playerController = FindObjectOfType<PlayerController>();
-        PlayerCamera playerCameraScript = FindObjectOfType<PlayerCamera>();
-        if (playerController != null)
-        {
-            playerController.enabled = true;
-        }
-        if (playerCameraScript != null)
-        {
-            playerCameraScript.SetCameraMovement(true);
-        }
     }
     private void PlayFailureSound()
 {
