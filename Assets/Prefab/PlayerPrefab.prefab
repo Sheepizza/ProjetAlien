@@ -14,12 +14,12 @@ GameObject:
   - component: {fileID: 3533911329781195653}
   - component: {fileID: 2503041113498875816}
   - component: {fileID: 8245925273576053905}
-  - component: {fileID: 7969843924632224536}
   - component: {fileID: 2456586336837627206}
   - component: {fileID: 3287045485611788853}
-  - component: {fileID: 8168762561723947600}
-  - component: {fileID: 8358763297223810707}
-  - component: {fileID: 4260276918105299834}
+  - component: {fileID: 391863423177865471}
+  - component: {fileID: 846784659857172597}
+  - component: {fileID: 3269179333850583370}
+  - component: {fileID: 3825348792330176891}
   m_Layer: 0
   m_Name: PlayerBody
   m_TagString: Untagged
@@ -41,7 +41,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2669499881089678799}
-  - {fileID: 1816102428357058038}
   m_Father: {fileID: 6274537183807283025}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8253320459446734062
@@ -162,9 +161,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  Door: {fileID: 0}
---- !u!114 &7969843924632224536
-  doorsDatas: {fileID: 11400000, guid: a4b8bbf098179d24f95b0d2651b87494, type: 2}
+  doorsDatas: {fileID: 0}
+  playableDirector: {fileID: 0}
 --- !u!114 &2456586336837627206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,72 +194,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  t: 0.2
-  Speed: 5
-  _cbCrouch: {fileID: 1538698608272504889}
-  camCrouch: {fileID: 1553799043939701877}
-  camHold: {fileID: 6237637883642238685}
---- !u!1 &1553799043939701877
-GameObject:
   pickUpRange: 2
-  handPosition: {fileID: 6210997497083980593}
+  handPosition: {fileID: 0}
   PickUpText: {fileID: 0}
-  pickableTags:
-  - PickUp
-  - Knife
-  - Arm
---- !u!114 &8168762561723947600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1816102428357058038}
-  m_Layer: 0
-  m_Name: CameraCrouch
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1816102428357058038
-Transform:
-  m_GameObject: {fileID: 65310136675079440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2b5c73ea88ecf249816d5f291c17ffe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
-  ButtonOnMaterial: {fileID: 2100000, guid: 03bc8c934e87eb34fa79c97f4dbc510a, type: 2}
-  ButtonOffMaterial: {fileID: 2100000, guid: 8b1d8b6d37bff5948b0c409f2020589f, type: 2}
-  camDatas: {fileID: 11400000, guid: 4fceb5ff058506f46b2f76ae616262fe, type: 2}
-  screen: {fileID: 0}
---- !u!114 &8358763297223810707
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1553799043939701877}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.3, z: 0.3}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1197187575146129295}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_GameObject: {fileID: 65310136675079440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01d4ede5aeea30d4f975a23500354666, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  pickableTags: []
 --- !u!114 &391863423177865471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -484,7 +420,6 @@ Transform:
   - {fileID: 1197187575146129295}
   - {fileID: 3523309235982246152}
   - {fileID: 7067982298241320224}
-  - {fileID: 2553044472551124238}
   - {fileID: 2460913538865792631}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
