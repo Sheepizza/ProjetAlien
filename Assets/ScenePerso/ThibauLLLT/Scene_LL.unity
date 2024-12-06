@@ -3980,6 +3980,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RepairMiniGame
       objectReference: {fileID: 0}
+    - target: {fileID: 2388859187251887789, guid: 9da99730e01a32b46b20fa4518109b96, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2729682265321353427, guid: 9da99730e01a32b46b20fa4518109b96, type: 3}
       propertyPath: failureSoundSource
       value: 
@@ -4079,6 +4083,10 @@ PrefabInstance:
     - target: {fileID: 8789718548656491712, guid: 9da99730e01a32b46b20fa4518109b96, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -1.0003
+      objectReference: {fileID: 0}
+    - target: {fileID: 8851819034609097825, guid: 9da99730e01a32b46b20fa4518109b96, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 9193970313962240887, guid: 9da99730e01a32b46b20fa4518109b96, type: 3}
       propertyPath: m_Sprite
