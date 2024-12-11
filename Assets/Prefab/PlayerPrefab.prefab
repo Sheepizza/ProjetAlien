@@ -45,6 +45,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2669499881089678799}
+  - {fileID: 4350201765089325980}
   m_Father: {fileID: 6274537183807283025}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8253320459446734062
@@ -132,11 +133,11 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  t: 2
   Speed: 5
-  JumpForce: 8
-  CrouchScale: 0.3
+  _cbCrouch: {fileID: 1538698608272504889}
+  camCrouch: {fileID: 8544986532436686318}
   camHold: {fileID: 6237637883642238685}
-  caps: {fileID: 3918856271568550026}
 --- !u!114 &2503041113498875816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,7 +187,8 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   doorsDatas: {fileID: 11400000, guid: a4b8bbf098179d24f95b0d2651b87494, type: 2}
-  playableDirector: {fileID: 0}
+  J1PlayableDirector: {fileID: 0}
+  J2PlayableDirector: {fileID: 0}
 --- !u!114 &2456586336837627206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,7 +457,7 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 0.49
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3918856271568550026
@@ -486,7 +488,7 @@ Transform:
   m_GameObject: {fileID: 3918856271568550026}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.2824247, y: 2.4844308, z: -1.5843852}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -534,7 +536,7 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 1.75
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &8625532473962581398
@@ -1047,7 +1049,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -1072,3 +1074,34 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: 9d4c6b28e3482b64c93e0c25d8a38b83, type: 2}
+--- !u!1 &8544986532436686318
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4350201765089325980}
+  m_Layer: 6
+  m_Name: CameraCrouch
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4350201765089325980
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8544986532436686318}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1197187575146129295}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
