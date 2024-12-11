@@ -7,10 +7,13 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
+using UnityEngine.UIElements;
 using UnityEngine.Animations;
 
 public class PlayerController : NetworkBehaviour
 {
+    public float secondsRest;
+    public float secondsEffort;
     public float t;
     public float Speed = 5f;
     Rigidbody _rb;
@@ -18,6 +21,7 @@ public class PlayerController : NetworkBehaviour
     public CapsuleCollider _cbCrouch;
     public GameObject camCrouch;
     public GameObject camHold;
+    public Slider enduranceSlider;
     Vector3 camStandPosition;
     float colliderStandHeight;
 
@@ -57,6 +61,20 @@ public class PlayerController : NetworkBehaviour
             }
         }
 
+        //courir
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            Speed = 8f;
+            //diminuer la barre d'endurance
+            StartCoroutine(SliderEffort());
+        }
+        else if(Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            Speed = 5f;
+            //recharger la barre d'endurance
+            StartCoroutine(SliderRest());
+        }
+
     }
 
     private void FixedUpdate()
@@ -65,8 +83,25 @@ public class PlayerController : NetworkBehaviour
         transform.up * _rb.velocity.y +
         transform.forward * Input.GetAxis("Vertical") * Speed;
     }
-    private void waitForSeconds(float seconds)
-    {
 
+    //pour régenérer le slider d'endurance
+    IEnumerator SliderRest()
+    {
+        while (enduranceSlider.value != 1)
+        {
+            yield return new WaitForSeconds(secondsRest);
+            enduranceSlider.value += 0.01f;
+        }
     }
+
+    IEnumerator SliderEffort()
+    {
+        while (enduranceSlider.value != 0)
+        {
+            yield return new WaitForSeconds(secondsEffort);
+            enduranceSlider.value -= 0.01f;
+        }
+    }
+
+
 }
