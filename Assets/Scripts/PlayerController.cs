@@ -16,6 +16,7 @@ public class PlayerController : NetworkBehaviour
     Rigidbody _rb;
     CapsuleCollider _cb;
 
+
     [Header ("Speed")]
     public float moveSpeed;
     public float walkSpeed;
@@ -24,10 +25,11 @@ public class PlayerController : NetworkBehaviour
 
     [Space(25)]
 
-    [Header ("Run")]
+    [Header ("Sprint")]
     public float runningTime;
     public float maxRunningTime;
     public float minRunningTime;
+    public bool EnSprint;
 
     [Space(25)]
 
@@ -48,7 +50,7 @@ public class PlayerController : NetworkBehaviour
     public KeyCode sprintKey = KeyCode.LeftShift;
     public KeyCode crouchKey = KeyCode.LeftControl;
 
-    public bool EnSprint;
+
 
     void Start()
     {
@@ -60,29 +62,36 @@ public class PlayerController : NetworkBehaviour
         colliderStandHeight = _cb.height;
         startYScale = transform.localScale.y;
     }
+    private void FixedUpdate() //Déplacements
+    {
+        _rb.velocity = transform.right * Input.GetAxis("Horizontal") * moveSpeed +
+        transform.up * _rb.velocity.y +
+        transform.forward * Input.GetAxis("Vertical") * moveSpeed;
+    }
 
-    // Update is called once per frame
+
     void Update()
     {
-        if (Input.GetKeyDown(crouchKey))  //accroupis
+        //LE CROUCH
+        if (Input.GetKeyDown(crouchKey))
         {
             transform.localScale = new Vector3(transform.localScale.x, crouchYScale, transform.localScale.z);
             _rb.AddForce(Vector3.down * 2f, ForceMode.Impulse);
-            camHold.transform.localPosition = Vector3.Lerp(camHold.transform.localPosition, camCrouch.transform.localPosition, t); //progressivement
-            _cb.height = _cbCrouch.height; //progressivement
+            camHold.transform.localPosition = Vector3.Lerp(camHold.transform.localPosition, camCrouch.transform.localPosition, t);
+            _cb.height = _cbCrouch.height;
             moveSpeed = crouchSpeed;
             //ajout anim accroupis
         }
-        else if (Input.GetKeyUp(crouchKey)) //debout
+        else if (Input.GetKeyUp(crouchKey)) //Se relever
         {
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.up, out hit, 2f)) //si il veutse relever mais qu'il touche un mur, il reste accroupit.
+            if (Physics.Raycast(transform.position, transform.up, out hit, 2f)) //Ne peut pas se relever car plafond trop bas
             {
                 camHold.transform.localPosition = camCrouch.transform.localPosition;
                 _cb.height = _cbCrouch.height;
                 moveSpeed = crouchSpeed;
             }
-            else
+            else //Peut se relever
             {
                 transform.localScale = new Vector3(transform.localScale.x, startYScale, transform.localScale.z);
                 camHold.transform.localPosition = Vector3.Lerp(camHold.transform.localPosition, camStandPosition, t);
@@ -92,27 +101,26 @@ public class PlayerController : NetworkBehaviour
             }
         }
 
-        //courir
+        //SPRINT
         if (Input.GetKeyDown(sprintKey) && moveSpeed == walkSpeed)
         {
-            StartCoroutine(Course());
+            StartCoroutine(DeloadSprint());
         }
         if (Input.GetKeyUp(sprintKey))
         {
-            StopCoroutine(Course());
+            StopCoroutine(DeloadSprint());
             moveSpeed = walkSpeed;
             EnSprint = false;
-            StartCoroutine(RechargementSprint());
+            StartCoroutine(ReloadSprint());
         }
     }
 
-    private void FixedUpdate()
-    {
-        _rb.velocity = transform.right * Input.GetAxis("Horizontal") * moveSpeed +
-        transform.up * _rb.velocity.y +
-        transform.forward * Input.GetAxis("Vertical") * moveSpeed;
-    }
-    IEnumerator Course() 
+    
+
+
+
+    //Reload et Deload du - SPRINT
+    IEnumerator DeloadSprint() 
     {
         EnSprint = true;
         {
@@ -130,7 +138,7 @@ public class PlayerController : NetworkBehaviour
             }
         }
     }
-    IEnumerator RechargementSprint()
+    IEnumerator ReloadSprint()
     {
         while(moveSpeed == walkSpeed && runningTime < maxRunningTime)
         {
