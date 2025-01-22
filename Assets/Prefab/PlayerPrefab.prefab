@@ -721,7 +721,7 @@ GameObject:
   - component: {fileID: 1179784880078146875}
   - component: {fileID: 2441264328872655370}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: Endurance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
