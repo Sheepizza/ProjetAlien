@@ -15,7 +15,6 @@ public class PlayerCamera : NetworkBehaviour
 
     private void Start()
     {
-        GameManager.Instance.SetPlayerCamera(GetComponent<Camera>());
         Cursor.lockState = CursorLockMode.Locked;
         HighlightManager.Instance.DisableOutlineForTag();
     }

@@ -2327,6 +2327,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8590996047788979764, guid: 156ea8d7801e10143a361335f8615ae7, type: 3}
+      propertyPath: sceneId
+      value: 900692135
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3976,6 +3980,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 59344780}
     m_Modifications:
+    - target: {fileID: 1696543988223186858, guid: 9da99730e01a32b46b20fa4518109b96, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 18.274414
+      objectReference: {fileID: 0}
     - target: {fileID: 2388859187251887789, guid: 9da99730e01a32b46b20fa4518109b96, type: 3}
       propertyPath: m_Name
       value: RepairMiniGame
@@ -5759,6 +5767,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pickableObjects: {fileID: 11400000, guid: b81e57511d3939047942a1f0576cd2af, type: 2}
+  CanInteract: 0
 --- !u!4 &1960913361
 Transform:
   m_ObjectHideFlags: 0
