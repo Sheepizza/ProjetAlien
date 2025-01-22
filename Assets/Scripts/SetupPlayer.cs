@@ -27,13 +27,22 @@ public class SetupPlayer : NetworkBehaviour
                 _mainCam.gameObject.SetActive(false);
             }
         }
+
+        if (isServer && isLocalPlayer)
+        {
+            transform.parent.gameObject.name = "Player1";    
+        }
+        else if (!isServer && isLocalPlayer)
+        {
+            transform.parent.gameObject.name = "Player2";
+        }
     }
 
-    private void OnDestroy()
+    /*private void OnDestroy()
     {
         if (isLocalPlayer)
         {
             _mainCam.gameObject.SetActive(true);
         }
-    }
+    }*/
 }

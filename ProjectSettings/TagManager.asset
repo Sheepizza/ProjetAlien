@@ -15,6 +15,11 @@ TagManager:
   - Fixed
   - Red
   - Green
+  - DoorButton
+  - LightButton
+  - CamButton
+  - SAS
+  - ToRepair
   layers:
   - Default
   - TransparentFX
@@ -22,9 +27,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Target
+  - Obstruction
+  - PostProcessing
   - 
   - 
   - 
