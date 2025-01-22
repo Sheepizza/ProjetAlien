@@ -119,8 +119,8 @@ public class MiniGameController : NetworkBehaviour
     private void CheckCursorPosition()
     {
         float cursorPosition = cursor.anchoredPosition.x;
-        float greenStart = greenZonePosition.x;
-        float greenEnd = greenStart + greenZone.rect.width;
+        float greenStart = greenZonePosition.x - (greenZone.rect.width/2);
+        float greenEnd = greenZonePosition.x + (greenZone.rect.width/2);
         if (cursorPosition >= greenStart && cursorPosition <= greenEnd) // Vérifie si le curseur est sur le rectangle vert. Si c'est le cas, réussi.
         {
             Debug.Log("Réussi!");
@@ -150,11 +150,13 @@ public class MiniGameController : NetworkBehaviour
 
     private void ActivateObjects()
     {
+        
         // Désactive les objets Broken et active les objets Fixed autour du joueur
         GameObject[] brokenObjects = GameObject.FindGameObjectsWithTag("Broken");
         foreach (GameObject obj in brokenObjects)
         {
             obj.SetActive(false);
+            
         }
         GameObject[] fixedObjects = GameObject.FindGameObjectsWithTag("Fixed");
         foreach (GameObject obj in fixedObjects)

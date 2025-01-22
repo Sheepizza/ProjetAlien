@@ -3990,7 +3990,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2388859187251887789, guid: 9da99730e01a32b46b20fa4518109b96, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2729682265321353427, guid: 9da99730e01a32b46b20fa4518109b96, type: 3}
       propertyPath: failureSoundSource
