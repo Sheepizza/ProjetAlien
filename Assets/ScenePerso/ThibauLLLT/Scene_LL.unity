@@ -646,7 +646,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &281785365
 Transform:
   m_ObjectHideFlags: 0
@@ -812,7 +812,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineMode: 0
   outlineColor: {r: 0.87843144, g: 0.882353, b: 0.09411766, a: 1}
-  outlineWidth: 8
+  outlineWidth: 6
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -1492,7 +1492,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &503887364
 Transform:
   m_ObjectHideFlags: 0
@@ -2545,7 +2545,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineMode: 0
   outlineColor: {r: 0.882353, g: 0.8862746, b: 0.13725491, a: 1}
-  outlineWidth: 8
+  outlineWidth: 6
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -4117,8 +4117,8 @@ GameObject:
   - component: {fileID: 1594774390}
   - component: {fileID: 1594774389}
   - component: {fileID: 1594774388}
-  - component: {fileID: 1594774387}
   - component: {fileID: 1594774393}
+  - component: {fileID: 1594774394}
   m_Layer: 0
   m_Name: BrokenCam
   m_TagString: Broken
@@ -4126,24 +4126,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1594774387
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1594774386}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 0.87843144, g: 0.8862746, b: 0.1254902, a: 1}
-  outlineWidth: 8
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!65 &1594774388
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4247,6 +4229,24 @@ MonoBehaviour:
   serverOnly: 0
   visibility: 0
   hasSpawned: 0
+--- !u!114 &1594774394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1594774386}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0.87843144, g: 0.882353, b: 0.09019608, a: 1}
+  outlineWidth: 6
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!4 &1608776805 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2362674894116724449, guid: 10069c4c75c435146bdab3fc75d439ed, type: 3}
@@ -4411,7 +4411,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineMode: 0
   outlineColor: {r: 0.882353, g: 0.8862746, b: 0.13725491, a: 1}
-  outlineWidth: 8
+  outlineWidth: 6
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -5766,7 +5766,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27e958445d39c0f4fa3ef7e5e21b1764, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pickableObjects: {fileID: 11400000, guid: b81e57511d3939047942a1f0576cd2af, type: 2}
+  _pickableObjects: {fileID: 11400000, guid: 5c8968b081a71db4b8e0f0c628c518ab, type: 2}
   CanInteract: 0
 --- !u!4 &1960913361
 Transform:
@@ -6015,7 +6015,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineMode: 0
   outlineColor: {r: 0.87843144, g: 0.882353, b: 0.098039225, a: 1}
-  outlineWidth: 8
+  outlineWidth: 6
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -6078,7 +6078,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2070839824
 Transform:
   m_ObjectHideFlags: 0
@@ -6181,6 +6181,10 @@ PrefabInstance:
     - target: {fileID: 7350043321530436756, guid: 852ae5b5a67cc844cabe7cd6ea7ead4c, type: 3}
       propertyPath: m_Name
       value: eube
+      objectReference: {fileID: 0}
+    - target: {fileID: 7475361299715955797, guid: 852ae5b5a67cc844cabe7cd6ea7ead4c, type: 3}
+      propertyPath: outlineWidth
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7475361299715955797, guid: 852ae5b5a67cc844cabe7cd6ea7ead4c, type: 3}
       propertyPath: outlineColor.b
@@ -6337,6 +6341,10 @@ PrefabInstance:
     - target: {fileID: 1425469129571564033, guid: 10069c4c75c435146bdab3fc75d439ed, type: 3}
       propertyPath: m_Name
       value: ScreenR3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1425469129571564033, guid: 10069c4c75c435146bdab3fc75d439ed, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2362674894116724449, guid: 10069c4c75c435146bdab3fc75d439ed, type: 3}
       propertyPath: m_LocalPosition.x
