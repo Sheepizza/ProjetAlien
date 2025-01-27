@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 3269179333850583370}
   - component: {fileID: 3825348792330176891}
   - component: {fileID: 5482099421820317264}
+  - component: {fileID: 8963184902531759516}
   m_Layer: 0
   m_Name: PlayerBody
   m_TagString: Untagged
@@ -119,6 +120,8 @@ MonoBehaviour:
   - {fileID: 1298140023208789708}
   - {fileID: 5052462979821838715}
   - {fileID: 4292158778610426544}
+  J1PlayerIdentity: 0
+  J2PlayerIdentity: 0
 --- !u!114 &4489196583225817687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,6 +386,25 @@ MonoBehaviour:
   syncInterval: 0
   Cursor: {fileID: 0}
   Follow: {fileID: 0}
+--- !u!114 &8963184902531759516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65310136675079440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b5c73ea88ecf249816d5f291c17ffe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  ButtonOnMaterial: {fileID: 0}
+  ButtonOffMaterial: {fileID: 0}
+  camDatas: {fileID: 11400000, guid: 4fceb5ff058506f46b2f76ae616262fe, type: 2}
+  screen: {fileID: 0}
 --- !u!1 &1694546100000668775
 GameObject:
   m_ObjectHideFlags: 0
