@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2355557690931110011}
   - component: {fileID: 3533911329781195653}
   - component: {fileID: 4489196583225817687}
+  - component: {fileID: 8541357822167648039}
   - component: {fileID: 2503041113498875816}
   - component: {fileID: 8245925273576053905}
   - component: {fileID: 2456586336837627206}
@@ -133,13 +134,38 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  secondsRest: 0.05
-  secondsEffort: 0.025
+  moveSpeed: 0
+  walkSpeed: 4
+  crouchSpeed: 2
+  sprintSpeed: 8
+  runningTime: 5
+  maxRunningTime: 0
+  minRunningTime: 0
+  EnSprint: 0
   t: 2
-  Speed: 5
+  crouchYScale: 0
   _cbCrouch: {fileID: 1538698608272504889}
   camCrouch: {fileID: 8544986532436686318}
   camHold: {fileID: 6237637883642238685}
+  jumpKey: 32
+  sprintKey: 304
+  crouchKey: 306
+--- !u!114 &8541357822167648039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65310136675079440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d3cb44282d9d9e48a167b938ec96405, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 4489196583225817687}
+  bobbingAmount: 0.08
+  bobbingSpeed: 3
+  camHold: {x: 0, y: 0, z: 0}
 --- !u!114 &2503041113498875816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,7 +240,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 65310136675079440}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d704eed438d3cbc46b7409a962d258e7, type: 3}
   m_Name: 
@@ -224,11 +250,12 @@ MonoBehaviour:
   syncInterval: 0
   pickUpRange: 2
   handPosition: {fileID: 6210997497083980593}
-  PickUpText: {fileID: 0}
+  playerCamera: {fileID: 5052462979821838715}
   pickableTags:
   - PickUp
   - Knife
   - Arm
+  - CellPickUp
 --- !u!114 &8168762561723947600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,16 +265,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 65310136675079440}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2b5c73ea88ecf249816d5f291c17ffe, type: 3}
+  m_Script: {fileID: 11500000, guid: e662f22db070bec458cc4d77035017aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  ButtonOnMaterial: {fileID: 2100000, guid: 03bc8c934e87eb34fa79c97f4dbc510a, type: 2}
-  ButtonOffMaterial: {fileID: 2100000, guid: 8b1d8b6d37bff5948b0c409f2020589f, type: 2}
-  camDatas: {fileID: 11400000, guid: 4fceb5ff058506f46b2f76ae616262fe, type: 2}
-  screen: {fileID: 0}
+  pickUpRange: 2
+  brokenTags:
+  - Broken
+  miniGame: {fileID: 2729682265321353427, guid: 9da99730e01a32b46b20fa4518109b96, type: 3}
 --- !u!114 &8358763297223810707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,6 +382,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   Cursor: {fileID: 0}
+  Follow: {fileID: 0}
 --- !u!1 &1694546100000668775
 GameObject:
   m_ObjectHideFlags: 0
@@ -1118,6 +1146,7 @@ MonoBehaviour:
   Sensitivity: 350
   Player: {fileID: 65310136675079440}
   CameraHolder: {fileID: 6237637883642238685}
+  CanMove: 1
 --- !u!114 &6526303527490658937
 MonoBehaviour:
   m_ObjectHideFlags: 0

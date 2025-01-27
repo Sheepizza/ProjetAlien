@@ -9,11 +9,18 @@ TagManager:
   - Knife
   - Arm
   - PickUp
+  - Cell
+  - CellPickUp
+  - Broken
+  - Fixed
+  - Red
+  - Green
   - DoorButton
   - LightButton
   - CamButton
   - SAS
   - ToRepair
+  - Light
   layers:
   - Default
   - TransparentFX

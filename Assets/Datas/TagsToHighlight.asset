@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ab2a8769bf4574396a7fd4fce522ca, type: 3}
   m_Name: TagsToHighlight
   m_EditorClassIdentifier: 
+  PickableObjectsTagName:
+  - PickUp
+  - Knife
+  - Arm
+  - Cell
   TagsNames:
   - PickUp
   - Arm
