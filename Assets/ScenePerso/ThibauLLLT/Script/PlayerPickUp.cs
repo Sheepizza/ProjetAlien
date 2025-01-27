@@ -4,6 +4,7 @@ using Mirror.Examples.Common;
 using UnityEngine;
 using Mirror;
 using TMPro;
+using Unity.Burst.CompilerServices;
 
 public class PlayerPickUp : NetworkBehaviour
 {
@@ -20,7 +21,7 @@ public class PlayerPickUp : NetworkBehaviour
 
     void Start()
     {
-
+        
     if (playerCamera == null)
     {
         Debug.LogError("La caméra principale (MainCamera) n'a pas été trouvée !");
@@ -87,13 +88,36 @@ public class PlayerPickUp : NetworkBehaviour
         GameObject targetObject = targetIdentity.gameObject;
         if (targetObject != null)
         {
+            if (targetObject.CompareTag("CellPickUp"))
+            {
+                Transform parentCell = targetObject.transform.parent; // Trouver la cellule parente
+                if (parentCell != null && parentCell.CompareTag("Cell"))
+                {
+                    foreach (Transform child in parentCell)
+                    {
+                        if (child.CompareTag("Light")) // Cherche un enfant avec le tag light
+                        {
+                            child.gameObject.SetActive(false);
+                            Transform powerCutAudio = parentCell.transform.Find("PowerCutAudio"); // Cherche le son en enfant de l'energy cell pour le jouer
+                            if (powerCutAudio != null)
+                            {
+                                AudioSource audioSource = powerCutAudio.GetComponent<AudioSource>();
+                                if (audioSource != null && !audioSource.isPlaying)
+                                {
+                                    audioSource.Play();
+                                }
+                            }
+                            break;
+
+                        }
+                    }
+                }
+            }
             targetObject.transform.SetParent(handPosition);
             targetObject.transform.localPosition = Vector3.zero;
             targetObject.transform.localRotation = Quaternion.identity;
-
             targetObject.GetComponent<Collider>().enabled = false;
             targetObject.GetComponent<Rigidbody>().isKinematic = true;
-
             pickedUpObject = targetObject;
         }
     }
@@ -133,17 +157,32 @@ public class PlayerPickUp : NetworkBehaviour
     {
         if (pickedUpObject != null && pickedUpObject.CompareTag("CellPickUp"))
         {
+            // Place la Cell tenue par le joueur en enfant l'emplacement voulu
             pickedUpObject.transform.position = targetCell.transform.position;
             pickedUpObject.transform.rotation = targetCell.transform.rotation;
-            pickedUpObject.transform.SetParent(null);
+            pickedUpObject.transform.SetParent(targetCell.transform);
 
+            // Activer la lumière associée à la cellule
+            foreach (Transform child in targetCell.transform)
+            {
+                if (child.CompareTag("Light"))
+                {
+                    child.gameObject.SetActive(true);
+                    Transform powerOnAudio = targetCell.transform.Find("PowerOnAudio");
+                    if (powerOnAudio != null)
+                    {
+                        AudioSource audioSource = powerOnAudio.GetComponent<AudioSource>();
+                        if (audioSource != null) audioSource.Play();
+                    }
+                    break;
+                }
+            }
             Rigidbody rb = pickedUpObject.GetComponent<Rigidbody>();
             if (rb != null)
             {
                 rb.isKinematic = true;
             }
-
-            pickedUpObject.GetComponent<Collider>().enabled = true; // Rendre le Collider actif pour permettre le raycast
+            pickedUpObject.GetComponent<Collider>().enabled = true; // Réactiver le collider
             pickedUpObject = null;
         }
     }

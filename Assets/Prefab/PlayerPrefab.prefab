@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 8245925273576053905}
   - component: {fileID: 2456586336837627206}
   - component: {fileID: 3287045485611788853}
-  - component: {fileID: 5484458394958352972}
   - component: {fileID: 8168762561723947600}
   - component: {fileID: 8358763297223810707}
   - component: {fileID: 391863423177865471}
@@ -215,7 +214,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 65310136675079440}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d704eed438d3cbc46b7409a962d258e7, type: 3}
   m_Name: 
@@ -231,7 +230,6 @@ MonoBehaviour:
   - Knife
   - Arm
   - CellPickUp
---- !u!114 &5484458394958352972
 --- !u!114 &8168762561723947600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,7 +240,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e662f22db070bec458cc4d77035017aa, type: 3}
-  m_Script: {fileID: 11500000, guid: b2b5c73ea88ecf249816d5f291c17ffe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncDirection: 0
@@ -252,10 +249,6 @@ MonoBehaviour:
   brokenTags:
   - Broken
   miniGame: {fileID: 2729682265321353427, guid: 9da99730e01a32b46b20fa4518109b96, type: 3}
-  ButtonOnMaterial: {fileID: 2100000, guid: 03bc8c934e87eb34fa79c97f4dbc510a, type: 2}
-  ButtonOffMaterial: {fileID: 2100000, guid: 8b1d8b6d37bff5948b0c409f2020589f, type: 2}
-  camDatas: {fileID: 11400000, guid: 4fceb5ff058506f46b2f76ae616262fe, type: 2}
-  screen: {fileID: 0}
 --- !u!114 &8358763297223810707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -363,6 +356,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   Cursor: {fileID: 0}
+  Follow: {fileID: 0}
 --- !u!1 &1694546100000668775
 GameObject:
   m_ObjectHideFlags: 0
