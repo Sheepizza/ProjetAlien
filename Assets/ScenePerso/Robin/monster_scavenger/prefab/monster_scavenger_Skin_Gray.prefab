@@ -740,9 +740,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4228292131850356525}
   - component: {fileID: 1543890135835122242}
-  - component: {fileID: 2637614690213565209}
   - component: {fileID: 7435324323550924136}
-  - component: {fileID: 2586732148312647723}
   - component: {fileID: 8590996047788979764}
   - component: {fileID: 1325787565347080203}
   - component: {fileID: 966933808944460834}
@@ -800,25 +798,6 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &2637614690213565209
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3595625012628118935}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3d211c84b624f049863d7305ee363c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
-  pathways: []
-  enemy: {fileID: 0}
-  pathwayOver: 0
-  pathwayTiming: 15
 --- !u!114 &7435324323550924136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -841,22 +820,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   canSeePlayer: 0
---- !u!114 &2586732148312647723
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3595625012628118935}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0da874e2ffd2324cb16bb4e818a2eef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
-  playerRef: {fileID: 0}
 --- !u!114 &8590996047788979764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -870,7 +833,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneId: 0
-  _assetId: 3610476299
+  _assetId: 0
   serverOnly: 0
   visibility: 0
   hasSpawned: 0
@@ -947,7 +910,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSound: {fileID: 3117110279985846047, guid: 25578e6ca0f668b4bb8854093da19108, type: 3}
-  enemyPathway: {fileID: 2637614690213565209}
+  manager: {fileID: 0}
   AudioDatas: {fileID: 0}
 --- !u!65 &9129177443320426633
 BoxCollider:
@@ -989,6 +952,7 @@ MonoBehaviour:
   enemy: {fileID: 1543890135835122242}
   pathwayOver: 0
   pathwayTiming: 10
+  playerRef: {fileID: 0}
 --- !u!95 &7130308539661580536
 Animator:
   serializedVersion: 5

@@ -46,7 +46,6 @@ public class AIManager : MonoBehaviour
         if (fov.canSeePlayer)
         {
             isHunting = true;
-            animator.SetTrigger("canChase");
             StopCoroutine(HuntStateTimer());
         }
         else if (!fov.canSeePlayer)
@@ -57,7 +56,6 @@ public class AIManager : MonoBehaviour
         if (isHunting)
         {
             Hunt();
-            animator.SetBool("isChasing", true);
         }
         else if (!isHunting)
         {
@@ -147,7 +145,6 @@ public class AIManager : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
         isHunting = false;
-        animator.SetTrigger("canChase");
     }
 }
 
