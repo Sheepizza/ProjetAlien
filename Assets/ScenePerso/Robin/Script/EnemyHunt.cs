@@ -66,8 +66,6 @@ public class EnemyHunt : NetworkBehaviour
 
     IEnumerator Kill()
     {
-            //animator.Play("root|Anim_monster_scavenger_attack");
-            //Debug.Log("Attacking");
             yield return new WaitForSeconds(1);
             //playerRef.SetActive(false);
     }

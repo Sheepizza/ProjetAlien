@@ -2010,7 +2010,7 @@ GameObject:
   - component: {fileID: 425802312}
   - component: {fileID: 425802313}
   m_Layer: 0
-  m_Name: Salle 1
+  m_Name: RoomPoint
   m_TagString: Room
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2266,7 +2266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 503842709}
   m_Layer: 0
-  m_Name: Salle 1 (1)
+  m_Name: PatrolPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4413,7 +4413,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1155073076}
   m_Layer: 0
-  m_Name: Salle 1 (2)
+  m_Name: PatrolPoint2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6664,7 +6664,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1703156856}
   m_Layer: 0
-  m_Name: Salle 1 (3)
+  m_Name: PatrolPoint3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
