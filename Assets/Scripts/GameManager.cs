@@ -49,23 +49,24 @@ public class GameManager : NetworkBehaviour
         if(J1Identity == 0)
         {
             J1Identity = _identity;
-            Debug.Log(_identity);
-            Debug.Log(J1Identity);
+            //Debug.Log("J1ID" + _identity);
+            //Debug.Log("J1ID2" + J1Identity);
             J1 = GameObject.Find("Player1");
             NameJ1 = J1.gameObject.name;
         }
         else
         {
             J2Identity = _identity;
-            J2 = GameObject.Find("Player1");
+            //Debug.Log("J2ID" +_identity);
+            //Debug.Log("J2ID2" +J2Identity);
+            J2 = GameObject.Find("Player2");
             NameJ2 = J2.gameObject.name;
         }
         Debug.Log(J1Identity);
     }
 
-    public bool FindPlayer(GameObject _gameObject)
+    public void FindPlayer(GameObject _gameObject)
     {
 
-        return (_gameObject == J1);
     }
 }

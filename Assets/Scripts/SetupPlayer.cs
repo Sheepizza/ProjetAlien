@@ -38,13 +38,15 @@ public class SetupPlayer : NetworkBehaviour
         if (isServer && isLocalPlayer)
         {
             transform.parent.gameObject.name = "Player1";
-            J1PlayerIdentity = transform.parent.gameObject.GetComponent<NetworkIdentity>().assetId;
+            //transform.parent.gameObject.GetComponent<NetworkIdentity>().assetId = Utils.GetTrueRandomUInt();
+            
+            J1PlayerIdentity = transform.parent.gameObject.GetComponent<NetworkIdentity>().netId;
             GameManager.Instance.SetPlayer(J1PlayerIdentity);
         }
         else if (!isServer && isLocalPlayer)
         {
             transform.parent.gameObject.name = "Player2";
-            J2PlayerIdentity = transform.parent.gameObject.GetComponent<NetworkIdentity>().assetId;
+            J2PlayerIdentity = transform.parent.gameObject.GetComponent<NetworkIdentity>().netId;
             GameManager.Instance.SetPlayer(J2PlayerIdentity);
         }
     
@@ -57,4 +59,12 @@ public class SetupPlayer : NetworkBehaviour
             _mainCam.gameObject.SetActive(true);
         }
     }*/
+
+    public void OnStartClient()
+    {
+        if(isServer)
+        {
+
+        }
+    }
 }
