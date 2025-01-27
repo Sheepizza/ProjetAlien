@@ -8,8 +8,6 @@ public class CamKeyValuePair
 {
     public string key;
     public string value;
-
-    public Material CamMaterial;
 }
 
 
@@ -18,6 +16,9 @@ public class CamDatas : ScriptableObject
 {
     public List<CamKeyValuePair> J1BC = new List<CamKeyValuePair>();
     public List<CamKeyValuePair> J2BC = new List<CamKeyValuePair>();
+
+    public List<Material> CamMaterialJ1 = new List<Material>();
+    public List<Material> CamMaterialJ2 = new List<Material>();
 
     public Dictionary<string, string> GetJ1Dictionary()
     {

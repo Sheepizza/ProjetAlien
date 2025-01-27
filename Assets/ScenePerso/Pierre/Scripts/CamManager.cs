@@ -2,19 +2,24 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Mirror;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CamManager : NetworkBehaviour
 {
+    public Material ButtonOnMaterial;
+    public Material ButtonOffMaterial;
     public CamDatas camDatas;
     Dictionary<string, string> CamButtons;
-
     List<CamKeyValuePair> CamList;
+
+    List<Material> CamMaterialsList;
 
     [SerializeField]
     private GameObject screen;
-
+    GameObject _button;
     uint _id;
+    int CamMaterialsIndex = 0;
 
     public override void OnStartLocalPlayer()
     {
@@ -31,6 +36,8 @@ public class CamManager : NetworkBehaviour
             }*/
             screen = GameObject.Find("CamScreenJ1");
             CamList = camDatas.J1BC;
+            CamMaterialsList = camDatas.CamMaterialJ1;
+            Debug.Log(CamMaterialsList);
         }
         else if (isLocalPlayer)
         {
@@ -38,7 +45,9 @@ public class CamManager : NetworkBehaviour
             Debug.Log("Dictionnaire de cameras du Joueur 2 initialis�.");
             screen = GameObject.Find("CamScreenJ2");
             CamList = camDatas.J2BC;
+            CamMaterialsList = camDatas.CamMaterialJ2;
         }
+        screen.GetComponent<MeshRenderer>().material = CamMaterialsList[CamMaterialsIndex];
     }
 
     public void ChangeCam(string key)
@@ -46,29 +55,105 @@ public class CamManager : NetworkBehaviour
         Debug.Log("Bonjour");
         if (CamButtons != null && CamButtons.ContainsKey(key))
         {
-            Debug.Log(CamButtons[key]);
+            //Debug.Log(CamButtons[key]);
 
-            // Basculer l'�tat de la porte
-            GameObject cam = GameObject.Find(CamButtons[key]);
+            switch (key)
+            {
+                case "ButPrevJ1" : 
+                    Debug.Log(key);
+                    _button = GameObject.Find("ButPrevJ1");
+                    Debug.Log("J'ai le button : " + _button.name);
+                    StartCoroutine(SwapButtonColor(_button));
+                    Debug.Log(CamMaterialsIndex);
+                    if (CamMaterialsIndex > 0)
+                    {
+                        CamMaterialsIndex -=1;
+                        StartCoroutine(SwapScreenMaterial(screen));
+                    }
+                    else Debug.Log("Pas possbile mon fraté");
+                break;
+
+                case "ButNextJ1" : 
+                    _button = GameObject.Find("ButNextJ1");
+                    StartCoroutine(SwapButtonColor(_button));
+                    Debug.Log(CamMaterialsIndex);
+                    if(CamMaterialsIndex < CamMaterialsList.Count-1)
+                    {
+                        CamMaterialsIndex++;
+                        StartCoroutine(SwapScreenMaterial(screen));
+                    }
+                    else Debug.Log("Pas Possible mon fraté");
+                break;
+
+                case "ButPrevJ2" : 
+                    Debug.Log(key);
+                    _button = GameObject.Find("ButPrevJ2");
+                    Debug.Log("J'ai le button : " + _button.name);
+                    StartCoroutine(SwapButtonColor(_button));
+                    Debug.Log(CamMaterialsIndex);
+                    if (CamMaterialsIndex > 0)
+                    {
+                        CamMaterialsIndex -=1;
+                        StartCoroutine(SwapScreenMaterial(screen));
+                    }
+                    else Debug.Log("Pas possbile mon fraté");
+                break;
+
+                case "ButNextJ2" : 
+                    _button = GameObject.Find("ButNextJ2");
+                    StartCoroutine(SwapButtonColor(_button));
+                    Debug.Log(CamMaterialsIndex);
+                    if(CamMaterialsIndex < CamMaterialsList.Count-1)
+                    {
+                        CamMaterialsIndex++;
+                        StartCoroutine(SwapScreenMaterial(screen));
+                    }
+                    else Debug.Log("Pas Possible mon fraté");
+                break;
+
+                default : Debug.LogWarning("Pas bon la");
+                break;
+            }
+
+            /*GameObject cam = GameObject.Find(CamButtons[key]);
             if (cam != null)
             {
                 Debug.Log("J'ai la Cam");
-                int index = CamList.FindIndex(item => item.value == CamButtons[key]);
+                int CamIndex = CamList.FindIndex(item => item.value == CamButtons[key]);
 
-                if (index != -1)
+                if (CamIndex != -1)
                 {
-                    Debug.Log("Index de la caméra trouvée : " + index);
-                    screen.GetComponent<MeshRenderer>().material = CamList[index].CamMaterial;
+                    Debug.Log("Index de la caméra trouvée : " + CamIndex);
+                    //screen.GetComponent<MeshRenderer>().material = CamList[CamIndex].CamMaterial;
                 }
             }
             else
             {
                 Debug.LogWarning("La cam pour la cle specifiee est introuvable : " + CamButtons[key]);
-            }
+            }*/
         }
         else
         {
             Debug.LogWarning("Cl� introuvable dans le dictionnaire ou dictionnaire non initialis�.");
         }
     }
+
+    public IEnumerator SwapButtonColor(GameObject _button)
+    {
+        Debug.Log("change couleur");
+        //Passe la couleur à rouge
+        _button.GetComponent<MeshRenderer>().material = ButtonOnMaterial;
+        yield return new WaitForSeconds(1);
+        //Enlève le rouge
+        _button.GetComponent<MeshRenderer>().material = ButtonOffMaterial;
+
+    }
+
+    public IEnumerator SwapScreenMaterial(GameObject _screen)
+    {
+        screen.GetComponent<MeshRenderer>().material = CamMaterialsList[0];
+        yield return new WaitForSeconds(1);
+        screen.GetComponent<MeshRenderer>().material = CamMaterialsList[CamMaterialsIndex];
+    }
+
 }

@@ -11,27 +11,40 @@ public class PlayerCamera : NetworkBehaviour
 
     public GameObject Player;
     public GameObject CameraHolder;
+    public bool CanMove = true; 
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         HighlightManager.Instance.DisableOutlineForTag();
     }
-    // Start is called before the first frame update
-    void Update()
-    {
-        HighlightManager.Instance.HighlightObject(GetComponent<Camera>());
-    }
 
     // Update is called once per frame
+    void Update()
+    {
+        if (CanMove)
+        {
+            HighlightManager.Instance.HighlightObject(GetComponent<Camera>());
+        }
+    }
+
+    // FixedUpdate est appel� � un intervalle fixe, utilis� pour les calculs de physique
     void FixedUpdate()
     {
-        transform.position = CameraHolder.transform.position;
+        if (CanMove)
+        {
+            transform.position = CameraHolder.transform.position;
 
-        X += Input.GetAxis("Mouse X") * (Sensitivity * Time.deltaTime);
-        Y -= Input.GetAxis("Mouse Y") * (Sensitivity * Time.deltaTime);
+            X += Input.GetAxis("Mouse X") * (Sensitivity * Time.deltaTime);
+            Y -= Input.GetAxis("Mouse Y") * (Sensitivity * Time.deltaTime);
 
-        transform.rotation = Quaternion.Euler(Math.Clamp(Y,-60,70), X, 0);
-        Player.transform.rotation = Quaternion.Euler(0, X, 0);
+            transform.rotation = Quaternion.Euler(Mathf.Clamp(Y, -60, 70), X, 0);
+            Player.transform.rotation = Quaternion.Euler(0, X, 0);
+        }
+    }
+
+    public void SetCameraMovement(bool enable)
+    {
+        CanMove = enable;
     }
 }

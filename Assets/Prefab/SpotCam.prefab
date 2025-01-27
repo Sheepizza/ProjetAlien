@@ -223,6 +223,10 @@ GameObject:
   - component: {fileID: 7222486272085879540}
   - component: {fileID: 4915649385942875091}
   - component: {fileID: -1538764148936680502}
+  - component: {fileID: 8501513943489172341}
+  - component: {fileID: 4029241674278631203}
+  - component: {fileID: 1698543249235153470}
+  - component: {fileID: 2476422239563440404}
   m_Layer: 0
   m_Name: SpotCam
   m_TagString: Untagged
@@ -238,7 +242,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8058398245988432206}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.038395196, y: 0.91476846, z: -0.11543524, w: 0.38522622}
+  m_LocalRotation: {x: 0.038398605, y: 0.91476715, z: -0.115431264, w: 0.38523033}
   m_LocalPosition: {x: -2.9908495, y: 1.7575809, z: 29.86103}
   m_LocalScale: {x: 0.5545199, y: 0.5545201, z: 0.5545199}
   m_ConstrainProportionsScale: 0
@@ -254,10 +258,10 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8058398245988432206}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -265,7 +269,7 @@ Camera:
   m_ShutterSpeed: 0.005
   m_Aperture: 16
   m_FocusDistance: 10
-  m_FocalLength: 50
+  m_FocalLength: 49.9836
   m_BladeCount: 5
   m_Curvature: {x: 2, y: 11}
   m_BarrelClipping: 0.25
@@ -280,7 +284,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 27
+  field of view: 75
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -288,7 +292,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: c881bd58763c89e4bb9a4ef302907a6f, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
@@ -321,7 +325,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -342,3 +346,70 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &8501513943489172341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8058398245988432206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 874784116422d6e48817c3aefc1dbf16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isBroke: 0
+  CamVolume: {fileID: 0}
+--- !u!114 &4029241674278631203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8058398245988432206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebe9106215ccd44448bb1195e02eac87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frameRateStop: 0.25
+  _renderTexture: {fileID: 0}
+  _camera: {fileID: 0}
+--- !u!114 &1698543249235153470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8058398245988432206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 0
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 336c84d1025266d41b081865fc9e139c, type: 2}
+--- !u!65 &2476422239563440404
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8058398245988432206}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

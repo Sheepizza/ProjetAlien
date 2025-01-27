@@ -15,6 +15,10 @@ MonoBehaviour:
   J1BD:
   - key: 2
     value: C
+  - key: BS1
+    value: SAS1
   J2BD:
   - key: 1
     value: A
+  - key: BS2
+    value: SAS2
