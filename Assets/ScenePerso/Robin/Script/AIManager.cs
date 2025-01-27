@@ -17,6 +17,11 @@ public class AIManager : MonoBehaviour
     Vector3 roomPosition;
     GameObject actualRoom;
 
+    FieldOfView fov;
+
+    public GameObject playerRef;
+    bool isHunting;
+
 
     // Start is called before the first frame update
     void Start()
@@ -26,8 +31,45 @@ public class AIManager : MonoBehaviour
 
         pathwayOver = true;
         pathwayCountdown = pathwayTiming;
-        
+
+        isHunting = false;
+        fov = GetComponent<FieldOfView>();
     }
+    #region State
+    void Update()
+    {
+        if (playerRef == null)
+        {
+            playerRef = GameObject.FindGameObjectWithTag("Player");
+        }
+
+        if (fov.canSeePlayer)
+        {
+            isHunting = true;
+            animator.SetTrigger("canChase");
+            StopCoroutine(HuntStateTimer());
+        }
+        else if (!fov.canSeePlayer)
+        {
+            StartCoroutine(HuntStateTimer());
+        }
+
+        if (isHunting)
+        {
+            Hunt();
+            animator.SetBool("isChasing", true);
+        }
+        else if (!isHunting)
+        {
+            if (pathwayOver && pathways.Count > 0)
+            {
+                FindRoom();
+            }
+        }
+
+    }
+    #endregion
+
     #region Pathway
     /// <summary>
     /// Assigne une salle à l'Alien où il doit aller
@@ -56,11 +98,7 @@ public class AIManager : MonoBehaviour
             {
                 StartCoroutine(PathwayTimer());
             }
-            if (enemy.pathStatus == NavMeshPathStatus.PathComplete)
-            {
-                Debug.Log(NavMeshPathStatus.PathComplete);
-            }
-            //
+
             if (enemy.destination.z == enemy.transform.position.z && enemy.destination.x == enemy.transform.position.x)
             {
                 enemy.destination = actualRoom.transform.GetChild(Random.Range(0, actualRoom.transform.childCount)).position;
@@ -82,4 +120,36 @@ public class AIManager : MonoBehaviour
         }
     }
     #endregion
+
+    #region Hunt
+    
+    void Hunt()
+    {
+        pathwayOver = true;
+        enemy.destination = playerRef.transform.position;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            StartCoroutine(Kill());
+        }
+    }
+
+    IEnumerator Kill()
+    {
+        yield return new WaitForSeconds(1);
+        //playerRef.SetActive(false);
+    }
+
+    IEnumerator HuntStateTimer()
+    {
+        yield return new WaitForSeconds(3);
+        isHunting = false;
+        animator.SetTrigger("canChase");
+    }
 }
+
+    #endregion
+

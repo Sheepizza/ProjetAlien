@@ -7,7 +7,7 @@ public class SoundDetection : MonoBehaviour
     GameObject playerRef;
     public PlayerSound playerSound;
     AudioSource[] audioSources;
-    public EnemyPathway enemyPathway;
+    public AIManager manager;
     public AudioDatas AudioDatas;
 
     public void Update()
@@ -26,7 +26,7 @@ public class SoundDetection : MonoBehaviour
                 float distanceToTarget = Vector3.Distance(transform.position, audioSources[i].transform.position);
             if (distanceToTarget < audioSources[i].maxDistance)
             {
-                enemyPathway.enemy.destination = audioSources[i].transform.position;
+                manager.enemy.destination = audioSources[i].transform.position;
             }
         }
     }
