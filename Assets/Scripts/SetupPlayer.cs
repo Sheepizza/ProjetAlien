@@ -33,23 +33,7 @@ public class SetupPlayer : NetworkBehaviour
             {
                 _mainCam.gameObject.SetActive(false);
             }
-        }
-
-        if (isServer && isLocalPlayer)
-        {
-            transform.parent.gameObject.name = "Player1";
-            //transform.parent.gameObject.GetComponent<NetworkIdentity>().assetId = Utils.GetTrueRandomUInt();
-            
-            J1PlayerIdentity = transform.parent.gameObject.GetComponent<NetworkIdentity>().netId;
-            GameManager.Instance.SetPlayer(J1PlayerIdentity);
-        }
-        else if (!isServer && isLocalPlayer)
-        {
-            transform.parent.gameObject.name = "Player2";
-            J2PlayerIdentity = transform.parent.gameObject.GetComponent<NetworkIdentity>().netId;
-            GameManager.Instance.SetPlayer(J2PlayerIdentity);
-        }
-    
+        }    
     }
 
     /*private void OnDestroy()
@@ -60,11 +44,36 @@ public class SetupPlayer : NetworkBehaviour
         }
     }*/
 
-    public void OnStartClient()
+    public override void OnStartClient()
     {
-        if(isServer)
+        
+        if(isClient && !isServer)
         {
-
+            Debug.Log("BonjourClient");
+            SendInfoClient();
         }
+        if(isServer && isClient)
+        {
+            Debug.Log("BonjourServer");
+            SendInfoServer();
+            //Debug.Log(transform.parent.gameObject.GetComponent<NetworkIdentity>().netId);
+        }
+    }
+
+    [Command]
+    public void SendInfoClient()
+    {
+        GameManager.Instance.J2Identity = transform.parent.gameObject.GetComponent<NetworkIdentity>().netId;
+        GameManager.Instance.NameJ2 = "Player2";
+        GameManager.Instance.J2 = transform.parent.gameObject;
+        GameManager.Instance.SetName();
+    }
+
+    [Command]
+    public void SendInfoServer()
+    {
+        GameManager.Instance.NameJ1 = "Player1";
+        GameManager.Instance.J1Identity = transform.parent.gameObject.GetComponent<NetworkIdentity>().netId;
+        GameManager.Instance.J1 = transform.parent.gameObject;
     }
 }
