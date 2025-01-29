@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class EnemyPatrolRange : NetworkBehaviour
 {
-    public AIManager manager;
+    public AlienMovement alienMovement;
     // Start is called before the first frame update
     void Start()
     {
         if (gameObject == isServer && gameObject == isLocalPlayer)
-        manager = GameObject.Find("MonsterCancerServer").GetComponent<AIManager>();
+        alienMovement = GameObject.Find("MonsterCancerServer").GetComponent<AlienMovement>();
         else if (gameObject == isLocalPlayer)
-        manager = GameObject.Find("MonsterCancerClient").GetComponent<AIManager>();
+        alienMovement = GameObject.Find("MonsterCancerClient").GetComponent<AlienMovement>();
     }
 
     // Update is called once per frame
@@ -25,7 +25,7 @@ public class EnemyPatrolRange : NetworkBehaviour
     {
         if (other.tag == "Room")
         {
-            manager.pathways.Add(other.gameObject);
+            alienMovement.rooms.Add(other.gameObject);
         }
 
     }
@@ -34,7 +34,7 @@ public class EnemyPatrolRange : NetworkBehaviour
     {
         if(other.tag == "Room")
         {
-            manager.pathways.Remove(other.gameObject);
+            alienMovement.rooms.Remove(other.gameObject);
         }
     }
 }
