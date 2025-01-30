@@ -26,6 +26,14 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 43502de526bb96f4fb95ee5655c9866d, type: 2}
   - {fileID: 2100000, guid: 5d21099f2f032044a9b64d05b3de4048, type: 2}
   - {fileID: 2100000, guid: 88b9a0497f607904caf239cbe5d2091f, type: 2}
+  - {fileID: 2100000, guid: dc723d81b0d56c547b97b369b4bae306, type: 2}
+  - {fileID: 2100000, guid: 575ed783fcabbd34bafacf5857e2ce88, type: 2}
+  - {fileID: 2100000, guid: 273888fa822a7ae439bfed843e7424bd, type: 2}
+  - {fileID: 2100000, guid: e15fc4f8aa8f3ed47aa37061908c6dbe, type: 2}
+  - {fileID: 2100000, guid: d23021ef53b2c864e8b95200ebc7c7eb, type: 2}
+  - {fileID: 2100000, guid: 870eb71bd2209254f8cd23372b51a567, type: 2}
+  - {fileID: 2100000, guid: e71b4f69faae7f44f9a06c967f2b4160, type: 2}
+  - {fileID: 2100000, guid: 51bd70743ea7bb24e8387a16b46542a2, type: 2}
   CamMaterialJ2:
   - {fileID: 2100000, guid: 43502de526bb96f4fb95ee5655c9866d, type: 2}
   - {fileID: 2100000, guid: 3e95014c187d1144496f4a7bb747f2b8, type: 2}
