@@ -256,6 +256,7 @@ MonoBehaviour:
   - Knife
   - Arm
   - CellPickUp
+  - RepairTool
 --- !u!114 &8168762561723947600
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -21,6 +21,7 @@ TagManager:
   - SAS
   - ToRepair
   - Light
+  - RepairTool
   layers:
   - Default
   - TransparentFX
