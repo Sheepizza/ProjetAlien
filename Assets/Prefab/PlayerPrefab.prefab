@@ -137,6 +137,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  _rb: {fileID: 8625532473962581398}
+  _cb: {fileID: 4867533481040309908}
   moveSpeed: 0
   walkSpeed: 4
   crouchSpeed: 2
@@ -146,7 +148,7 @@ MonoBehaviour:
   minRunningTime: 0
   EnSprint: 0
   t: 2
-  crouchYScale: 0
+  crouchYScale: 0.5
   _cbCrouch: {fileID: 1538698608272504889}
   camCrouch: {fileID: 8544986532436686318}
   camHold: {fileID: 6237637883642238685}
@@ -698,7 +700,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1197187575146129295}
   - {fileID: 3523309235982246152}
@@ -1340,7 +1342,7 @@ Transform:
   m_GameObject: {fileID: 8544986532436686318}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.39999998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
