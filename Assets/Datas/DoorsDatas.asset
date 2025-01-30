@@ -13,12 +13,28 @@ MonoBehaviour:
   m_Name: DoorsDatas
   m_EditorClassIdentifier: 
   J1BD:
-  - key: 2
-    value: C
-  - key: BS1
-    value: SAS1
-  J2BD:
-  - key: 1
-    value: A
-  - key: BS2
-    value: SAS2
+  - key: J1D_1
+    value: J1D_A
+  - key: J1D_2
+    value: J1D_B
+  - key: J1D_3
+    value: J1D_C
+  - key: J1D_4
+    value: J1D_D
+  - key: J1D_5
+    value: J1D_E
+  - key: J1D_6
+    value: J1D_F
+  - key: J1D_7
+    value: J1D_G
+  - key: J1D_8
+    value: J1D_H
+  - key: J1D_9
+    value: J1D_I
+  - key: J1D_10
+    value: J1D_J
+  - key: J1D_11
+    value: J1D_K
+  - key: J1D_12
+    value: J1D_L
+  J2BD: []
