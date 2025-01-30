@@ -14,8 +14,9 @@ public class AlienMovement : NetworkBehaviour
 
     bool inPatrol = false;
     bool isArrived = false;
-    public int actualRoom;
-    int pathwayCountdown = 10;
+    int actualRoom;
+    int pathwayCountdown = 20;
+    public int pathwayTiming;
 
     void Start()
     {
@@ -30,39 +31,63 @@ public class AlienMovement : NetworkBehaviour
         }
         if(playerRef != null && !inPatrol)
         {
-            FindRoom();
+            StartCoroutine(FindRoom());
         }
+     
+        Debug.Log(inPatrol);
+        Debug.Log(pathwayCountdown);
 
-        // if(transform.position.x == enemyNavMesh.destination.x && transform.position.z == enemyNavMesh.destination.z)
-        // {
-        //     isArrived = true;
-        // }
-
-        // if(transform.position.x != enemyNavMesh.destination.x || transform.position.z != enemyNavMesh.destination.z)
-        // {
-        //     isArrived = false;
-        // }
-
-        //Debug.Log(isArrived);
-
-        // ==> sert pour le WaitUntil
+        //==> sert pour le WaitUntil
     }
 
 
-    void FindRoom()
+    IEnumerator FindRoom()
     {
+        inPatrol = true;
         int pathChosen = Random.Range(0, rooms.Count);
         actualRoom = pathChosen;
-        enemyNavMesh.destination = rooms[pathChosen].transform.position;
-        inPatrol = true;
-        StartCoroutine(RoomPathway());
+        enemyNavMesh.destination = rooms[actualRoom].transform.position;
+
+
+        while(inPatrol)
+        {
+            float distanceToDestination = Vector3.Distance(transform.position, enemyNavMesh.destination);
+            float distanceToActualRoom = Vector3.Distance(transform.position, rooms[actualRoom].transform.position);
+
+
+            if (distanceToDestination < 0.5f)  // Tolérance de 0.5 unités
+            {
+                isArrived = true;
+            }
+            else
+            {
+                isArrived = false;
+            }
+
+            if (pathwayCountdown <= 0)
+            {
+                pathwayCountdown = pathwayTiming;
+                inPatrol = false;
+            }
+
+                if (isArrived)
+            {
+                Debug.Log("Arrived");
+                enemyNavMesh.destination = rooms[actualRoom].transform.GetChild(Random.Range(0, rooms[actualRoom].transform.childCount)).position;
+                isArrived = false;
+            }
+
+
+            yield return null;
+        }
     }
 
-    IEnumerator RoomPathway()
+    IEnumerator PathwayCountdown()
     {
-        yield return new WaitUntil(() => isArrived);
-        //Peut-être un truc à jouer avec ça, intéressant mais ptit bug sur le booléen.
-        Debug.Log("Arrived");
-        enemyNavMesh.destination = rooms[actualRoom].transform.GetChild(Random.Range(0, rooms[actualRoom].transform.childCount)).position;
+        while (pathwayCountdown > 0)
+        {
+            pathwayCountdown--;
+            yield return new WaitForSeconds(1);
+        }
     }
 }
