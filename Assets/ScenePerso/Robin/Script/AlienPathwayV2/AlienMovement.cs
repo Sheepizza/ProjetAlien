@@ -8,19 +8,11 @@ using UnityEngine.AI;
 
 public class AlienMovement : NetworkBehaviour
 {
-    private GameObject playerRef;
     private NavMeshAgent enemyNavMesh;
-    public List<GameObject> rooms = new List<GameObject>();
-
-    bool inPatrol = false;
-    bool isArrived = false;
-    int actualRoom;
-    int pathwayCountdown = 20;
-    public int pathwayTiming;
-
     void Start()
     {
         enemyNavMesh = GetComponent<NavMeshAgent>();
+        FOV = GetComponent<FieldOfView>();
     }
 
     void Update()
@@ -29,34 +21,51 @@ public class AlienMovement : NetworkBehaviour
         {
             playerRef = GameObject.Find("Player1");
         }
-        if(playerRef != null && !inPatrol)
+        if(playerRef != null && !inPatrol && !FOV.canSeePlayer)
         {
             StartCoroutine(FindRoom());
         }
-     
-        Debug.Log(inPatrol);
         Debug.Log(pathwayCountdown);
+        
+        if(FOV.canSeePlayer)
+        {
+            if(huntingCoroutine == null)
+            {
+                huntingCoroutine = StartCoroutine(Hunting());
+            }
+        }
 
         //==> sert pour le WaitUntil
     }
 
-
+#region Patrouille
+Coroutine pathwayCountdownCoroutine;
+    private GameObject playerRef;
+    public List<GameObject> rooms = new List<GameObject>();
+    bool inPatrol = false;
+    bool isArrived = false;
+    int actualRoom;
+    int pathwayCountdown = 20;
+    public int pathwayTiming;
     IEnumerator FindRoom()
     {
+        pathwayCountdownCoroutine = null;
         inPatrol = true;
         int pathChosen = Random.Range(0, rooms.Count);
         actualRoom = pathChosen;
         enemyNavMesh.destination = rooms[actualRoom].transform.position;
-
+        
 
         while(inPatrol)
         {
             float distanceToDestination = Vector3.Distance(transform.position, enemyNavMesh.destination);
-            float distanceToActualRoom = Vector3.Distance(transform.position, rooms[actualRoom].transform.position);
-
 
             if (distanceToDestination < 0.5f)  // Tolérance de 0.5 unités
             {
+                if(pathwayCountdownCoroutine == null)
+                {
+                    pathwayCountdownCoroutine = StartCoroutine(PathwayCountdown());
+                }
                 isArrived = true;
             }
             else
@@ -70,13 +79,11 @@ public class AlienMovement : NetworkBehaviour
                 inPatrol = false;
             }
 
-                if (isArrived)
+            if (isArrived)
             {
-                Debug.Log("Arrived");
                 enemyNavMesh.destination = rooms[actualRoom].transform.GetChild(Random.Range(0, rooms[actualRoom].transform.childCount)).position;
                 isArrived = false;
             }
-
 
             yield return null;
         }
@@ -84,10 +91,28 @@ public class AlienMovement : NetworkBehaviour
 
     IEnumerator PathwayCountdown()
     {
+        Debug.Log("Debut Patrouille ma gueule");
         while (pathwayCountdown > 0)
         {
             pathwayCountdown--;
             yield return new WaitForSeconds(1);
         }
     }
+    #endregion
+
+#region HuntState
+FieldOfView FOV;
+Coroutine huntingCoroutine;
+    
+IEnumerator Hunting()
+{
+    while(FOV.canSeePlayer)
+    {
+        enemyNavMesh.destination = playerRef.transform.position;
+    }
+    
+    yield return null;
+}
+
+#endregion
 }
