@@ -17183,7 +17183,7 @@ GameObject:
   - component: {fileID: 1206618359}
   - component: {fileID: 1206618358}
   - component: {fileID: 1206618357}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Verre
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18152,6 +18152,10 @@ PrefabInstance:
     - target: {fileID: 4228292131850356525, guid: 156ea8d7801e10143a361335f8615ae7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8249807875821042530, guid: 156ea8d7801e10143a361335f8615ae7, type: 3}
+      propertyPath: escapeTiming
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8249807875821042530, guid: 156ea8d7801e10143a361335f8615ae7, type: 3}
       propertyPath: pathwayTiming

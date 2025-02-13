@@ -21,18 +21,29 @@ public class AlienMovement : NetworkBehaviour
         {
             playerRef = GameObject.Find("Player1");
         }
-        if(playerRef != null && !inPatrol && !FOV.canSeePlayer)
+        if(playerRef != null && !inPatrol && !hunting)
         {
             StartCoroutine(FindRoom());
         }
-        Debug.Log(pathwayCountdown);
+        //Debug.Log(pathwayCountdown);
         
         if(FOV.canSeePlayer)
         {
+            if (stopHuntingCoroutine != null)
+            {
+                StopCoroutine(stopHuntingCoroutine);
+            }
+            StopCoroutine(StopingHunt());
+            hunting = true;
+            
             if(huntingCoroutine == null)
             {
                 huntingCoroutine = StartCoroutine(Hunting());
             }
+        }
+        else
+        {
+            stopHuntingCoroutine = StartCoroutine(StopingHunt());
         }
 
         //==> sert pour le WaitUntil
@@ -103,16 +114,30 @@ Coroutine pathwayCountdownCoroutine;
 #region HuntState
 FieldOfView FOV;
 Coroutine huntingCoroutine;
-    
+Coroutine stopHuntingCoroutine;
+bool hunting = false;
+public int escapeTiming;
 IEnumerator Hunting()
 {
-    while(FOV.canSeePlayer)
+    inPatrol = false;
+    StopCoroutine(FindRoom());
+    while(hunting)
     {
-        enemyNavMesh.destination = playerRef.transform.position;
-    }
-    
+    enemyNavMesh.destination = playerRef.transform.position;
     yield return null;
+    }
 }
 
+IEnumerator StopingHunt()
+{
+    if(!FOV.canSeePlayer)
+    {
+        yield return new WaitForSeconds(escapeTiming);
+        hunting = false;
+        huntingCoroutine = null;
+    }
+
+}
 #endregion
+
 }
