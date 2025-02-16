@@ -29,6 +29,7 @@ public class GameManager : NetworkBehaviour
 
     static GameManager instance = null;
     public static GameManager Instance => instance;
+    public MinimapCursor minimapCursor;
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -43,10 +44,14 @@ public class GameManager : NetworkBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
+
+
     [Command(requiresAuthority = false)]
     public void SetName()
     {
         J1.gameObject.name = "Player1";
         J2.gameObject.name = "Player2";
+        minimapCursor = J1.GetComponentInChildren<MinimapCursor>();
+        minimapCursor.SetupMiniMap();
     }   
 }
