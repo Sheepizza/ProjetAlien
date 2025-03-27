@@ -25,14 +25,14 @@ public class CamFrame : MonoBehaviour
     {
         if(coroutineInstance == null)
         {
-            Debug.Log("Je fais 0");
+            //Debug.Log("Je fais 0");
             coroutineInstance = StartCoroutine(CameraFramebyFrame());
         }
     }
 
     public IEnumerator CameraFramebyFrame()
     {
-        Debug.Log("Je fais 1");
+        //Debug.Log("Je fais 1");
         _camera.enabled = false;
         yield return new WaitForSeconds(frameRateStop);
         _camera.enabled = true;

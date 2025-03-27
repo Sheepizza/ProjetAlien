@@ -25,14 +25,12 @@ public class ElectricityManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    public bool IncreaseActivePower()
+    public void IncreaseActivePower()
     {
         if (_powerReserve != _mawPower)
         {
             _powerReserve += 1;
-            return true;
         }
-        return false;
     }
 
     public void DecreaseActivePower()
@@ -43,5 +41,10 @@ public class ElectricityManager : MonoBehaviour
     public void UpgradeMaxPower(int _reserve)
     {
         _mawPower += _reserve;
+    }
+
+    public bool CompareActivePower()
+    {
+        return _powerReserve < _mawPower;
     }
 }

@@ -43,10 +43,13 @@ public class DoorManager : NetworkBehaviour
             Debug.Log(_door.GetComponent<BreakManager>().IsBreak);
             if (_door != null && !_door.GetComponent<BreakManager>().IsBreak)
             {
-                Debug.Log("Ici connard 2");
-                CmdChangeDoorPos(_door,_isButtonActive);
-                GameObject.Find(key).GetComponent<IsActivate>().IsActive = !_isButtonActive;
-                _canUse = false;
+                if (_isButtonActive && ElectricityManager.Instance.CompareActivePower() || !_isButtonActive)
+                {
+                    Debug.Log("Ici connard 2");
+                    CmdChangeDoorPos(_door, _isButtonActive);
+                    GameObject.Find(key).GetComponent<IsActivate>().IsActive = !_isButtonActive;
+                    _canUse = false;
+                }
             }
         }
     }
@@ -75,6 +78,15 @@ public class DoorManager : NetworkBehaviour
 
     IEnumerator ChangeDoorPos(GameObject _door, bool _isActive)
     {
+        if (_isActive)
+        {
+            ElectricityManager.Instance.IncreaseActivePower();
+        }
+        else
+        {
+            ElectricityManager.Instance.DecreaseActivePower();
+        }
+
         Vector3 _startPos = _door.transform.position;
         float _elapsedTime = 0f;
         int _direction = _isActive ? -1 : 1;
