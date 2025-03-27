@@ -13,8 +13,8 @@ using Mirror.Examples.Billiards;
 
 public class PlayerController : NetworkBehaviour
 {
-    Rigidbody _rb;
-    CapsuleCollider _cb;
+    public Rigidbody _rb;
+    public CapsuleCollider _cb;
 
 
     [Header ("Speed")]
@@ -56,8 +56,6 @@ public class PlayerController : NetworkBehaviour
     {
         moveSpeed = walkSpeed;
         maxRunningTime = runningTime;
-        _rb = GetComponentInParent<Rigidbody>();
-        _cb = GetComponentInParent<CapsuleCollider>();
         camStandPosition = camHold.transform.localPosition;
         colliderStandHeight = _cb.height;
         startYScale = transform.localScale.y;
