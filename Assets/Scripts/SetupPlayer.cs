@@ -7,9 +7,16 @@ public class SetupPlayer : NetworkBehaviour
 {
     [SerializeField]
     Behaviour[] componentsToDisable;
-
+    
     Camera _mainCam;
 
+    [SerializeField]
+    uint J1PlayerIdentity;
+
+    [SerializeField]
+    uint J2PlayerIdentity;
+
+    // Start is called before the first frame update
     void Start()
     {
         if (!isLocalPlayer)
@@ -30,12 +37,17 @@ public class SetupPlayer : NetworkBehaviour
 
         if (isServer && isLocalPlayer)
         {
-            transform.parent.gameObject.name = "Player1";    
+            transform.parent.gameObject.name = "Player1";
+            J1PlayerIdentity = transform.parent.gameObject.GetComponent<NetworkIdentity>().assetId;
+            GameManager.Instance.SetPlayer(J1PlayerIdentity);
         }
         else if (!isServer && isLocalPlayer)
         {
             transform.parent.gameObject.name = "Player2";
+            J2PlayerIdentity = transform.parent.gameObject.GetComponent<NetworkIdentity>().assetId;
+            GameManager.Instance.SetPlayer(J2PlayerIdentity);
         }
+    
     }
 
     /*private void OnDestroy()

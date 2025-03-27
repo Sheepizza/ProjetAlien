@@ -20,7 +20,7 @@ TagManager:
   - CamButton
   - SAS
   - ToRepair
-  - mort
+  - Light
   layers:
   - Default
   - TransparentFX
