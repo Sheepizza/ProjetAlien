@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43db691e28529ba42919aa4d3058c860, type: 3}
-  m_Name: LightsDatas
+  m_Script: {fileID: 11500000, guid: 6fc20a64b39188e4da1fa64f0efe3f61, type: 3}
+  m_Name: PlayerDatas
   m_EditorClassIdentifier: 
-  J1BD:
-  - key: J1L_1
-    value: J1L_A
-  J2BD: []
+  Speed: 5
+  InitRatio: 1
+  SprintRatio: 2
+  CrouchRatio: 0.5
+  LyingRatio: 0.25
