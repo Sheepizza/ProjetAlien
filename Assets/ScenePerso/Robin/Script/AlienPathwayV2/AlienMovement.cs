@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using Mirror;
+using Mono.CecilX;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -17,17 +18,29 @@ public class AlienMovement : NetworkBehaviour
 
     void Update()
     {
+        Debug.Log("le son est détecté ?" + soundDetected);
+
+
+
+        if(!soundDetected)
+        {
+            SoundDetection();
+        }
+        if(soundDetected)
+        {
+            SoundHunting();
+        }
         if(playerRef == null)
         {
             playerRef = GameObject.Find("Player1");
         }
-        if(playerRef != null && !inPatrol && !hunting)
+        if(playerRef != null && !inPatrol && !hunting && !soundDetected)
         {
             StartCoroutine(FindRoom());
         }
         //Debug.Log(pathwayCountdown);
         
-        if(FOV.canSeePlayer)
+        if(FOV.canSeePlayer && !soundDetected)
         {
             if (stopHuntingCoroutine != null)
             {
@@ -102,7 +115,7 @@ Coroutine pathwayCountdownCoroutine;
 
     IEnumerator PathwayCountdown()
     {
-        Debug.Log("Debut Patrouille ma gueule");
+        //Debug.Log("Debut Patrouille ma gueule");
         while (pathwayCountdown > 0)
         {
             pathwayCountdown--;
@@ -140,4 +153,62 @@ IEnumerator StopingHunt()
 }
 #endregion
 
+#region SoundDetection
+bool soundDetected = false;
+public LayerMask soundSourceLayer;
+public LayerMask soundSourceBreakable;
+private Vector3 target;
+void SoundDetection()
+{
+    Collider[] soundSources = Physics.OverlapSphere(transform.position, 50f, soundSourceLayer);
+    Transform mostIntenseSource = null;
+    float highestIntensity = 0f;
+
+    foreach(Collider source in soundSources)
+    {
+        Sound sound = source.GetComponent<Sound>();
+        Debug.Log("Le son est joué ?" + sound.audioSource.isPlaying);
+
+        if(sound != null)
+        {
+            float soundRange = sound.GetCurrentSoundRange();
+            float distance = Vector3.Distance(transform.position, source.transform.position);
+
+            if(soundRange > 0 && distance > 0 &&  distance <= soundRange)
+            {
+                
+                float intensity = soundRange / distance;
+                if (intensity > highestIntensity)
+                {
+                    highestIntensity = intensity;
+                    mostIntenseSource = source.transform;
+                }
+            }
+        }
+    }
+    if (mostIntenseSource != null)
+    {   
+        enemyNavMesh.destination = mostIntenseSource.position;
+        target = mostIntenseSource.position;
+        soundDetected = true;
+    }
+}
+void SoundHunting()
+{
+    StopCoroutine(FindRoom());
+    inPatrol = false;
+    float distanceToSource = Vector3.Distance(transform.position, target);
+    Debug.Log(distanceToSource);
+
+    if(distanceToSource < 2f)
+    {
+        soundDetected = false;
+        Collider[] soundSources = Physics.OverlapSphere(transform.position, distanceToSource + 1, soundSourceBreakable);
+        foreach (Collider source in soundSources)
+        {
+            source.gameObject.SetActive(false);
+        }
+    }
+}
+#endregion
 }
