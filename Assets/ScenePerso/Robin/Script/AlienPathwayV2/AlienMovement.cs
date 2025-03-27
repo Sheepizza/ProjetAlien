@@ -198,7 +198,7 @@ void SoundHunting()
     StopCoroutine(FindRoom());
     inPatrol = false;
     float distanceToSource = Vector3.Distance(transform.position, target);
-    Debug.Log(distanceToSource);
+    //Debug.Log(distanceToSource);
 
     if(distanceToSource < 2f)
     {
