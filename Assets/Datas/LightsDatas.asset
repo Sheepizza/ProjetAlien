@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: LightsDatas
   m_EditorClassIdentifier: 
   J1BD:
-  - key: 4
-    value: G
-  J2BD:
-  - key: 6
-    value: Z
+  - key: J1L_1
+    value: J1L_A
+  J2BD: []

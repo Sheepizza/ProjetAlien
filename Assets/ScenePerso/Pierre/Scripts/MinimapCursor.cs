@@ -3,56 +3,48 @@ using System.Collections.Generic;
 using Mirror;
 using Mirror.BouncyCastle.Tls;
 using Mirror.Examples.Basic;
+using Telepathy;
 using UnityEngine;
 
 public class MinimapCursor : NetworkBehaviour
 {
-    public GameObject Cursor;
-    public Transform Follow;
-    
+    public GameObject CursorJ1;
+    public Transform FollowJ1;
+    public GameObject CursorJ2;
+    public Transform FollowJ2;
+    private float timer = 0;
 
     // Start is called before the first frame update
-    public override void OnStartLocalPlayer()
+    public void SetupMiniMap()
     {
-        
         if (isServer && isLocalPlayer)
         {
-            Cursor = GameObject.Find("CursorPlayer1");
-            Follow = gameObject.GetComponent<Transform>();
+            //Debug.Log("GetCursor");
+            CursorJ1 = GameObject.Find("CursorPlayer1");
+            CursorJ2 = GameObject.Find("CursorPlayer2");
+            FollowJ1 = GameManager.Instance.J1.transform;
+            FollowJ2 = GameManager.Instance.J2.transform;
         }
-        else if (isLocalPlayer && !isServer)
-        {
-            Cursor =  GameObject.Find("CursorPlayer2");
-            Follow = gameObject.GetComponent<Transform>();
-        }
-        //Cursor.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
     }
 
-    // Update is called once per frame
-    public void FixedUpdate()
+    void Update()
+    {
+        UpdateCursorPos();
+
+    }
+    public void UpdateCursorPos()
     {
         
-        ChangeCursorPos();
-    }
-
-    [Command(requiresAuthority = false)]
-    void ChangeCursorPos()
-    {   
-        /*if(Cursor != null)
+        if (isServer && isLocalPlayer && CursorJ1 != null && CursorJ2 != null)
         {
-
-            Cursor.transform.position = new Vector3(Follow.transform.position.x,8,Follow.transform.position.z);
-            Debug.Log("Cursor Pos : " + Cursor.transform.position);
-        }*/
-        Debug.Log("Commande lancée");
-        RpcChangeCursorPos();
-    }
-
-    [ClientRpc]
-    void RpcChangeCursorPos()
-    {
-        Debug.Log("Commande envoyée");
-        if (Cursor != null)
-            Cursor.transform.position = new Vector3(Follow.transform.position.x,8,Follow.transform.position.z);
+            CursorJ1.transform.position = new Vector3(FollowJ1.transform.position.x,6f,FollowJ1.transform.position.z);
+            CursorJ2.transform.position = new Vector3(FollowJ2.transform.position.x,6f,FollowJ2.transform.position.z);
+        }
+        timer += Time.deltaTime;
+        if (timer>0.2f && CursorJ1 != null && CursorJ2 != null)
+        {
+            //UpdateClientCursorPos();
+            timer = 0;
+        }
     }
 }

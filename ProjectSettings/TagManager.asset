@@ -32,8 +32,8 @@ TagManager:
   - Target
   - Obstruction
   - PostProcessing
-  - 
-  - 
+  - soundSourceLayer
+  - soundSourceBreakable
   - 
   - 
   - 
