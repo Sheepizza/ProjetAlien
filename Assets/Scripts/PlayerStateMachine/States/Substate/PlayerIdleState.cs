@@ -36,5 +36,5 @@ public class PlayerIdleState : PlayerStandingState
     }
 
     void ToWalk() => stateMachine.ChangeState(stateMachine.WalkState);
-    void ToCIdle() => stateMachine.StartCoroutine(stateMachine.CrouchAnim());
+    void ToCIdle() => stateMachine.StartCoroutine(stateMachine.CrouchAnim(false));
 }

@@ -23,4 +23,6 @@ public class PlayerCrouchingState : PlayerState
         ApplyGravityForce();
         
     }
+
+    public bool CheckIfUnderObject() => Physics.Raycast(stateMachine.GetComponent<Transform>().position, stateMachine.GetComponent<Transform>().up, 1f);
 }

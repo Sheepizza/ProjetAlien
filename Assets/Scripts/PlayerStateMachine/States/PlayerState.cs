@@ -22,10 +22,10 @@ public abstract class PlayerState
         Vector3 _moveInput = stateMachine.GetComponent<Transform>().right * InputManager.Instance.MoveDirection().x + stateMachine.GetComponent<Transform>().forward * InputManager.Instance.MoveDirection().y;
         _moveInput *= Datas.Speed * _ratio;
 
-        stateMachine.GetComponent<Rigidbody>().velocity = new Vector3(_moveInput.x, stateMachine.GetComponent<Rigidbody>().velocity.y, _moveInput.z);
+        stateMachine.transform.parent.GetComponent<Rigidbody>().velocity = new Vector3(_moveInput.x, stateMachine.transform.parent.GetComponent<Rigidbody>().velocity.y, _moveInput.z);
     }
 
-    public void ApplyGravityForce() => stateMachine.GetComponent<Rigidbody>().AddForce(Vector3.down * Datas.GravityMultiplier, ForceMode.Acceleration);
+    public void ApplyGravityForce() => stateMachine.transform.parent.GetComponent<Rigidbody>().AddForce(Vector3.down * Datas.GravityMultiplier, ForceMode.Acceleration);
 
-    public void VelocityToNull() => stateMachine.GetComponent<Rigidbody>().velocity = new Vector3(0, stateMachine.GetComponent<Rigidbody>().velocity.y, 0);
+    public void VelocityToNull() => stateMachine.transform.parent.GetComponent<Rigidbody>().velocity = new Vector3(0, stateMachine.transform.parent.GetComponent<Rigidbody>().velocity.y, 0);
 }

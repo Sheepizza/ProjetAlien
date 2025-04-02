@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerLyingState : PlayerStandingState
+public class PlayerLyingState : PlayerCrouchingState
 {
     public PlayerLyingState(PlayerStateMachine _stateMachine, PlayerDatas _datas) : base(_stateMachine, _datas)
     {
@@ -21,5 +21,9 @@ public class PlayerLyingState : PlayerStandingState
     public override void PhysicsUpdate()
     {
         Move(Datas.LyingRatio);
+        if (!CheckIfUnderObject())
+        {
+            stateMachine.StartCoroutine(stateMachine.CrouchAnim(true));
+        }
     }
 }

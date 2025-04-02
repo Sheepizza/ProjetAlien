@@ -10,8 +10,8 @@ public class PlayerPickUp : NetworkBehaviour
 {
     public float pickUpRange = 2f;
     public Transform handPosition;
-    private GameObject PickUpText;
-    private GameObject PlaceText;
+    /*private GameObject PickUpText;
+    private GameObject PlaceText;*/
     public Camera playerCamera;
     private GameObject pickedUpObject = null;
     private GameObject highlightedObject = null;
@@ -28,8 +28,8 @@ public class PlayerPickUp : NetworkBehaviour
     }
 
     //playerCamera = GameManager.Instance.GetPlayerCamera();
-    PickUpText = UIManager.Instance.PickUpText;
-    PlaceText = UIManager.Instance.PlaceText;
+    /*PickUpText = UIManager.Instance.PickUpText;
+    PlaceText = UIManager.Instance.PlaceText;*/
     }
 
     void Update()
@@ -62,8 +62,8 @@ public class PlayerPickUp : NetworkBehaviour
 
     Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
     RaycastHit hit;
-    PickUpText.SetActive(false);
-    PlaceText.SetActive(false);
+    /*PickUpText.SetActive(false);
+    PlaceText.SetActive(false);*/
 
     if (Physics.Raycast(ray, out hit, pickUpRange))
     {
@@ -139,7 +139,7 @@ public class PlayerPickUp : NetworkBehaviour
     void TryPlaceCell()
     {
         Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-        PlaceText.SetActive(false);
+        //PlaceText.SetActive(false);
         if (Physics.Raycast(ray, out RaycastHit hit, pickUpRange) && hit.collider.CompareTag("Cell"))
         {
             CmdPlaceCell(hit.collider.gameObject);
@@ -192,8 +192,8 @@ public class PlayerPickUp : NetworkBehaviour
         Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         RaycastHit hit;
 
-        PickUpText.SetActive(false);
-        PlaceText.SetActive(false);
+        /*PickUpText.SetActive(false);
+        PlaceText.SetActive(false);*/
 
         if (Physics.Raycast(ray, out hit, pickUpRange))
         {
@@ -202,7 +202,7 @@ public class PlayerPickUp : NetworkBehaviour
             // Affiche PlaceText si l'objet visé a le tag "Cell"
             if (targetObject.CompareTag("Cell") && pickedUpObject != null && pickedUpObject.CompareTag("CellPickUp"))
             {
-                PlaceText.SetActive(true);
+                //PlaceText.SetActive(true);
             }
 
             if (IsPickableObject(targetObject) && pickedUpObject == null)
@@ -217,7 +217,7 @@ public class PlayerPickUp : NetworkBehaviour
                             oldOutline.enabled = false;
                         }
                     }
-                    PickUpText.SetActive(true);
+                    //PickUpText.SetActive(true);
                     
                     Outline outline = targetObject.GetComponent<Outline>();
                     if (outline != null)
@@ -228,7 +228,7 @@ public class PlayerPickUp : NetworkBehaviour
                 }
                 else
                 {
-                    PickUpText.SetActive(true);  // S'assurer que le texte reste visible tant que l'objet est visé
+                    //PickUpText.SetActive(true);  // S'assurer que le texte reste visible tant que l'objet est visé
                 }
             }
             else

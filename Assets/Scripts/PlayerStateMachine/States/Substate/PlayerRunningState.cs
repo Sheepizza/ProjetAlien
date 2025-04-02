@@ -12,6 +12,7 @@ public class PlayerRunningState : PlayerStandingState
     public override void Enter()
     {
         Subscribe();
+        stateMachine.StartCoroutine(stateMachine.SprintLimit());
     }
 
     public override void Exit()

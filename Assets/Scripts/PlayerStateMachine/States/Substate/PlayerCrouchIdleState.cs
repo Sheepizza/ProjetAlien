@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCrouchIdleState : PlayerStandingState
+public class PlayerCrouchIdleState : PlayerCrouchingState
 {
     public PlayerCrouchIdleState(PlayerStateMachine _stateMachine, PlayerDatas _datas) : base(_stateMachine, _datas)
     {

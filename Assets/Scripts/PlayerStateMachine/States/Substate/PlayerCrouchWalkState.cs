@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCrouchWalkState : PlayerStandingState
+public class PlayerCrouchWalkState : PlayerCrouchingState
 {
     public PlayerCrouchWalkState(PlayerStateMachine _stateMachine, PlayerDatas _datas) : base(_stateMachine, _datas)
     {
@@ -22,6 +22,11 @@ public class PlayerCrouchWalkState : PlayerStandingState
     public override void PhysicsUpdate()
     {
         Move(Datas.CrouchRatio);
+
+        if (CheckIfUnderObject())
+        {
+            stateMachine.StartCoroutine(stateMachine.LyingAnim());
+        }
     }
 
     void Subscribe()
