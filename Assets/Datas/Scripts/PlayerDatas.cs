@@ -11,4 +11,7 @@ public class PlayerDatas : ScriptableObject
     public float SprintRatio = 2f;
     public float CrouchRatio = 0.5f;
     public float LyingRatio = 0.25f;
+
+    [Header("Environment")]
+    public float GravityMultiplier = 10f;
 }

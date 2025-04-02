@@ -22,16 +22,19 @@ public class PlayerIdleState : PlayerStandingState
 
     public override void PhysicsUpdate()
     {
-        
+        base.PhysicsUpdate();
     }
     void Subscribe()
     {
         InputManager.MovePerformedActions += ToWalk;
+        InputManager.CrouchPerformedActions += ToCIdle;
     }
     void Unsubscribe()
     {
         InputManager.MovePerformedActions -= ToWalk;
+        InputManager.CrouchPerformedActions -= ToCIdle;
     }
 
     void ToWalk() => stateMachine.ChangeState(stateMachine.WalkState);
+    void ToCIdle() => stateMachine.StartCoroutine(stateMachine.CrouchAnim());
 }

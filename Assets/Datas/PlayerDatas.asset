@@ -17,3 +17,4 @@ MonoBehaviour:
   SprintRatio: 2
   CrouchRatio: 0.5
   LyingRatio: 0.25
+  GravityMultiplier: 10
