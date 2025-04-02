@@ -21,6 +21,7 @@ TagManager:
   - SAS
   - ToRepair
   - Light
+  - RepairTool
   layers:
   - Default
   - TransparentFX
@@ -31,8 +32,8 @@ TagManager:
   - Target
   - Obstruction
   - PostProcessing
-  - 
-  - 
+  - soundSourceLayer
+  - soundSourceBreakable
   - 
   - 
   - 
