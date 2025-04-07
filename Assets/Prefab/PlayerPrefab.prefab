@@ -259,6 +259,7 @@ MonoBehaviour:
   - Knife
   - Arm
   - CellPickUp
+  - RepairTool
 --- !u!114 &8168762561723947600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -524,6 +525,7 @@ GameObject:
   - component: {fileID: 6270987477027013902}
   - component: {fileID: 4867533481040309908}
   - component: {fileID: 8625532473962581398}
+  - component: {fileID: 3117110279985846047}
   m_Layer: 6
   m_Name: PlayerPrefab
   m_TagString: Player
@@ -619,6 +621,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &3117110279985846047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3918856271568550026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 045c3187d008c3a4c895d187b939878f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSound: {fileID: 0}
+  isWalking: 0
 --- !u!1 &4028255186410253925
 GameObject:
   m_ObjectHideFlags: 0
@@ -684,7 +700,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

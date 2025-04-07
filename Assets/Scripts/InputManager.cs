@@ -15,6 +15,8 @@ public class InputManager : MonoBehaviour
     public static Action SprintPerformedActions;
     public static Action SprintCanceledActions;
     public static Action MovePerformedActions;
+    public static Action MoveCanceledActions;
+    public static Action CrouchPerformedActions;
     #endregion
 
     private void Awake()
@@ -38,6 +40,8 @@ public class InputManager : MonoBehaviour
         InputActions.Player.Sprint.performed += OnSprintPerformed;
         InputActions.Player.Sprint.canceled += OnSprintCanceled;
         InputActions.Player.Move.performed += OnMovePerformed;
+        InputActions.Player.Move.canceled += OnMoveCanceled;
+        InputActions.Player.Crouch.performed += OnCrouchPerformed;
     }
 
     private void OnSprintPerformed(InputAction.CallbackContext context)
@@ -52,6 +56,14 @@ public class InputManager : MonoBehaviour
     private void OnMovePerformed(InputAction.CallbackContext context)
     {
         MovePerformedActions?.Invoke();
+    }
+    private void OnMoveCanceled(InputAction.CallbackContext context)
+    {
+        MoveCanceledActions?.Invoke();
+    }
+    private void OnCrouchPerformed(InputAction.CallbackContext context)
+    {
+        CrouchPerformedActions?.Invoke();
     }
 
     public Vector2 MoveDirection() => InputManager.Instance.InputActions.Player.Move.ReadValue<Vector2>();

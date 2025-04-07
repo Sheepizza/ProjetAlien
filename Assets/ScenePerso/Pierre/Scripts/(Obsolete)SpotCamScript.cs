@@ -78,7 +78,7 @@ public class SpotCamScript : MonoBehaviour
     //Vérifie l'entrée dans le Collider du joueur, si c'est un écran, on appel le constructeur qui assigne une caméra
     private void OnTriggerEnter(Collider col)
     {
-        print("Hello");
+        //print("Hello");
         if(col.gameObject.tag == "Screen")
         {
             tmpCollider = col;
