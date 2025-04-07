@@ -51,7 +51,7 @@ public class PlayerStateMachine : MonoBehaviour
     private void FixedUpdate()
     {
         CurrentState.PhysicsUpdate();
-        Debug.Log(CurrentState);
+        Debug.DrawLine(transform.position, transform.position + transform.up, Color.red);
     }
 
     void Init()
