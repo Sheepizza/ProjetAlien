@@ -2253,6 +2253,7 @@ MonoBehaviour:
   - {fileID: 8399587129757680863}
   - {fileID: 6183290204418594286}
   - {fileID: 8678001934344443476}
+  playerModel: {fileID: 5341329110181189468}
   J1PlayerIdentity: 0
   J2PlayerIdentity: 0
 --- !u!114 &8678001934344443476
