@@ -166,7 +166,9 @@ void SoundDetection()
 
     foreach(Collider source in soundSources)
     {
+            Debug.Log(source);
         Sound sound = source.GetComponent<Sound>();
+
         Debug.Log("Le son est joué ?" + sound.audioSource.isPlaying);
 
         if(sound != null)
