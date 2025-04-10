@@ -11,7 +11,10 @@ public class PlayerCamera : NetworkBehaviour
 
     public GameObject Player;
     public GameObject CameraHolder;
-    public bool CanMove = true; 
+    public bool CanMove = true;
+
+    [Header("Character Render"), SerializeField]
+    GameObject characterRender;
 
     private void Start()
     {
@@ -40,6 +43,7 @@ public class PlayerCamera : NetworkBehaviour
 
             transform.rotation = Quaternion.Euler(Mathf.Clamp(Y, -60, 70), X, 0);
             Player.transform.rotation = Quaternion.Euler(0, X, 0);
+            characterRender.transform.rotation = Quaternion.Euler(0, X, 0);
         }
     }
 

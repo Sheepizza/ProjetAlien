@@ -23,6 +23,7 @@ public abstract class PlayerState
         _moveInput *= Datas.Speed * _ratio;
 
         stateMachine.transform.parent.GetComponent<Rigidbody>().velocity = new Vector3(_moveInput.x, stateMachine.transform.parent.GetComponent<Rigidbody>().velocity.y, _moveInput.z);
+       
     }
 
     public void ApplyGravityForce() => stateMachine.transform.parent.GetComponent<Rigidbody>().AddForce(Vector3.down * Datas.GravityMultiplier, ForceMode.Acceleration);

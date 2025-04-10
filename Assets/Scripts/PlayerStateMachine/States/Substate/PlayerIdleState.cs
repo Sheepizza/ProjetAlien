@@ -12,6 +12,7 @@ public class PlayerIdleState : PlayerStandingState
     {
         base.Enter();
         Subscribe();
+        stateMachine.UpdateAnimatorLayer(1, 0);
     }
 
     public override void Exit()

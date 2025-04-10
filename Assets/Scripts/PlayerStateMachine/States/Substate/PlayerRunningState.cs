@@ -13,12 +13,14 @@ public class PlayerRunningState : PlayerStandingState
     {
         Subscribe();
         stateMachine.StartCoroutine(stateMachine.SprintLimit());
+        stateMachine.UpdateAnimatorLayer(2, 1);
     }
 
     public override void Exit()
     {
         VelocityToNull();
         Unsubscribe();
+        stateMachine.UpdateAnimatorLayer(2, 0);
     }
 
     public override void PhysicsUpdate()

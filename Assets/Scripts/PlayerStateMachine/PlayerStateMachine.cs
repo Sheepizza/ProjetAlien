@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Mirror;
 
-public class PlayerStateMachine : MonoBehaviour
+public class PlayerStateMachine : NetworkBehaviour
 {
     public PlayerState CurrentState;
+
+    [Header("Animator")]
+    public Animator Animator;
 
     [Header("Datas")]
     public PlayerDatas Datas;
@@ -29,6 +33,11 @@ public class PlayerStateMachine : MonoBehaviour
     float t = 0;
     float timeInSprint = 0;
 
+    [SyncVar] float syncHor;
+    [SyncVar] float syncVert;
+
+    [SyncVar] float layerWeight;
+
     #region States
     public PlayerStandingState StandingState;
     public PlayerCrouchingState CrouchingState;
@@ -51,7 +60,15 @@ public class PlayerStateMachine : MonoBehaviour
     private void FixedUpdate()
     {
         CurrentState.PhysicsUpdate();
-        Debug.DrawLine(transform.position, transform.position + transform.up, Color.red);
+
+        if (isLocalPlayer)
+        {
+            Vector2 moveDir = InputManager.Instance.MoveDirection();
+            CmdUpdateAnimator(moveDir.x, moveDir.y);
+        }
+
+        Animator.SetFloat("Horizontal", syncHor);
+        Animator.SetFloat("Vertical", syncVert);
     }
 
     void Init()
@@ -178,5 +195,24 @@ public class PlayerStateMachine : MonoBehaviour
             }
         }
         yield break;
+    }
+
+    public void UpdateAnimatorLayer(int _index, float _weight)
+    {
+        CmdUpdateAnimatorLayer(_index, _weight);
+    }
+
+    [Command]
+    void CmdUpdateAnimator(float _hor, float _vert)
+    {
+        syncHor = _hor;
+        syncVert = _vert;
+    }
+
+    [Command]
+    void CmdUpdateAnimatorLayer(int _index, float _weight)
+    {
+        layerWeight = _weight;
+        Animator.SetLayerWeight(_index, layerWeight);
     }
 }
