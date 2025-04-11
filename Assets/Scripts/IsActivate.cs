@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class IsActivate : NetworkBehaviour
 {
-    [SyncVar]
+    [SyncVar(hook = nameof(OnActiveChange))]
     public bool IsActive = false;
+
+    void OnActiveChange(bool _oldActive, bool _newActive)
+    {
+        GetComponent<MeshRenderer>().material.color = _newActive ? Color.green : Color.red;
+    }
 }
