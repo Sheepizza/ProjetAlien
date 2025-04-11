@@ -9,9 +9,9 @@ public class EnemyPatrolRange : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (gameObject == isServer && gameObject == isLocalPlayer)
+        if (isServer && isLocalPlayer)
         alienMovement = GameObject.Find("MonsterCancerServer").GetComponent<AlienMovement>();
-        else if (gameObject == isLocalPlayer)
+        else if (isLocalPlayer)
         alienMovement = GameObject.Find("MonsterCancerClient").GetComponent<AlienMovement>();
     }
 
@@ -23,7 +23,7 @@ public class EnemyPatrolRange : NetworkBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Room")
+        if (other.tag == "Room" && alienMovement != null)
         {
             alienMovement.rooms.Add(other.gameObject);
         }
@@ -32,7 +32,7 @@ public class EnemyPatrolRange : NetworkBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if(other.tag == "Room")
+        if(other.tag == "Room" && alienMovement != null)
         {
             alienMovement.rooms.Remove(other.gameObject);
         }

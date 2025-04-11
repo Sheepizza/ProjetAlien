@@ -32,7 +32,10 @@ public class AlienMovement : NetworkBehaviour
         }
         if(playerRef == null)
         {
-            playerRef = GameObject.Find("Player1");
+            if (name == "MonsterCancerServer")
+                playerRef = GameObject.Find("Player1");
+            else
+                playerRef = GameObject.Find("Player2");
         }
         if(playerRef != null && !inPatrol && !hunting && !soundDetected)
         {

@@ -24,7 +24,6 @@ public class LightManager : NetworkBehaviour
         {
             ButtonsLights = lightsDatas.GetJ2Dictionary();
         }
-        TurnOffAllLights();
     }
 
     public void ChangeLightState(string key)
@@ -85,13 +84,5 @@ public class LightManager : NetworkBehaviour
         yield return new WaitForSeconds(0.2f);
         _lights.SetActive(true);
         _canUse = true;
-    }
-
-    void TurnOffAllLights()
-    {
-        foreach (var value in ButtonsLights.Values)
-        {
-            GameObject.Find(value).transform.GetChild(0).gameObject.SetActive(false);
-        }
     }
 }
