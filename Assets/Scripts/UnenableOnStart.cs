@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UnenableOnStart : MonoBehaviour
 {
-    void Start()
+    void Awake()
     {
         gameObject.SetActive(false);
     }

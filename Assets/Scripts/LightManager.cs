@@ -85,4 +85,29 @@ public class LightManager : NetworkBehaviour
         _lights.SetActive(true);
         _canUse = true;
     }
+
+    [Command]
+    public void CMDUnactiveAllLights()
+    {
+        RPCUnactiveAllLights();
+    }
+
+    [ClientRpc]
+    void RPCUnactiveAllLights()
+    {
+        Dictionary<string, string> _dico;
+        _dico = lightsDatas.GetJ1Dictionary();
+
+        foreach (var _light in _dico.Values)
+        {
+            GameObject.Find(_light).transform.GetChild(0).gameObject.SetActive(false);
+        }
+
+        _dico = lightsDatas.GetJ2Dictionary();
+
+        foreach (var _light in _dico.Values)
+        {
+            GameObject.Find(_light).transform.GetChild(0).gameObject.SetActive(false);
+        }
+    }
 }
