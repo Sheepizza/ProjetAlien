@@ -51,13 +51,13 @@ public class GameManager : NetworkBehaviour
     {
         J1.gameObject.name = "Player1";
         J2.gameObject.name = "Player2";
-        minimapCursor = J1.GetComponentInChildren<MinimapCursor>();
-        minimapCursor.SetupMiniMap();
         InitGame();
     }
 
     void InitGame()
     {
+        minimapCursor = J1.GetComponentInChildren<MinimapCursor>();
+        minimapCursor.SetupMiniMap();
         J1.GetComponentInChildren<LightManager>().CMDUnactiveAllLights();
         J2.GetComponentInChildren<LightManager>().CMDUnactiveAllLights();
     }
