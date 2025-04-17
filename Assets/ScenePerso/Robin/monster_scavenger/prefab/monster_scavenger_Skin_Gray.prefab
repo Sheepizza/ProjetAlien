@@ -746,6 +746,7 @@ GameObject:
   - component: {fileID: 966933808944460834}
   - component: {fileID: 9129177443320426633}
   - component: {fileID: 8249807875821042530}
+  - component: {fileID: 3464066618149686175}
   m_Layer: 0
   m_Name: monster_scavenger_Skin_Gray
   m_TagString: Untagged
@@ -932,6 +933,35 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   rooms: []
+  pathwayTiming: 0
+  escapeTiming: 0
+  soundSourceLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  soundSourceBreakable:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!95 &3464066618149686175
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3595625012628118935}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8cd913eb064be87499c59512b376c52c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3994217530261323971
 GameObject:
   m_ObjectHideFlags: 0

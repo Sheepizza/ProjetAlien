@@ -10,16 +10,29 @@ using UnityEngine.AI;
 public class AlienMovement : NetworkBehaviour
 {
     private NavMeshAgent enemyNavMesh;
+    private Animator animator;
+    private Rigidbody _rb;
+
     void Start()
     {
         enemyNavMesh = GetComponent<NavMeshAgent>();
         FOV = GetComponent<FieldOfView>();
+        animator = GetComponent<Animator> ();
+        _rb = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
         Debug.Log("le son est détecté ?" + soundDetected);
 
+        if(_rb.velocity.magnitude > 0.1f)
+        {
+            animator.SetBool("isWalking", true);
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
+        }
 
 
         if(!soundDetected)
