@@ -10,6 +10,9 @@ public class SetupPlayer : NetworkBehaviour
     
     Camera _mainCam;
 
+    [Header("PlayerModel"), SerializeField]
+    SkinnedMeshRenderer playerModel;
+
     [SerializeField]
     uint J1PlayerIdentity;
 
@@ -28,6 +31,7 @@ public class SetupPlayer : NetworkBehaviour
         }
         else
         {
+            playerModel.enabled = false;
             _mainCam = Camera.main;
             if (_mainCam != null)
             {

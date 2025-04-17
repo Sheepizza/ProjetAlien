@@ -20,7 +20,8 @@ public class PlayerStandingState : PlayerState
 
     public override void PhysicsUpdate()
     {
-
+        ApplyGravityForce();
+        
     }
 
     void Subscribe()

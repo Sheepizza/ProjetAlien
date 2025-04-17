@@ -12,6 +12,7 @@ public class PlayerIdleState : PlayerStandingState
     {
         base.Enter();
         Subscribe();
+        stateMachine.UpdateAnimatorLayer(1, 0);
     }
 
     public override void Exit()
@@ -22,16 +23,19 @@ public class PlayerIdleState : PlayerStandingState
 
     public override void PhysicsUpdate()
     {
-        
+        base.PhysicsUpdate();
     }
     void Subscribe()
     {
         InputManager.MovePerformedActions += ToWalk;
+        InputManager.CrouchPerformedActions += ToCIdle;
     }
     void Unsubscribe()
     {
         InputManager.MovePerformedActions -= ToWalk;
+        InputManager.CrouchPerformedActions -= ToCIdle;
     }
 
     void ToWalk() => stateMachine.ChangeState(stateMachine.WalkState);
+    void ToCIdle() => stateMachine.StartCoroutine(stateMachine.CrouchAnim(false));
 }

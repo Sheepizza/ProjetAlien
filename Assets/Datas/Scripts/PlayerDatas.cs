@@ -11,4 +11,14 @@ public class PlayerDatas : ScriptableObject
     public float SprintRatio = 2f;
     public float CrouchRatio = 0.5f;
     public float LyingRatio = 0.25f;
+
+    [Header("Sprint")]
+    public float SprintTimer = 2f;
+    [Tooltip("The time it takes the player to recover 1 second of sprinting in Idle State")]
+    public float SprintIdleReload = 2.5f;
+    [Tooltip("The time it takes the player to recover 1 second of sprinting")]
+    public float SprintBaseReload = 5f
+;
+    [Header("Environment")]
+    public float GravityMultiplier = 10f;
 }

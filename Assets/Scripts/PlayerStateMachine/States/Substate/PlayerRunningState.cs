@@ -12,27 +12,38 @@ public class PlayerRunningState : PlayerStandingState
     public override void Enter()
     {
         Subscribe();
+        stateMachine.StartCoroutine(stateMachine.SprintLimit());
+        stateMachine.UpdateAnimatorLayer(2, 1);
     }
 
     public override void Exit()
     {
+        VelocityToNull();
         Unsubscribe();
+        stateMachine.UpdateAnimatorLayer(2, 0);
     }
 
     public override void PhysicsUpdate()
     {
+        base.PhysicsUpdate();
         Move(Datas.SprintRatio);
     }
 
     void Subscribe()
     {
-        InputManager.SprintCanceledActions += ToIdle;
+        InputManager.SprintCanceledActions += EndSprint;
     }
 
     void Unsubscribe()
     {
-        InputManager.SprintCanceledActions -= ToIdle;
+        InputManager.SprintCanceledActions -= EndSprint;
     }
 
-    void ToIdle() => stateMachine.ChangeState(stateMachine.IdleState);
+    void EndSprint()
+    {
+        if (InputManager.Instance.InputActions.Player.Move.inProgress)
+            stateMachine.ChangeState(stateMachine.WalkState);
+        else
+            stateMachine.ChangeState(stateMachine.IdleState);
+    }
 }

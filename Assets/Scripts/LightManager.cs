@@ -1,6 +1,7 @@
 using Mirror;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -23,6 +24,7 @@ public class LightManager : NetworkBehaviour
         {
             ButtonsLights = lightsDatas.GetJ2Dictionary();
         }
+        TurnOffAllLights();
     }
 
     public void ChangeLightState(string key)
@@ -35,8 +37,9 @@ public class LightManager : NetworkBehaviour
             {
                 if (_isButtonActive && ElectricityManager.Instance.CompareActivePower() || !_isButtonActive)
                 {
-                    CmdChangeLightPos(_lightParent, _isButtonActive);
+                    Debug.Log(_lightParent.transform.GetChild(0).gameObject);
                     GameObject.Find(key).GetComponent<IsActivate>().IsActive = !_isButtonActive;
+                    CmdChangeLightPos(_lightParent.transform.GetChild(0).gameObject, _isButtonActive);
                     _canUse = false;
                 }
             }
@@ -44,44 +47,51 @@ public class LightManager : NetworkBehaviour
     }
 
     [Command]
-    void CmdChangeLightPos(GameObject _lightParent, bool _isActive)
+    void CmdChangeLightPos(GameObject _lights, bool _isActive)
     {
-        RpcChangeLightPos(_lightParent, _isActive);
+        RpcChangeLightPos(_lights, _isActive);
     }
 
     [ClientRpc]
-    void RpcChangeLightPos(GameObject _lightParent, bool _isActive)
+    void RpcChangeLightPos(GameObject _lights, bool _isActive)
     {
-        Debug.Log(_isActive);
-        if (_lightParent != null && _isActive)
+        if (_lights != null && _isActive)
         {
             ElectricityManager.Instance.DecreaseActivePower();
-            _lightParent.SetActive(!_isActive);
+            _lights.SetActive(!_isActive);
             _canUse = true;
         }
 
-        else if (_lightParent != null)
+        else if (_lights != null)
         {
             ElectricityManager.Instance.IncreaseActivePower();
-            StartCoroutine(LightGlitched(_lightParent));
+            StartCoroutine(LightGlitched(_lights));
         }
     }
 
-    IEnumerator LightGlitched(GameObject _lightParent)
+    IEnumerator LightGlitched(GameObject _lights)
     {
-        _lightParent.SetActive(true);
+        _lights.SetActive(true);
         yield return new WaitForSeconds(0.025f);
-        _lightParent.SetActive(false);
+        _lights.SetActive(false);
         yield return new WaitForSeconds(0.05f);
-        _lightParent.SetActive(true);
+        _lights.SetActive(true);
         yield return new WaitForSeconds(0.025f);
-        _lightParent.SetActive(false);
+        _lights.SetActive(false);
         yield return new WaitForSeconds(0.6f);
-        _lightParent.SetActive(true);
+        _lights.SetActive(true);
         yield return new WaitForSeconds(0.05f);
-        _lightParent.SetActive(false);
+        _lights.SetActive(false);
         yield return new WaitForSeconds(0.2f);
-        _lightParent.SetActive(true);
+        _lights.SetActive(true);
         _canUse = true;
+    }
+
+    void TurnOffAllLights()
+    {
+        foreach (var value in ButtonsLights.Values)
+        {
+            GameObject.Find(value).transform.GetChild(0).gameObject.SetActive(false);
+        }
     }
 }
