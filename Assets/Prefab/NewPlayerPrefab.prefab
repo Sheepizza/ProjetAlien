@@ -879,7 +879,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: 9d4c6b28e3482b64c93e0c25d8a38b83, type: 2}
+  sharedProfile: {fileID: 0}
 --- !u!1 &1721215138386904635
 GameObject:
   m_ObjectHideFlags: 0
@@ -2254,6 +2254,7 @@ MonoBehaviour:
   - {fileID: 8399587129757680863}
   - {fileID: 6183290204418594286}
   - {fileID: 8678001934344443476}
+  - {fileID: 1788757141997657477}
   playerModel: {fileID: 5341329110181189468}
   J1PlayerIdentity: 0
   J2PlayerIdentity: 0

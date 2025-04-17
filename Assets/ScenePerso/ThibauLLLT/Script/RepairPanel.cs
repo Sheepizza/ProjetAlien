@@ -70,7 +70,7 @@ public class RepairPanel : NetworkBehaviour
 
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    OpenRepairPanel();
+                    //OpenRepairPanel();
                 }
             }
             else
@@ -103,7 +103,7 @@ public class RepairPanel : NetworkBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            CloseRepairPanel();
+            //CloseRepairPanel();
         }
     }
 
@@ -134,7 +134,7 @@ public class RepairPanel : NetworkBehaviour
     return targetObject.CompareTag("Broken");
 }
 
-    public void OpenRepairPanel()
+    /*public void OpenRepairPanel()
     {
         if (!repairMiniGamePanel.activeSelf)
         {
@@ -148,5 +148,5 @@ public class RepairPanel : NetworkBehaviour
         {
             repairMiniGamePanel.SetActive(false);
         }
-    }
+    }*/
 }

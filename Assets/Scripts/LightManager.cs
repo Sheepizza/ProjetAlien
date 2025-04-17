@@ -24,7 +24,6 @@ public class LightManager : NetworkBehaviour
         {
             ButtonsLights = lightsDatas.GetJ2Dictionary();
         }
-        TurnOffAllLights();
     }
 
     public void ChangeLightState(string key)
@@ -87,11 +86,28 @@ public class LightManager : NetworkBehaviour
         _canUse = true;
     }
 
-    void TurnOffAllLights()
+    [Command]
+    public void CMDUnactiveAllLights()
     {
-        foreach (var value in ButtonsLights.Values)
+        RPCUnactiveAllLights();
+    }
+
+    [ClientRpc]
+    void RPCUnactiveAllLights()
+    {
+        Dictionary<string, string> _dico;
+        _dico = lightsDatas.GetJ1Dictionary();
+
+        foreach (var _light in _dico.Values)
         {
-            GameObject.Find(value).transform.GetChild(0).gameObject.SetActive(false);
+            GameObject.Find(_light).transform.GetChild(0).gameObject.SetActive(false);
+        }
+
+        _dico = lightsDatas.GetJ2Dictionary();
+
+        foreach (var _light in _dico.Values)
+        {
+            GameObject.Find(_light).transform.GetChild(0).gameObject.SetActive(false);
         }
     }
 }

@@ -37,7 +37,16 @@ public class SetupPlayer : NetworkBehaviour
             {
                 _mainCam.gameObject.SetActive(false);
             }
-        }    
+        }
+        
+        if (isServer && isLocalPlayer)
+        {
+            GameObject.Find("MonsterCancerClient");
+        }
+        else if (isLocalPlayer)
+        {
+            GameObject.Find("MonsterCancerServer");
+        }
     }
 
     /*private void OnDestroy()
