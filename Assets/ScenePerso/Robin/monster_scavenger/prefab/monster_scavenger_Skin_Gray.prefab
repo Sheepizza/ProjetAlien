@@ -744,9 +744,9 @@ GameObject:
   - component: {fileID: 8590996047788979764}
   - component: {fileID: 1325787565347080203}
   - component: {fileID: 966933808944460834}
-  - component: {fileID: 9129177443320426633}
   - component: {fileID: 8249807875821042530}
   - component: {fileID: 3464066618149686175}
+  - component: {fileID: 5878059887138808679}
   m_Layer: 0
   m_Name: monster_scavenger_Skin_Gray
   m_TagString: Untagged
@@ -896,27 +896,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!65 &9129177443320426633
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3595625012628118935}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1.5, z: 0.8}
-  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!114 &8249807875821042530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -962,6 +941,29 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!136 &5878059887138808679
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3595625012628118935}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.2
+  m_Height: 1.25
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.65, z: 0}
 --- !u!1 &3994217530261323971
 GameObject:
   m_ObjectHideFlags: 0

@@ -23,6 +23,7 @@ public class EnemyPatrolRange : NetworkBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+
         if (other.tag == "Room")
         {
             alienMovement.rooms.Add(other.gameObject);
