@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8977674173899715516}
   - component: {fileID: 8420928151240056389}
   - component: {fileID: 6470433782702420456}
-  - component: {fileID: 2401309068808956253}
+  - component: {fileID: -6887022626079945658}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -217,7 +217,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!54 &2401309068808956253
+--- !u!54 &-6887022626079945658
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
