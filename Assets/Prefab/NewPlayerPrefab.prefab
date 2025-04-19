@@ -696,7 +696,7 @@ GameObject:
   - component: {fileID: 4348832366632925318}
   m_Layer: 6
   m_Name: PlayerCamera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2207,6 +2207,7 @@ GameObject:
   - component: {fileID: 2894965050120603568}
   - component: {fileID: 2146799200047222096}
   - component: {fileID: 8426430505604662571}
+  - component: {fileID: 54377149126428017}
   m_Layer: 0
   m_Name: PlayerBody
   m_TagString: Untagged
@@ -2536,6 +2537,23 @@ MonoBehaviour:
   coll: {fileID: 3736990209051699841}
   collCrouchHeight: 0.5
   collStandHeight: 2
+--- !u!114 &54377149126428017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5805139498350548469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50a78139a13a6e047bcdd9aaa457556a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionDistance: 3
+  interactionKey: 102
+  objectToAnimate: {fileID: 3601181053658820044, guid: 19b282a1aba59db478424dd935fe75b8, type: 3}
+  animator: {fileID: 6470433782702420456, guid: 19b282a1aba59db478424dd935fe75b8, type: 3}
+  animationTrigger: Dispense
 --- !u!1 &5938404176959321875
 GameObject:
   m_ObjectHideFlags: 0
