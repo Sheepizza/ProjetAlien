@@ -7,6 +7,8 @@ public class PickUpManager : NetworkBehaviour
 {
     public Transform HandPos;
     GameObject _pickedGO;
+    [Header("Animator"), SerializeField]
+    Animator animator;
 
     public void Update()
     {
@@ -40,6 +42,8 @@ public class PickUpManager : NetworkBehaviour
 
         _pickedGO.GetComponent<Collider>().enabled = false;
         _pickedGO.GetComponent<Rigidbody>().isKinematic = true;
+
+        animator.SetBool("Holding", true);
     }
 
     [Command]
@@ -55,5 +59,7 @@ public class PickUpManager : NetworkBehaviour
         _pickedGO.GetComponent<Collider>().enabled = true;
         _pickedGO.GetComponent<Rigidbody>().isKinematic = false;
         _pickedGO = null;
+
+        animator.SetBool("Holding", false);
     }
 }

@@ -34,7 +34,7 @@ public class LightManager : NetworkBehaviour
             bool _isButtonActive = GameObject.Find(key).GetComponent<IsActivate>().IsActive;
             if (_lightParent != null)
             {
-                if (_isButtonActive && ElectricityManager.Instance.CompareActivePower() || !_isButtonActive)
+                if (!_isButtonActive && ElectricityManager.Instance.CompareActivePower() || _isButtonActive)
                 {
                     Debug.Log(_lightParent.transform.GetChild(0).gameObject);
                     GameObject.Find(key).GetComponent<IsActivate>().IsActive = !_isButtonActive;

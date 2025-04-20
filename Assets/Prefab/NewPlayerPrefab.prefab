@@ -2412,6 +2412,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   HandPos: {fileID: 888154049988539939}
+  animator: {fileID: 7804561030321690184}
 --- !u!114 &8645088777507707834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3459,7 +3460,7 @@ Transform:
   m_GameObject: {fileID: 8330637451510676860}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.59, y: -0.63, z: 1.3353852}
+  m_LocalPosition: {x: 0.332, y: -0.27, z: 0.581}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
