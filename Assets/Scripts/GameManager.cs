@@ -60,5 +60,7 @@ public class GameManager : NetworkBehaviour
         minimapCursor.SetupMiniMap();
         J1.GetComponentInChildren<LightManager>().CMDUnactiveAllLights();
         J2.GetComponentInChildren<LightManager>().CMDUnactiveAllLights();
+        J1.GetComponentInChildren<PickUpManager>().SetupLDManager();
+        J2.GetComponentInChildren<PickUpManager>().SetupLDManager();
     }
 }
