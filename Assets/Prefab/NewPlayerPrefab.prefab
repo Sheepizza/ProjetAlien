@@ -2553,7 +2553,6 @@ MonoBehaviour:
   interactionDistance: 3
   interactionKey: 102
   objectToAnimate: {fileID: 3601181053658820044, guid: 19b282a1aba59db478424dd935fe75b8, type: 3}
-  animator: {fileID: 6470433782702420456, guid: 19b282a1aba59db478424dd935fe75b8, type: 3}
   animationTrigger: Dispense
 --- !u!1 &5938404176959321875
 GameObject:
