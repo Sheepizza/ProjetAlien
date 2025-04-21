@@ -7,6 +7,9 @@ public class BreakManager : NetworkBehaviour
 {
     public BreakDatas DoorBreakDatas;
 
+    Vector3 startPos;
+    float t = 0;
+
     [SyncVar(hook = "ChangeState")]
     public bool IsBreak = false;
 
@@ -16,14 +19,22 @@ public class BreakManager : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        startPos = transform.position;
         _repairTime = DoorBreakDatas.SecondsToRepair;
-        IsBreak = false;
+        GetComponent<Outline>().OutlineWidth = 0;
+        GetComponent<Outline>().enabled = false;
     }
 
+    [Command(requiresAuthority = false)]
     public void ChangeState(bool _state)
     {
         IsBreak = _state;
         Debug.Log(gameObject + " " + IsBreak);
+        if (!IsBreak)
+        {
+            t = 0;
+            //CMDOpenDoorOnRepair();
+        }
     }
 
 
@@ -38,7 +49,8 @@ public class BreakManager : NetworkBehaviour
             if (_actualRepairTime >= _repairTime) 
             { 
                 Debug.Log("changeGOState");
-                GameObject.Find("Player1").GetComponentInChildren<RepairManager>().ChangeGOState(gameObject, false);
+                //GameObject.Find("Player1").GetComponentInChildren<RepairManager>().ChangeGOState(gameObject, false);
+                ChangeState(false);
                 Debug.Log(gameObject);
             }
         }
@@ -46,19 +58,48 @@ public class BreakManager : NetworkBehaviour
 
     public void ChangeState(bool OldBool, bool NewBool)
     {
-        Debug.Log("RPC");
-
         if (NewBool)
         {
+            Debug.Log("ToRepair");
             transform.tag = "ToRepair";
             GetComponent<Outline>().OutlineWidth = 8;
             GetComponent<Outline>().enabled = false;
+            transform.position = startPos + Vector3.down * 3;
         }
         else
         {
+            Debug.Log("Repaired");
             transform.tag = "Untagged";
             GetComponent<Outline>().OutlineWidth = 0; 
             GetComponent<Outline>().enabled = false;
+            transform.position = startPos;
         }
+    }
+
+    [Command(requiresAuthority = false)]
+    void CMDOpenDoorOnRepair()
+    {
+        RPCOpenDoorOnRepair();
+    }
+
+    [ClientRpc]
+    void RPCOpenDoorOnRepair()
+    {
+        t = 0;
+        StartCoroutine(OpenDoorOnRepair());
+    }
+
+    IEnumerator OpenDoorOnRepair()
+    {
+        Debug.Log("Start");
+        while (t < .5f)
+        {
+            Debug.Log(t);
+            t += Time.deltaTime;
+            transform.position = Vector3.Lerp(startPos + Vector3.down * 3, startPos, t / .5f);
+            yield return null;
+        }
+        Debug.Log("End");
+        transform.position = startPos;
     }
 }

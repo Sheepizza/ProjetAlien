@@ -36,11 +36,8 @@ public class DoorManager : NetworkBehaviour
 
         if (ButtonsDoors != null && ButtonsDoors.ContainsKey(key) && _canUse)
         {
-            Debug.Log("Ici Connard");
             _door = GameObject.Find(ButtonsDoors[key]);
             bool _isButtonActive = GameObject.Find(key).GetComponent<IsActivate>().IsActive;
-            Debug.Log(_door);
-            Debug.Log(_door.GetComponent<BreakManager>().IsBreak);
             if (_door != null && !_door.GetComponent<BreakManager>().IsBreak)
             {
                 if (_isButtonActive && ElectricityManager.Instance.CompareActivePower() || !_isButtonActive)

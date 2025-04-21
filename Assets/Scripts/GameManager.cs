@@ -30,6 +30,9 @@ public class GameManager : NetworkBehaviour
     static GameManager instance = null;
     public static GameManager Instance => instance;
     public MinimapCursor minimapCursor;
+
+    [Header("Datas"), SerializeField]
+    BreakAtStart BrokenObjects;
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -49,8 +52,7 @@ public class GameManager : NetworkBehaviour
     [Command(requiresAuthority = false)]
     public void SetName()
     {
-        J1.gameObject.name = "Player1";
-        J2.gameObject.name = "Player2";
+        RPCSetName(J1, J2);
         InitGame();
     }
 
@@ -62,5 +64,21 @@ public class GameManager : NetworkBehaviour
         J2.GetComponentInChildren<LightManager>().CMDUnactiveAllLights();
         J1.GetComponentInChildren<PickUpManager>().SetupLDManager();
         J2.GetComponentInChildren<PickUpManager>().SetupLDManager();
+        BreakObjects();
+    }
+
+    void BreakObjects()
+    {
+        foreach (var _obj in BrokenObjects.ObjectsToBreakAtStart)
+        {
+            GameObject.Find("J1D_A").GetComponent<BreakManager>().IsBreak = true;
+        }
+    }
+
+    [ClientRpc]
+    public void RPCSetName(GameObject _j1, GameObject _j2)
+    {
+        _j1.gameObject.name = "Player1";
+        _j2.gameObject.name = "Player2";
     }
 }
