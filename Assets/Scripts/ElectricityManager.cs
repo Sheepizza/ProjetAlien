@@ -35,6 +35,7 @@ public class ElectricityManager : MonoBehaviour
 
     public void DecreaseActivePower()
     {
+        if (_powerReserve - 1 !=0)
         _powerReserve -= 1;
     }
 
