@@ -123,7 +123,7 @@ public class PlayerStateMachine : NetworkBehaviour
             ChangeState(CWalkState);
             yield break;
         }
-
+        
         ChangeState(CIdleState);
     }
 
@@ -212,6 +212,12 @@ public class PlayerStateMachine : NetworkBehaviour
 
     [Command]
     void CmdUpdateAnimatorLayer(int _index, float _weight)
+    {
+        RPCUpdateAnimatorLayer(_index, _weight);
+    }
+
+    [ClientRpc]
+    void RPCUpdateAnimatorLayer(int _index, float _weight)
     {
         layerWeight = _weight;
         Animator.SetLayerWeight(_index, layerWeight);

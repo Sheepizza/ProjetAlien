@@ -1,13 +1,22 @@
 using Mirror;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 
 public class PickUpManager : NetworkBehaviour
 {
     public Transform HandPos;
+    public LDObjectManager _LDObjectManager;
     GameObject _pickedGO;
+    [Header("Animator"), SerializeField]
+    Animator animator;
 
+    [ClientRpc]
+    public void SetupLDManager()
+    {
+        _LDObjectManager = GetComponent<LDObjectManager>();
+    }
     public void Update()
     {
         if (_pickedGO != null && Input.GetKeyDown(KeyCode.F))
@@ -34,12 +43,15 @@ public class PickUpManager : NetworkBehaviour
     void RPCPickUp(string _GOname)
     {
         _pickedGO = GameObject.Find(_GOname);
+        _LDObjectManager.GiveObjectTag(_pickedGO);
         _pickedGO.transform.SetParent(HandPos);
         _pickedGO.transform.localPosition = Vector3.zero;
         _pickedGO.transform.localRotation = Quaternion.identity;
 
         _pickedGO.GetComponent<Collider>().enabled = false;
         _pickedGO.GetComponent<Rigidbody>().isKinematic = true;
+
+        animator.SetBool("Holding", true);
     }
 
     [Command]
@@ -51,9 +63,15 @@ public class PickUpManager : NetworkBehaviour
     [ClientRpc]
     void RPCDrop()
     {
-        _pickedGO.transform.SetParent(null);
-        _pickedGO.GetComponent<Collider>().enabled = true;
-        _pickedGO.GetComponent<Rigidbody>().isKinematic = false;
-        _pickedGO = null;
+        if(_pickedGO)
+        {
+            _pickedGO.transform.SetParent(null);
+            _LDObjectManager.DropObject();
+            _pickedGO.GetComponent<Collider>().enabled = true;
+            _pickedGO.GetComponent<Rigidbody>().isKinematic = false;
+            _pickedGO = null;
+        }
+
+        animator.SetBool("Holding", false);
     }
 }

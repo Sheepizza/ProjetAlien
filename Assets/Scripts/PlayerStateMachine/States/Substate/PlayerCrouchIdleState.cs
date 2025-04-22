@@ -12,6 +12,7 @@ public class PlayerCrouchIdleState : PlayerCrouchingState
     {
         VelocityToNull();
         Subscribe();
+        stateMachine.UpdateAnimatorLayer(0, 0);
         stateMachine.UpdateAnimatorLayer(1, 1);
     }
 
