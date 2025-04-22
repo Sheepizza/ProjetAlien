@@ -71,7 +71,7 @@ public class GameManager : NetworkBehaviour
     {
         foreach (var _obj in BrokenObjects.ObjectsToBreakAtStart)
         {
-            GameObject.Find("J1D_A").GetComponent<BreakManager>().IsBreak = true;
+            GameObject.Find(_obj).GetComponent<BreakManager>().IsBreak = true;
         }
     }
 
