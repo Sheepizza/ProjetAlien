@@ -40,9 +40,8 @@ public class DoorManager : NetworkBehaviour
             bool _isButtonActive = GameObject.Find(key).GetComponent<IsActivate>().IsActive;
             if (_door != null && !_door.GetComponent<BreakManager>().IsBreak)
             {
-                if (_isButtonActive && ElectricityManager.Instance.CompareActivePower() || !_isButtonActive)
+                if (!_isButtonActive && ElectricityManager.Instance.CompareActivePower() || _isButtonActive)
                 {
-                    Debug.Log("Ici connard 2");
                     CmdChangeDoorPos(_door, !_isButtonActive);
                     GameObject.Find(key).GetComponent<IsActivate>().IsActive = !_isButtonActive;
                     _canUse = false;
