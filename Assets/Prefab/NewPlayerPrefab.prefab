@@ -2208,6 +2208,7 @@ GameObject:
   - component: {fileID: 2146799200047222096}
   - component: {fileID: 8426430505604662571}
   - component: {fileID: 54377149126428017}
+  - component: {fileID: 360411007899983691}
   m_Layer: 0
   m_Name: PlayerBody
   m_TagString: Untagged
@@ -2545,7 +2546,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5805139498350548469}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50a78139a13a6e047bcdd9aaa457556a, type: 3}
   m_Name: 
@@ -2554,6 +2555,23 @@ MonoBehaviour:
   interactionKey: 102
   objectToAnimate: {fileID: 3601181053658820044, guid: 19b282a1aba59db478424dd935fe75b8, type: 3}
   animationTrigger: Dispense
+--- !u!114 &360411007899983691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5805139498350548469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1dbce15bcaacde4193b645ec65c87b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionDistance: 3
+  interactionKey: 102
+  objectToAnimate: {fileID: 8237230097531640920, guid: da6e9afb49e8e054b8712949238dd79c, type: 3}
+  targetPosition: {fileID: 8022123530466193929, guid: de43d35b4a895774c9807c572e90bd0b, type: 3}
+  moveDuration: 1.2
 --- !u!1 &5938404176959321875
 GameObject:
   m_ObjectHideFlags: 0
