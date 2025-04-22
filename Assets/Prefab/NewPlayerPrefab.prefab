@@ -2497,6 +2497,7 @@ MonoBehaviour:
   FollowJ1: {fileID: 0}
   CursorJ2: {fileID: 0}
   FollowJ2: {fileID: 0}
+  CursorHeight: 10
 --- !u!114 &2146799200047222096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2573,11 +2574,14 @@ MonoBehaviour:
   syncInterval: 0
   _LDObjectDatas: {fileID: 11400000, guid: 66964c47d6ddacc4faf58858a623844c, type: 2}
   _LDTargetDatas: {fileID: 11400000, guid: 3bac5d8f2a8d6e7439a97f41d9bbca0e, type: 2}
+  _uniqueDoorOpen: {fileID: 0}
   objectInHand: {fileID: 0}
   objectName: 
   targetName: 
   objectTag: 
   targetTag: 
+  ResultName: 
+  ResultObject: {fileID: 0}
 --- !u!1 &5938404176959321875
 GameObject:
   m_ObjectHideFlags: 0
