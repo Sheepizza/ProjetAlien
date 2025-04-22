@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 842f7bc38279ffa418a61e9478b9618d, type: 3}
   m_Name: StartBreak
   m_EditorClassIdentifier: 
-  ObjectsToBreakAtStart: []
+  ObjectsToBreakAtStart:
+  - J2D_A
