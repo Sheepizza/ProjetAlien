@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using Mirror;
 using Mirror.BouncyCastle.Asn1.Esf;
-using Mono.CecilX;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -160,8 +159,8 @@ Coroutine huntingCoroutine;
 Coroutine stopHuntingCoroutine;
 bool hunting = false;
 public int escapeTiming;
-private float timer = 0f;
-private float timeBeforeAttacking = 2f;
+//private float timer = 0f;
+//private float timeBeforeAttacking = 2f;
 public GameObject losingCanva;
 IEnumerator Hunting()
 {
