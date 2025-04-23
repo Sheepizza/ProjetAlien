@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.UIElements;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Data", menuName = "Data/TagsDatas", order = 1)]

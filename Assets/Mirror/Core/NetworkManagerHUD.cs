@@ -22,9 +22,9 @@ namespace Mirror
         void OnGUI()
         {
             // If this width is changed, also change offsetX in GUIConsole::OnGUI
-            int width = 300;
+            int width = 600;
 
-            GUILayout.BeginArea(new Rect(10 + offsetX, 40 + offsetY, width, 9999));
+            GUILayout.BeginArea(new Rect(10 + offsetX, 40 + offsetY, width, 9999f));
 
             if (!NetworkClient.isConnected && !NetworkServer.active)
                 StartButtons();
@@ -58,17 +58,21 @@ namespace Mirror
                     NetworkServer.dontListen = true;
                     manager.StartHost();
                 }
-#else
+#else           
                 // Server + Client
-                if (GUILayout.Button("Host (Server + Client)"))
-                    manager.StartHost();
+                if (GUILayout.Button("Héberger une partie", GUILayout.Height(50)))
+                    {
+                        manager.StartHost();
+                    }
 #endif
 
                 // Client + IP (+ PORT)
-                GUILayout.BeginHorizontal();
+                
 
-                if (GUILayout.Button("Client"))
+                if (GUILayout.Button("Rejoindre une partie", GUILayout.Height(50)))
                     manager.StartClient();
+
+                GUILayout.BeginHorizontal();
 
                 manager.networkAddress = GUILayout.TextField(manager.networkAddress);
                 // only show a port field if we have a port transport
@@ -90,8 +94,8 @@ namespace Mirror
                 // cant be a server in webgl build
                 GUILayout.Box("( WebGL cannot be server )");
 #else
-                if (GUILayout.Button("Server Only"))
-                    manager.StartServer();
+                /*if (GUILayout.Button("Server Only"))
+                    manager.StartServer();*/
 #endif
             }
             else
@@ -130,6 +134,7 @@ namespace Mirror
         {
             if (NetworkServer.active && NetworkClient.isConnected)
             {
+                offsetX = 0; offsetY = 0;
                 GUILayout.BeginHorizontal();
 #if UNITY_WEBGL
                 if (GUILayout.Button("Stop Single Player"))
@@ -147,12 +152,14 @@ namespace Mirror
             }
             else if (NetworkClient.isConnected)
             {
+                offsetX = 0; offsetY = 0;
                 // stop client if client-only
                 if (GUILayout.Button("Stop Client"))
                     manager.StopClient();
             }
             else if (NetworkServer.active)
             {
+                offsetX = 0; offsetY = 0;
                 // stop server if server-only
                 if (GUILayout.Button("Stop Server"))
                     manager.StopServer();
