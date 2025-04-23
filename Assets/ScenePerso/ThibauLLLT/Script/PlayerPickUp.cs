@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using Mirror.Examples.Common;
 using UnityEngine;
@@ -12,7 +12,7 @@ public class PlayerPickUp : NetworkBehaviour
     public Transform handPosition;
     /*private GameObject PickUpText;
     private GameObject PlaceText;*/
-    public Camera playerCamera;
+    /*public Camera playerCamera;
     private GameObject pickedUpObject = null;
     private GameObject highlightedObject = null;
 
@@ -30,7 +30,7 @@ public class PlayerPickUp : NetworkBehaviour
     //playerCamera = GameManager.Instance.GetPlayerCamera();
     /*PickUpText = UIManager.Instance.PickUpText;
     PlaceText = UIManager.Instance.PlaceText;*/
-    }
+    /*}
 
     void Update()
     {
@@ -65,7 +65,7 @@ public class PlayerPickUp : NetworkBehaviour
     /*PickUpText.SetActive(false);
     PlaceText.SetActive(false);*/
 
-    if (Physics.Raycast(ray, out hit, pickUpRange))
+    /*if (Physics.Raycast(ray, out hit, pickUpRange))
     {
         GameObject targetObject = hit.collider.gameObject;
         if (IsPickableObject(targetObject) && pickedUpObject == null)
@@ -195,7 +195,7 @@ public class PlayerPickUp : NetworkBehaviour
         /*PickUpText.SetActive(false);
         PlaceText.SetActive(false);*/
 
-        if (Physics.Raycast(ray, out hit, pickUpRange))
+        /*if (Physics.Raycast(ray, out hit, pickUpRange))
         {
             GameObject targetObject = hit.collider.gameObject;
 
@@ -278,4 +278,4 @@ public class PlayerPickUp : NetworkBehaviour
         }
         return false;
     }
-}
+}*/
