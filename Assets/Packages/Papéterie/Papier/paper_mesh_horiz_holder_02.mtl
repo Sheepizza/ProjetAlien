@@ -1,0 +1,72 @@
+newmtl paper_Mat
+Ni 1.5
+Ka 0 0 0
+map_Ke paper_mesh_horiz_holder_02/paper_Mat_glow.png
+d 1
+Kd 0 0 0
+adobe_map_normal paper_mesh_horiz_holder_02/paper_Mat_normal.png
+map_d paper_mesh_horiz_holder_02/paper_Mat_opacity.png
+Tr 0
+illum 7
+Ks 1 1 1
+adobe_translucence 0.0
+adobe_map_roughness paper_mesh_horiz_holder_02/paper_Mat_roughness.png
+adobe_interior_color 1.0 1.0 1.0
+adobe_density 0.0
+map_Pm paper_mesh_horiz_holder_02/paper_Mat_metallic.png
+Ns 16
+map_Kd paper_mesh_horiz_holder_02/paper_Mat_baseColor.png
+newmtl clipboard_Mat
+Ni 1.5
+Ka 0 0 0
+map_Ke paper_mesh_horiz_holder_02/clipboard_Mat_glow.png
+d 1
+Kd 0 0 0
+adobe_map_normal paper_mesh_horiz_holder_02/clipboard_Mat_normal.png
+map_d paper_mesh_horiz_holder_02/clipboard_Mat_opacity.png
+Tr 0
+illum 7
+Ks 1 1 1
+adobe_translucence 0.0
+adobe_map_roughness paper_mesh_horiz_holder_02/clipboard_Mat_roughness.png
+adobe_interior_color 1.0 1.0 1.0
+adobe_density 0.0
+map_Pm paper_mesh_horiz_holder_02/clipboard_Mat_metallic.png
+Ns 16
+map_Kd paper_mesh_horiz_holder_02/clipboard_Mat_baseColor.png
+newmtl pencil_Mat
+Ni 1.5
+Ka 0 0 0
+map_Ke paper_mesh_horiz_holder_02/pencil_Mat_glow.png
+d 1
+Kd 0 0 0
+adobe_map_normal paper_mesh_horiz_holder_02/pencil_Mat_normal.png
+map_d paper_mesh_horiz_holder_02/pencil_Mat_opacity.png
+Tr 0
+illum 7
+Ks 1 1 1
+adobe_translucence 0.0
+adobe_map_roughness paper_mesh_horiz_holder_02/pencil_Mat_roughness.png
+adobe_interior_color 1.0 1.0 1.0
+adobe_density 0.0
+map_Pm paper_mesh_horiz_holder_02/pencil_Mat_metallic.png
+Ns 16
+map_Kd paper_mesh_horiz_holder_02/pencil_Mat_baseColor.png
+newmtl paper_h_holder_Mat
+Ni 1.5
+Ka 0 0 0
+map_Ke paper_mesh_horiz_holder_02/paper_h_holder_Mat_glow.png
+d 1
+Kd 0 0 0
+adobe_map_normal paper_mesh_horiz_holder_02/paper_h_holder_Mat_normal.png
+map_d paper_mesh_horiz_holder_02/paper_h_holder_Mat_opacity.png
+Tr 0
+illum 7
+Ks 1 1 1
+adobe_translucence 0.0
+adobe_map_roughness paper_mesh_horiz_holder_02/paper_h_holder_Mat_roughness.png
+adobe_interior_color 1.0 1.0 1.0
+adobe_density 0.0
+map_Pm paper_mesh_horiz_holder_02/paper_h_holder_Mat_metallic.png
+Ns 16
+map_Kd paper_mesh_horiz_holder_02/paper_h_holder_Mat_baseColor.png
