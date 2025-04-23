@@ -29,7 +29,7 @@ public class DispenserAnim : MonoBehaviour
                 animator.enabled = false;
             }
             Rigidbody rb = objectToAnimate.GetComponent<Rigidbody>();
-            if (rb != null) Destroy(rb);
+            if (rb != null) rb.gameObject.SetActive(false);
         }
     }
 
