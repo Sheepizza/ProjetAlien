@@ -1,16 +1,5 @@
-using JetBrains.Annotations;
-using Mirror;
-using Mirror.BouncyCastle.Bcpg.Sig;
-using Mirror.BouncyCastle.Tls;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
-using UnityEngine.UIElements;
-using UnityEngine.Animations;
-using Mirror.Examples.Billiards;
-using Mirror.Examples.Common.Controllers.Player;
 
 public class PlayerBobbing : MonoBehaviour
 {
