@@ -60,17 +60,19 @@ namespace Mirror
                 }
 #else
                 // Server + Client
-                if (GUILayout.Button("Host (Server + Client)"))
+                if (GUILayout.Button("Héberger une partie"))
                     manager.StartHost();
 #endif
 
                 // Client + IP (+ PORT)
-                GUILayout.BeginHorizontal();
+                
 
-                if (GUILayout.Button("Client"))
+                if (GUILayout.Button("Rejoindre une partie"))
                     manager.StartClient();
 
-                manager.networkAddress = GUILayout.TextField(manager.networkAddress);
+                GUILayout.BeginHorizontal();
+
+                manager.networkAddress = GUILayout.TextField("Entrer l'adresse IP de l'hébergeur");
                 // only show a port field if we have a port transport
                 // we can't have "IP:PORT" in the address field since this only
                 // works for IPV4:PORT.
@@ -90,8 +92,8 @@ namespace Mirror
                 // cant be a server in webgl build
                 GUILayout.Box("( WebGL cannot be server )");
 #else
-                if (GUILayout.Button("Server Only"))
-                    manager.StartServer();
+                /*if (GUILayout.Button("Server Only"))
+                    manager.StartServer();*/
 #endif
             }
             else
@@ -130,6 +132,7 @@ namespace Mirror
         {
             if (NetworkServer.active && NetworkClient.isConnected)
             {
+                offsetX = 0; offsetY = 0;
                 GUILayout.BeginHorizontal();
 #if UNITY_WEBGL
                 if (GUILayout.Button("Stop Single Player"))
@@ -147,12 +150,14 @@ namespace Mirror
             }
             else if (NetworkClient.isConnected)
             {
+                offsetX = 0; offsetY = 0;
                 // stop client if client-only
                 if (GUILayout.Button("Stop Client"))
                     manager.StopClient();
             }
             else if (NetworkServer.active)
             {
+                offsetX = 0; offsetY = 0;
                 // stop server if server-only
                 if (GUILayout.Button("Stop Server"))
                     manager.StopServer();

@@ -21339,8 +21339,8 @@ MonoBehaviour:
   headlessStartMode: 0
   editorAutoStart: 0
   sendRate: 60
-  offlineScene: 
-  onlineScene: 
+  offlineScene: Assets/ScenePerso/Menu.unity
+  onlineScene: Assets/ScenePerso/Sam/Scene Sam.unity
   offlineSceneLoadDelay: 0
   transport: {fileID: 0}
   networkAddress: localhost
