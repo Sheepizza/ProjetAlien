@@ -6992,6 +6992,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 3750829374125519247, guid: 156ea8d7801e10143a361335f8615ae7, type: 3}
+      propertyPath: m_Radius
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3994217530261323971, guid: 156ea8d7801e10143a361335f8615ae7, type: 3}
       propertyPath: m_Layer
       value: 12
@@ -7085,8 +7089,12 @@ PrefabInstance:
       value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7435324323550924136, guid: 156ea8d7801e10143a361335f8615ae7, type: 3}
+      propertyPath: canKill
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7435324323550924136, guid: 156ea8d7801e10143a361335f8615ae7, type: 3}
       propertyPath: EnemyRange
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7903511398607053000, guid: 156ea8d7801e10143a361335f8615ae7, type: 3}
       propertyPath: m_Layer
