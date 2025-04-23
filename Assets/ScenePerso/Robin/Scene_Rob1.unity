@@ -7225,6 +7225,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9129177443320426633, guid: 156ea8d7801e10143a361335f8615ae7, type: 3}
+    - {fileID: 8249807875821042530, guid: 156ea8d7801e10143a361335f8615ae7, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -7234,7 +7235,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3595625012628118935, guid: 156ea8d7801e10143a361335f8615ae7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2142748496}
+    - targetCorrespondingSourceObject: {fileID: 3595625012628118935, guid: 156ea8d7801e10143a361335f8615ae7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2142748497}
   m_SourcePrefab: {fileID: 100100000, guid: 156ea8d7801e10143a361335f8615ae7, type: 3}
+--- !u!195 &315067629 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 1543890135835122242, guid: 156ea8d7801e10143a361335f8615ae7, type: 3}
+  m_PrefabInstance: {fileID: 315067628}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &317506455
 GameObject:
   m_ObjectHideFlags: 0
@@ -42074,6 +42083,30 @@ MonoBehaviour:
   positionSensitivity: 0.01
   rotationSensitivity: 0.01
   scaleSensitivity: 0.01
+--- !u!114 &2142748497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2142748479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecfe58b33b9935c48b38a35618e1b0c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyNavMesh: {fileID: 315067629}
+  rooms: []
+  roomsAroundPlayer: []
+  losingCanva: {fileID: 262001455}
+  playerRef: {fileID: 0}
+  pathwayTiming: 0
+  soundSourceLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  soundSourceBreakable:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -10,8 +10,8 @@ public class AlienState
         _stateMachine = stateMachine;
     }
 
-    protected Alien alien;
-    protected AlienStateMachine stateMachine;
+    public Alien alien;
+    public AlienStateMachine stateMachine;
 
     public virtual void EnterState() {}
     public virtual void ExitState() {}
