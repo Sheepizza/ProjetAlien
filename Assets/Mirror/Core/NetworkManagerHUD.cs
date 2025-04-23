@@ -22,9 +22,9 @@ namespace Mirror
         void OnGUI()
         {
             // If this width is changed, also change offsetX in GUIConsole::OnGUI
-            int width = 300;
+            int width = 600;
 
-            GUILayout.BeginArea(new Rect(10 + offsetX, 40 + offsetY, width, 9999));
+            GUILayout.BeginArea(new Rect(10 + offsetX, 40 + offsetY, width, 9999f));
 
             if (!NetworkClient.isConnected && !NetworkServer.active)
                 StartButtons();
@@ -58,16 +58,18 @@ namespace Mirror
                     NetworkServer.dontListen = true;
                     manager.StartHost();
                 }
-#else
+#else           
                 // Server + Client
-                if (GUILayout.Button("Héberger une partie"))
-                    manager.StartHost();
+                if (GUILayout.Button("Héberger une partie", GUILayout.Height(50)))
+                    {
+                        manager.StartHost();
+                    }
 #endif
 
                 // Client + IP (+ PORT)
                 
 
-                if (GUILayout.Button("Rejoindre une partie"))
+                if (GUILayout.Button("Rejoindre une partie", GUILayout.Height(50)))
                     manager.StartClient();
 
                 GUILayout.BeginHorizontal();
