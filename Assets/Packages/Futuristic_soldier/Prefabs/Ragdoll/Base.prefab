@@ -2557,7 +2557,7 @@ GameObject:
   - component: {fileID: 1300934774163094889}
   - component: {fileID: 5869743667332335930}
   m_Layer: 0
-  m_Name: Sci-fi_character_unity_Ragdoll Version 1
+  m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
