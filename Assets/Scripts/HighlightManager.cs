@@ -29,6 +29,8 @@ public class HighlightManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
 
         _objectsToHighlight = _pickableObjects.TagsNames;
+        //for(int i = 0; i < _objectsToHighlight.Count;i++)
+          //  Debug.Log(_objectsToHighlight[i]);
     }
 
     public void HighlightObject(Camera playerCamera)
@@ -38,6 +40,7 @@ public class HighlightManager : MonoBehaviour
         if (Physics.Raycast(ray, out hit, 2f))
         {
             GameObject targetObject = hit.collider.gameObject;
+            //Debug.Log("targetObject : " + targetObject);
             if (highlightedObject != targetObject)
             {
                 if (highlightedObject != null)
@@ -51,6 +54,7 @@ public class HighlightManager : MonoBehaviour
                 }
 
                 var outline = targetObject.GetComponent<Outline>();
+                //Debug.Log("Outline : " + outline);
                 if (outline != null)
                 {
                     CanInteract = true;
@@ -112,6 +116,15 @@ public class HighlightManager : MonoBehaviour
         if (highlightedObject != null)
         {
             return highlightedObject.name;
+        }
+        return null;
+    }
+
+    public GameObject GetObject()
+    {
+        if(highlightedObject != null)
+        {
+            return highlightedObject.gameObject;
         }
         return null;
     }

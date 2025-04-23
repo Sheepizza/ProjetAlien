@@ -23,6 +23,7 @@ TagManager:
   - Light
   - RepairTool
   - DispenserButton
+  - LevelDesign
   layers:
   - Default
   - TransparentFX

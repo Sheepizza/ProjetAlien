@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class FieldOfView : MonoBehaviour
@@ -7,6 +8,8 @@ public class FieldOfView : MonoBehaviour
     public float radius;
     [Range(0,360)]
     public float angle;
+    public float EnemyRange;
+    public bool canKill = false;
     public GameObject playerRef;
     public LayerMask targetMask;
     public LayerMask obstructionMask;
@@ -55,6 +58,15 @@ public class FieldOfView : MonoBehaviour
                 else
                 {
                     canSeePlayer = false;
+                }
+
+                if(distanceToTarget < EnemyRange)
+                {
+                    canKill = true;
+                }
+                else
+                {
+                    canKill = false;
                 }
             }
             else

@@ -36,6 +36,10 @@ public class ElectricityManager : MonoBehaviour
     public void DecreaseActivePower()
     {
         _powerReserve -= 1;
+        if (_powerReserve < 0)
+        {
+            _powerReserve = 0;
+        }
     }
 
     public void UpgradeMaxPower(int _reserve)

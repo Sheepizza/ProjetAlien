@@ -12,6 +12,8 @@ public class MinimapCursor : NetworkBehaviour
     public Transform FollowJ1;
     public GameObject CursorJ2;
     public Transform FollowJ2;
+    
+    public float CursorHeight;
     private float timer = 0;
 
     // Start is called before the first frame update
@@ -37,8 +39,8 @@ public class MinimapCursor : NetworkBehaviour
         
         if (isServer && isLocalPlayer && CursorJ1 != null && CursorJ2 != null)
         {
-            CursorJ1.transform.position = new Vector3(FollowJ1.transform.position.x,6f,FollowJ1.transform.position.z);
-            CursorJ2.transform.position = new Vector3(FollowJ2.transform.position.x,6f,FollowJ2.transform.position.z);
+            CursorJ1.transform.position = new Vector3(FollowJ1.transform.position.x,CursorHeight,FollowJ1.transform.position.z);
+            CursorJ2.transform.position = new Vector3(FollowJ2.transform.position.x,CursorHeight,FollowJ2.transform.position.z);
         }
         timer += Time.deltaTime;
         if (timer>0.2f && CursorJ1 != null && CursorJ2 != null)

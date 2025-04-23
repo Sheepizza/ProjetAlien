@@ -60,7 +60,6 @@ public class PlayerStateMachine : NetworkBehaviour
     private void FixedUpdate()
     {
         CurrentState.PhysicsUpdate();
-        Debug.Log(CurrentState);
 
         if (isLocalPlayer)
         {

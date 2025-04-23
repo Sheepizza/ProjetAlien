@@ -9,6 +9,7 @@ public class PlayerInteraction : MonoBehaviour
     CamManager _camManager;
     PickUpManager _pickUpManager;
     RepairManager _repairManager;
+    LDObjectManager _ldObjectManager;
 
     private void Start()
     {
@@ -17,6 +18,7 @@ public class PlayerInteraction : MonoBehaviour
         _camManager = GetComponent<CamManager>();
         _pickUpManager = GetComponent<PickUpManager>();
         _repairManager = GetComponent<RepairManager>();
+        _ldObjectManager = GetComponent<LDObjectManager>();
     }
 
     // Update is called once per frame
@@ -47,6 +49,10 @@ public class PlayerInteraction : MonoBehaviour
 
                 case "LightButton":
                     _lightManager.ChangeLightState(HighlightManager.Instance.GetObjectName());
+                    break;
+
+                case "LevelDesign":
+                    _ldObjectManager.CheckInteraction(HighlightManager.Instance.GetObjectName());
                     break;
 
                 default:

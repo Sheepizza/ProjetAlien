@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using Mirror;
+using Mirror.BouncyCastle.Asn1.Esf;
 using Mono.CecilX;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -19,11 +20,14 @@ public class AlienMovement : NetworkBehaviour
         FOV = GetComponent<FieldOfView>();
         animator = GetComponent<Animator> ();
         _rb = GetComponent<Rigidbody>();
+        rooms.AddRange(GameObject.FindGameObjectsWithTag("Room"));
+        losingCanva.SetActive(false);
     }
 
     void Update()
     {
-        Debug.Log("le son est détecté ?" + soundDetected);
+        //Debug.Log("le son est détecté ?" + soundDetected);
+        //Debug.Log(actualRoom);
 
         if(_rb.velocity.magnitude > 0.1f)
         {
@@ -81,7 +85,8 @@ public class AlienMovement : NetworkBehaviour
 #region Patrouille
 Coroutine pathwayCountdownCoroutine;
     private GameObject playerRef;
-    public List<GameObject> rooms = new List<GameObject>();
+    public List<GameObject> roomsAroundPlayer = new List<GameObject>();
+    List<GameObject> rooms = new List<GameObject>();
     bool inPatrol = false;
     bool isArrived = false;
     int actualRoom;
@@ -91,11 +96,20 @@ Coroutine pathwayCountdownCoroutine;
     {
         pathwayCountdownCoroutine = null;
         inPatrol = true;
-        int pathChosen = Random.Range(0, rooms.Count);
-        actualRoom = pathChosen;
-        enemyNavMesh.destination = rooms[actualRoom].transform.position;
-        
-
+        if(roomsAroundPlayer.Count != 0)
+        {
+            Debug.Log("Le monstre patrouille autour du joueur");
+            int pathChosen = Random.Range(0, roomsAroundPlayer.Count);
+            actualRoom = pathChosen;
+            enemyNavMesh.destination = roomsAroundPlayer[actualRoom].transform.position;
+        }
+        else
+        {
+            Debug.Log("Le monstre patrouille aléatoirement");
+            int rdmRoom = Random.Range(0, rooms.Count);
+            actualRoom = rdmRoom;
+            enemyNavMesh.destination = rooms[actualRoom].transform.position;
+        }
         while(inPatrol)
         {
             float distanceToDestination = Vector3.Distance(transform.position, enemyNavMesh.destination);
@@ -146,14 +160,22 @@ Coroutine huntingCoroutine;
 Coroutine stopHuntingCoroutine;
 bool hunting = false;
 public int escapeTiming;
+private float timer = 0f;
+private float timeBeforeAttacking = 2f;
+public GameObject losingCanva;
 IEnumerator Hunting()
 {
     inPatrol = false;
     StopCoroutine(FindRoom());
     while(hunting)
     {
-    enemyNavMesh.destination = playerRef.transform.position;
-    yield return null;
+        enemyNavMesh.destination = playerRef.transform.position;
+        yield return null;
+
+        if(FOV.canKill == true)
+        {
+            Killing();
+        }
     }
 }
 
@@ -167,6 +189,15 @@ IEnumerator StopingHunt()
     }
 
 }
+
+void Killing()
+{
+    Debug.Log("Je te tue agougagou");
+
+    losingCanva.SetActive(true);
+    Time.timeScale = 0;
+}
+
 #endregion
 
 #region SoundDetection
