@@ -74,7 +74,7 @@ namespace Mirror
 
                 GUILayout.BeginHorizontal();
 
-                manager.networkAddress = GUILayout.TextField("Entrer l'adresse IP de l'hébergeur");
+                manager.networkAddress = GUILayout.TextField(manager.networkAddress);
                 // only show a port field if we have a port transport
                 // we can't have "IP:PORT" in the address field since this only
                 // works for IPV4:PORT.
