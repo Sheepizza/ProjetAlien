@@ -40871,6 +40871,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: LDZone2
       objectReference: {fileID: 0}
+    - target: {fileID: 4518224913747325759, guid: 75fd2315fadf49e4d87d5457ab015ba0, type: 3}
+      propertyPath: m_Size.y
+      value: 0.094726086
+      objectReference: {fileID: 0}
+    - target: {fileID: 4518224913747325759, guid: 75fd2315fadf49e4d87d5457ab015ba0, type: 3}
+      propertyPath: m_Center.y
+      value: -0.7289492
+      objectReference: {fileID: 0}
     - target: {fileID: 6575588910100400408, guid: 75fd2315fadf49e4d87d5457ab015ba0, type: 3}
       propertyPath: sceneId
       value: 3026093215
