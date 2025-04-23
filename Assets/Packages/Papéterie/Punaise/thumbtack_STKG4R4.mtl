@@ -1,0 +1,18 @@
+newmtl MatSG_plastic_thumbtack_Mat
+Ni 1.6
+Ka 0 0 0
+map_Ke thumbtack_STKG4R4/Mat_plastic_thumbtack_glow.png
+d 1
+Kd 0 0 0
+adobe_map_normal thumbtack_STKG4R4/Mat_plastic_thumbtack_normal.png
+map_d thumbtack_STKG4R4/Mat_plastic_thumbtack_opacity.png
+Tr 0
+illum 7
+Ks 1 1 1
+adobe_translucence 0.0
+adobe_map_roughness thumbtack_STKG4R4/Mat_plastic_thumbtack_roughness.png
+adobe_interior_color 1.0 1.0 1.0
+adobe_density 0.0
+map_Pm thumbtack_STKG4R4/Mat_plastic_thumbtack_metallic.png
+Ns 16
+map_Kd thumbtack_STKG4R4/Mat_plastic_thumbtack_baseColor.png
