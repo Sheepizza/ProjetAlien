@@ -13,7 +13,31 @@ MonoBehaviour:
   m_Name: AmbiantSoundsDatas
   m_EditorClassIdentifier: 
   audioParams:
-  - Name: 
-    Clip: {fileID: 0}
-    Volume: 0
+  - Name: Grincement_metal
+    Clip: {fileID: 8300000, guid: 4f49f5a00d9794f4492d339fd80b376b, type: 3}
+    Volume: 1
+    MaxRange: 0
+  - Name: Grincement_metal_2
+    Clip: {fileID: 8300000, guid: eceacd6ff1bd43c4c84a8ada04ec83bf, type: 3}
+    Volume: 1
+    MaxRange: 0
+  - Name: Grincement_metal_3
+    Clip: {fileID: 8300000, guid: 98e6013e29e797247804ee6b194342b4, type: 3}
+    Volume: 1
+    MaxRange: 0
+  - Name: Grincement_metal_4
+    Clip: {fileID: 8300000, guid: 5503747ad2e6d20449ee55be12045b8d, type: 3}
+    Volume: 1
+    MaxRange: 0
+  - Name: Chute_Corps
+    Clip: {fileID: 8300000, guid: 1b4256f9e3dd07945afdc408ffd024dc, type: 3}
+    Volume: 1
+    MaxRange: 0
+  - Name: Chute_Metal
+    Clip: {fileID: 8300000, guid: d46b3d1296af9eb4fad98e863c2675f4, type: 3}
+    Volume: 1
+    MaxRange: 0
+  - Name: Chute_Conserve
+    Clip: {fileID: 8300000, guid: 8ce7cc39016a31a4b9fb8bce5d3592a9, type: 3}
+    Volume: 1
     MaxRange: 0
