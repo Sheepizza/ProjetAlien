@@ -1,0 +1,36 @@
+newmtl ashtray_Mat
+Ni 1.6
+Ka 0 0 0
+map_Ke ashtray_used/ashtray_Mat_glow.png
+d 1
+Kd 0 0 0
+adobe_map_normal ashtray_used/ashtray_Mat_normal.png
+map_d ashtray_used/ashtray_Mat_opacity.png
+Tr 0
+illum 7
+Ks 1 1 1
+adobe_translucence 0.0
+adobe_map_roughness ashtray_used/ashtray_Mat_roughness.png
+adobe_interior_color 1.0 1.0 1.0
+adobe_density 0.0
+map_Pm ashtray_used/ashtray_Mat_metallic.png
+Ns 16
+map_Kd ashtray_used/ashtray_Mat_baseColor.png
+newmtl cigarettes_Mat
+Ni 1.6
+Ka 0 0 0
+map_Ke ashtray_used/cigarettes_Mat_glow.png
+d 1
+Kd 0 0 0
+adobe_map_normal ashtray_used/cigarettes_Mat_normal.png
+map_d ashtray_used/cigarettes_Mat_opacity.png
+Tr 0
+illum 7
+Ks 1 1 1
+adobe_translucence 0.0
+adobe_map_roughness ashtray_used/cigarettes_Mat_roughness.png
+adobe_interior_color 1.0 1.0 1.0
+adobe_density 0.0
+map_Pm ashtray_used/cigarettes_Mat_metallic.png
+Ns 16
+map_Kd ashtray_used/cigarettes_Mat_baseColor.png
