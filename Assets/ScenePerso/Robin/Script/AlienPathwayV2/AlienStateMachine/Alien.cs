@@ -42,15 +42,13 @@ public class Alien : MonoBehaviour
 
     private void Start()
     {
-        StateMachine.Initialize(patrolState);
-
-
         enemyNavMesh = GetComponent<NavMeshAgent>();
         FOV = GetComponent<FieldOfView>();
         animator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody>();
-        rooms.AddRange(GameObject.FindGameObjectsWithTag("Room"));
         losingCanva.SetActive(false);
+
+        StateMachine.Initialize(patrolState);    
     }
     private void Awake()
     {
@@ -61,12 +59,6 @@ public class Alien : MonoBehaviour
 
     private void Update()
     {
-        StateMachine._CurrentState.FrameUpdate();
-        if (!soundDetected)
-        {
-            SoundDetection();
-        }
-
         if (playerRef == null)
         {
             if (name == "MonsterCancerServer")
@@ -74,6 +66,13 @@ public class Alien : MonoBehaviour
             else
                 playerRef = GameObject.Find("Player2");
         }
+
+        if (!soundDetected)
+        {
+            SoundDetection();
+        }     
+
+        StateMachine._CurrentState.FrameUpdate(); 
     }
 
     private void FixedUpdate()
@@ -81,6 +80,18 @@ public class Alien : MonoBehaviour
         StateMachine._CurrentState.PhysicsUpdate();
     }
 
+    public void FindRoomManager()
+    {
+        if(!inPatrol)
+        {
+            StartCoroutine(FindRoom());
+        }
+        else
+        {
+            inPatrol = false;
+            StopCoroutine(FindRoom());
+        }
+    }
     #region SoundDetection
     bool soundDetected = false;
     public LayerMask soundSourceLayer;
@@ -97,7 +108,7 @@ public class Alien : MonoBehaviour
             Debug.Log(source);
             Sound sound = source.GetComponent<Sound>();
 
-            Debug.Log("Le son est joué ?" + sound.audioSource.isPlaying);
+            Debug.Log("Le son est jouï¿½ ?" + sound.audioSource.isPlaying);
 
             if (sound != null)
             {
@@ -139,16 +150,17 @@ public class Alien : MonoBehaviour
         }
         else
         {
-            Debug.Log("Le monstre patrouille aléatoirement");
+            Debug.Log("Le monstre patrouille alï¿½atoirement");
             int rdmRoom = Random.Range(0, rooms.Count);
             actualRoom = rdmRoom;
+            Debug.Log(actualRoom);
             enemyNavMesh.destination = rooms[actualRoom].transform.position;
         }
         while (inPatrol)
         {
             float distanceToDestination = Vector3.Distance(transform.position, enemyNavMesh.destination);
 
-            if (distanceToDestination < 0.5f)  // Tolérance de 0.5 unités
+            if (distanceToDestination < 0.5f)  // Tolï¿½rance de 0.5 unitï¿½s
             {
                 if (pathwayCountdownCoroutine == null)
                 {
@@ -189,5 +201,4 @@ public class Alien : MonoBehaviour
     }
 }
     
-
 #endregion

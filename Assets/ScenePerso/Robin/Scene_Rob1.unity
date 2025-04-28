@@ -7089,15 +7089,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4228292131850356525, guid: 156ea8d7801e10143a361335f8615ae7, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.693
+      value: 1.3
       objectReference: {fileID: 0}
     - target: {fileID: 4228292131850356525, guid: 156ea8d7801e10143a361335f8615ae7, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.693
+      value: 1.3
       objectReference: {fileID: 0}
     - target: {fileID: 4228292131850356525, guid: 156ea8d7801e10143a361335f8615ae7, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.693
+      value: 1.3
       objectReference: {fileID: 0}
     - target: {fileID: 4228292131850356525, guid: 156ea8d7801e10143a361335f8615ae7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -42096,17 +42096,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyNavMesh: {fileID: 315067629}
+  FOV: {fileID: 2142748505}
   rooms: []
   roomsAroundPlayer: []
   losingCanva: {fileID: 262001455}
   playerRef: {fileID: 0}
-  pathwayTiming: 0
+  pathwayCountdown: 20
+  pathwayTiming: 20
   soundSourceLayer:
     serializedVersion: 2
     m_Bits: 512
   soundSourceBreakable:
     serializedVersion: 2
     m_Bits: 1024
+--- !u!114 &2142748505 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7435324323550924136, guid: 156ea8d7801e10143a361335f8615ae7, type: 3}
+  m_PrefabInstance: {fileID: 315067628}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2142748479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f4c9a8b8ac177545aa55f5d32a3ab40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

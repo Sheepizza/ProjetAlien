@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class AlienState
 {
-    public AlienState(Alien _alien, AlienStateMachine _stateMachine)
+    public AlienState(Alien alien, AlienStateMachine stateMachine)
     {
-        _alien = alien;
-        _stateMachine = stateMachine;
+        this.alien = alien;
+        this.stateMachine = stateMachine;
     }
 
-    public Alien alien;
-    public AlienStateMachine stateMachine;
+    protected Alien alien;
+    protected AlienStateMachine stateMachine;
 
     public virtual void EnterState() {}
     public virtual void ExitState() {}
