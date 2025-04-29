@@ -7048,6 +7048,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 4898344477824101756, guid: 156ea8d7801e10143a361335f8615ae7, type: 3}
+      propertyPath: losingCanva
+      value: 
+      objectReference: {fileID: 319045697}
     - target: {fileID: 4924123116917070286, guid: 156ea8d7801e10143a361335f8615ae7, type: 3}
       propertyPath: m_Layer
       value: 12
