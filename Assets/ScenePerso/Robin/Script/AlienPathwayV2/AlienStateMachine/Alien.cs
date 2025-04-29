@@ -33,11 +33,12 @@ public class Alien : MonoBehaviour
     #region other variables
     Coroutine pathwayCountdownCoroutine;
 
-    bool inPatrol = false;
+    public bool inPatrol = false;
     bool isArrived = false;
     int actualRoom;
     public int pathwayCountdown = 20;
     public int pathwayTiming;
+    public int escapeTiming;
     #endregion
 
     private void Start()
@@ -48,7 +49,7 @@ public class Alien : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         losingCanva.SetActive(false);
 
-        StateMachine.Initialize(patrolState);    
+        StateMachine.Initialize(patrolState);
     }
     private void Awake()
     {
@@ -70,9 +71,9 @@ public class Alien : MonoBehaviour
         if (!soundDetected)
         {
             SoundDetection();
-        }     
+        }
 
-        StateMachine._CurrentState.FrameUpdate(); 
+        StateMachine._CurrentState.FrameUpdate();
     }
 
     private void FixedUpdate()
@@ -80,18 +81,7 @@ public class Alien : MonoBehaviour
         StateMachine._CurrentState.PhysicsUpdate();
     }
 
-    public void FindRoomManager()
-    {
-        if(!inPatrol)
-        {
-            StartCoroutine(FindRoom());
-        }
-        else
-        {
-            inPatrol = false;
-            StopCoroutine(FindRoom());
-        }
-    }
+
     #region SoundDetection
     bool soundDetected = false;
     public LayerMask soundSourceLayer;
@@ -137,6 +127,17 @@ public class Alien : MonoBehaviour
 
     #endregion
     #region Patrouille
+    public void FindRoomManager()
+    {
+        if (!inPatrol)
+        {
+            StartCoroutine(FindRoom());
+        }
+        else
+        {
+            StopCoroutine(FindRoom());
+        }
+    }
     public IEnumerator FindRoom()
     {
         pathwayCountdownCoroutine = null;
@@ -172,19 +173,11 @@ public class Alien : MonoBehaviour
             {
                 isArrived = false;
             }
-
-            if (pathwayCountdown <= 0)
-            {
-                pathwayCountdown = pathwayTiming;
-                inPatrol = false;
-            }
-
             if (isArrived)
             {
                 enemyNavMesh.destination = rooms[actualRoom].transform.GetChild(Random.Range(0, rooms[actualRoom].transform.childCount)).position;
                 isArrived = false;
             }
-
             yield return null;
         }
     }
@@ -199,6 +192,23 @@ public class Alien : MonoBehaviour
             yield return new WaitForSeconds(1);
         }
     }
+
+
+    #endregion
+    #region Hunt
+    public void Killing()
+    {
+        Debug.Log("Je te tue agougagou");
+
+        losingCanva.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    public IEnumerator StopHunt()
+    {
+        yield return new WaitForSeconds(escapeTiming);
+        huntState.Change();
+    }
 }
-    
+
 #endregion

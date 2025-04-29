@@ -189,7 +189,7 @@ IEnumerator StopingHunt()
 
 }
 
-void Killing()
+public void Killing()
 {
     Debug.Log("Je te tue agougagou");
 

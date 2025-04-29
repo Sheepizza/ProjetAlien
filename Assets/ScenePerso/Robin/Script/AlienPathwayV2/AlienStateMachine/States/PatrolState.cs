@@ -20,7 +20,8 @@ public class PatrolState : AlienState
 
     public override void ExitState()
     {
-        base.ExitState();
+        alien.inPatrol = false;
+        base.ExitState();     
     }
 
     public override void FrameUpdate()
@@ -29,7 +30,9 @@ public class PatrolState : AlienState
 
         if(alien.pathwayCountdown <= 0)
         {
-        alien.FindRoomManager();
+            alien.inPatrol = false;
+            alien.pathwayCountdown = alien.pathwayTiming;
+            alien.FindRoomManager();
         }
 
         if(alien.FOV.canSeePlayer)
