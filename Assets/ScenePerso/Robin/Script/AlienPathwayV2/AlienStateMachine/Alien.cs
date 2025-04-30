@@ -9,6 +9,7 @@ public class Alien : MonoBehaviour
     public AlienStateMachine StateMachine { get; set; }
     public PatrolState patrolState { get; set; }
     public HuntState huntState { get; set; }
+    public SearchingState searchingState { get; set; }
 
     #endregion
 
@@ -52,6 +53,8 @@ public class Alien : MonoBehaviour
         StateMachine = new AlienStateMachine();
         patrolState = new PatrolState(this, StateMachine);
         huntState = new HuntState(this, StateMachine);
+        searchingState = new SearchingState(this, StateMachine);
+        
     }
 
     private void Update()

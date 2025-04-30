@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PatrolState : AlienState
@@ -12,23 +14,25 @@ public class PatrolState : AlienState
         Debug.Log("Entre dans l'état de Patrouille");
         alien.rooms.AddRange(GameObject.FindGameObjectsWithTag("Room"));
 
-        alien.FindRoomManager();
+        alien.FindRoomManager();    
     }
 
     public override void ExitState()
     {
-        alien.inPatrol = false;
+        alien.inPatrol = false;    
     }
 
     public override void FrameUpdate()
     {
 
-        if (alien.isArrived)
+        if(alien.pathwayCountdown <= 0)
         {
-            
+            alien.inPatrol = false;
+            alien.pathwayCountdown = alien.pathwayTiming;
+            alien.FindRoomManager();
         }
 
-        if (alien.FOV.canSeePlayer)
+        if(alien.FOV.canSeePlayer)
         {
             stateMachine.ChangeState(alien.huntState);
         }
