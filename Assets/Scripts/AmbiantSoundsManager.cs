@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class AmbiantSoundsManager : MonoBehaviour
@@ -13,6 +14,11 @@ public class AmbiantSoundsManager : MonoBehaviour
     public bool goPlaySound = false;
     [SerializeField]
     float currentTime = 0;
+
+    public float Timelimit = 2;
+
+    [Tooltip("Fixes the chance limit from 0 to ChanceOfActivation")]
+    public int ChanceOfActivation = 5;
 
     void Awake()
     {
@@ -33,7 +39,7 @@ public class AmbiantSoundsManager : MonoBehaviour
 
     void Update()
     {
-        if(coroutine == null && goPlaySound == true)
+        if(goPlaySound == true && coroutine == null  )
         {
             Debug.Log("Try Start Coroutine");
             coroutine = StartCoroutine(SoundCoolDown());
@@ -48,10 +54,8 @@ public class AmbiantSoundsManager : MonoBehaviour
 
     public IEnumerator SoundCoolDown()
     {
-
-        float Timelimit = 2;
         Debug.Log("Coroutine Start");
-        if(!goPlaySound)
+        if(goPlaySound)
         {
             while(currentTime < Timelimit)
             {

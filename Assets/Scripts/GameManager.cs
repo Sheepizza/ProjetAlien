@@ -62,7 +62,7 @@ public class GameManager : NetworkBehaviour
         J1.GetComponentInChildren<PickUpManager>().SetupLDManager();
         J2.GetComponentInChildren<PickUpManager>().SetupLDManager();
         BreakObjects();
-        ambiantSoundsManager.goPlaySound = true;
+        GoAmbiantSound();
     }
 
     void BreakObjects()
@@ -78,5 +78,17 @@ public class GameManager : NetworkBehaviour
     {
         _j1.gameObject.name = "Player1";
         _j2.gameObject.name = "Player2";
+    }
+
+    [Command(requiresAuthority = false)]
+    void GoAmbiantSound()
+    {
+        RpcGoAmbiantSound();
+    }
+
+    [ClientRpc]
+    void RpcGoAmbiantSound()
+    {
+        ambiantSoundsManager.goPlaySound = true;
     }
 }
