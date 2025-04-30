@@ -36,7 +36,6 @@ public class DispenserAnim : MonoBehaviour
     void Update()
     {
         if (hasDispensed) return;
-
         Ray ray = new Ray(mainCamera.transform.position, mainCamera.transform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit, interactionDistance))
         {
@@ -60,7 +59,7 @@ public class DispenserAnim : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Animator introuvable");
+            Debug.LogError("Animator where");
         }
         yield return new WaitForSeconds(1.5f);
         if (objectToAnimate != null && objectToAnimate.GetComponent<Rigidbody>() == null)
@@ -70,9 +69,8 @@ public class DispenserAnim : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Rigidbody déjà présent ou objet null");
+            Debug.LogWarning("Rigidbody déjà présent ou bug");
         }
-
-        Debug.Log("Objet lâché");
+        Debug.Log("Objet ditribué (omg ça a fonctionné ?)");
     }
 }
