@@ -11,18 +11,16 @@ public class HuntState : AlienState
 
     public override void EnterState()
     {
-        base.EnterState();
         Debug.Log("Je chasse");
     }
 
     public override void ExitState()
     {
-        base.ExitState();
+
     }
 
     public override void FrameUpdate()
     {
-        base.FrameUpdate();
         alien.enemyNavMesh.destination = alien.playerRef.transform.position;
 
         if(alien.FOV.canKill)
@@ -37,7 +35,7 @@ public class HuntState : AlienState
 
     public override void PhysicsUpdate()
     {
-        base.PhysicsUpdate();
+
     }
 
     public void Change()

@@ -2097,7 +2097,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f3a38759bf7d46244a94938d8387ad28, type: 2}
+  - {fileID: 2100000, guid: 5686492093226bb49b0b18e9832208bf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2557,7 +2557,7 @@ GameObject:
   - component: {fileID: 1300934774163094889}
   - component: {fileID: 5869743667332335930}
   m_Layer: 0
-  m_Name: Sci-fi_character_unity_Ragdoll_Green
+  m_Name: Blue_Ragdoll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
