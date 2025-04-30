@@ -28,14 +28,14 @@ public class AlienMovement : NetworkBehaviour
         //Debug.Log("le son est détecté ?" + soundDetected);
         //Debug.Log(actualRoom);
 
-        if(_rb.velocity.magnitude > 0.1f)
+        /*if(_rb.velocity.magnitude > 0.1f)
         {
             animator.SetBool("isWalking", true);
         }
         else
         {
             animator.SetBool("isWalking", false);
-        }
+        }*/
 
 
         if(!soundDetected)
@@ -189,7 +189,7 @@ IEnumerator StopingHunt()
 
 }
 
-void Killing()
+public void Killing()
 {
     Debug.Log("Je te tue agougagou");
 
