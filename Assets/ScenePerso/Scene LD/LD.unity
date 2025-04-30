@@ -1828,6 +1828,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2401777506506618900, guid: 75fd2315fadf49e4d87d5457ab015ba0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.432
+      objectReference: {fileID: 0}
+    - target: {fileID: 2401777506506618900, guid: 75fd2315fadf49e4d87d5457ab015ba0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -16.127
+      objectReference: {fileID: 0}
+    - target: {fileID: 2401777506506618900, guid: 75fd2315fadf49e4d87d5457ab015ba0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.997
+      objectReference: {fileID: 0}
     - target: {fileID: 4165119674101312230, guid: 75fd2315fadf49e4d87d5457ab015ba0, type: 3}
       propertyPath: m_Name
       value: LDZone2
