@@ -5,50 +5,85 @@ using UnityEngine;
 public class AmbiantSoundsManager : MonoBehaviour
 {
     public AmbiantSoundsDatas ambiantSoundsDatas;
-    public AudioSource currentAudioSource;
+    public AudioSource currentClip;
 
-    bool goPlaySound = false;
+    public List<AudioSource> audioSources = new List<AudioSource>();
+    public Coroutine coroutine;
+
+    public bool goPlaySound = false;
+    [SerializeField]
+    float currentTime = 0;
+
+    void Awake()
+    {
+        AssignSound();
+    }
+
+    public void AssignSound()
+    {        
+        for(int i = 0; i < ambiantSoundsDatas.ambiantSound.Count; i++)
+        {
+            AudioSource newAudioSource = gameObject.AddComponent<AudioSource>();
+            audioSources.Add(new AudioSource());
+            audioSources[i] = newAudioSource;
+            audioSources[i].clip = ambiantSoundsDatas.ambiantSound[i].Clip;
+            //Debug.Log("Assigning Sounds " + i);
+        }
+    }
+
+    void Update()
+    {
+        if(coroutine == null && goPlaySound == true)
+        {
+            Debug.Log("Try Start Coroutine");
+            coroutine = StartCoroutine(SoundCoolDown());
+        }
+    }
+
+    public void StartAmbiantSound()
+    {
+        goPlaySound = true;
+        Debug.Log(goPlaySound);
+    }
 
     public IEnumerator SoundCoolDown()
     {
-        float currentTime = 0;
-        float Timelimit = 30;
-        float TimeRandomCheck = 10;
-        
 
-        if(goPlaySound)
-        {
-            PlayRandomSound();
-        }
-
-
+        float Timelimit = 2;
+        Debug.Log("Coroutine Start");
         if(!goPlaySound)
         {
-            currentTime += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
-            if(currentTime >= Timelimit && currentTime%10 == TimeRandomCheck%10)
+            while(currentTime < Timelimit)
             {
-                int randomNumber = Random.Range(0, 10);
-                if(randomNumber == 1)
-                {
-                    goPlaySound = true;
-                }
+                currentTime += Time.deltaTime;
+                yield return new WaitForSeconds(Time.deltaTime);
             }
+            Debug.Log("IcanPLay");
+            int randomNumber = Random.Range(0, 5);
+            Debug.Log(randomNumber );
+            if(randomNumber == 1)
+            {
+                PlayRandomSound();
+            }
+            currentTime = 0;
         }
+        coroutine = null;
     }
 
     void PlayRandomSound()
     {
-        int RandomSoundNumber = Random.Range(0, ambiantSoundsDatas.audioSources.Count);
-        for(int i = 0; i < ambiantSoundsDatas.audioSources.Count; i++)
+        Debug.Log("TryToPlay");
+        int RandomSoundNumber = Random.Range(0, ambiantSoundsDatas.ambiantSound.Count);
+        Debug.Log(RandomSoundNumber);
+        for(int i = 0; i < ambiantSoundsDatas.ambiantSound.Count; i++)
         {
             if(RandomSoundNumber == i)
             {
-                currentAudioSource = ambiantSoundsDatas.audioSources[i];
-                currentAudioSource.Play();
+                currentClip = audioSources[i];
+                Debug.Log(currentClip.clip.name);
+                currentClip.Play();
+                Debug.Log("SoundIsPlayed");
             }
         }
-        //Quand le son est fini de jouer
-        goPlaySound = false;
     }
 }

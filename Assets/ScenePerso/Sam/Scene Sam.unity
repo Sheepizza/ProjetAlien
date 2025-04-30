@@ -36008,8 +36008,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18e7b9ae0296be447806c403c4f4eeb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ambiantSoundsDatas: {fileID: 0}
-  currentAudioSource: {fileID: 0}
+  ambiantSoundsDatas: {fileID: 11400000, guid: 05146fa82e0b2b4488a3d88e52e919f9, type: 2}
+  currentClip: {fileID: 0}
 --- !u!1 &1805671657
 GameObject:
   m_ObjectHideFlags: 0
