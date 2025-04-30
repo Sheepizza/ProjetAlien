@@ -23,10 +23,25 @@ public class HuntState : AlienState
     public override void FrameUpdate()
     {
         base.FrameUpdate();
+        alien.enemyNavMesh.destination = alien.playerRef.transform.position;
+
+        if(alien.FOV.canKill)
+        {
+            alien.Killing();
+        }
+        if(!alien.FOV.canSeePlayer)
+        {
+            alien.StartCoroutine(alien.StopHunt());
+        }
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+    }
+
+    public void Change()
+    {
+        stateMachine.ChangeState(alien.patrolState);
     }
 }

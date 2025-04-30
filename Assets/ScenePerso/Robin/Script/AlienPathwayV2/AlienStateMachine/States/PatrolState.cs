@@ -12,20 +12,27 @@ public class PatrolState : AlienState
     public override void EnterState()
     {
         base.EnterState();
-        alien.StartCoroutine(alien.FindRoom());
+        Debug.Log("Entre dans l'état de Patrouille");
+        alien.rooms.AddRange(GameObject.FindGameObjectsWithTag("Room"));
+
+        alien.FindRoomManager();    
     }
 
     public override void ExitState()
     {
-        base.ExitState();
+        alien.inPatrol = false;
+        base.ExitState();     
     }
 
     public override void FrameUpdate()
     {
         base.FrameUpdate();
+
         if(alien.pathwayCountdown <= 0)
         {
-            stateMachine.ChangeState(alien.patrolState);
+            alien.inPatrol = false;
+            alien.pathwayCountdown = alien.pathwayTiming;
+            alien.FindRoomManager();
         }
 
         if(alien.FOV.canSeePlayer)

@@ -33,24 +33,23 @@ public class Alien : MonoBehaviour
     #region other variables
     Coroutine pathwayCountdownCoroutine;
 
-    bool inPatrol = false;
+    public bool inPatrol = false;
     bool isArrived = false;
     int actualRoom;
     public int pathwayCountdown = 20;
     public int pathwayTiming;
+    public int escapeTiming;
     #endregion
 
     private void Start()
     {
-        StateMachine.Initialize(patrolState);
-
-
         enemyNavMesh = GetComponent<NavMeshAgent>();
         FOV = GetComponent<FieldOfView>();
         animator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody>();
-        rooms.AddRange(GameObject.FindGameObjectsWithTag("Room"));
         losingCanva.SetActive(false);
+
+        StateMachine.Initialize(patrolState);
     }
     private void Awake()
     {
@@ -61,12 +60,6 @@ public class Alien : MonoBehaviour
 
     private void Update()
     {
-        StateMachine._CurrentState.FrameUpdate();
-        if (!soundDetected)
-        {
-            SoundDetection();
-        }
-
         if (playerRef == null)
         {
             if (name == "MonsterCancerServer")
@@ -74,12 +67,20 @@ public class Alien : MonoBehaviour
             else
                 playerRef = GameObject.Find("Player2");
         }
+
+        if (!soundDetected)
+        {
+            SoundDetection();
+        }
+
+        StateMachine._CurrentState.FrameUpdate();
     }
 
     private void FixedUpdate()
     {
         StateMachine._CurrentState.PhysicsUpdate();
     }
+
 
     #region SoundDetection
     bool soundDetected = false;
@@ -97,7 +98,7 @@ public class Alien : MonoBehaviour
             Debug.Log(source);
             Sound sound = source.GetComponent<Sound>();
 
-            Debug.Log("Le son est joué ?" + sound.audioSource.isPlaying);
+            Debug.Log("Le son est jouï¿½ ?" + sound.audioSource.isPlaying);
 
             if (sound != null)
             {
@@ -126,6 +127,17 @@ public class Alien : MonoBehaviour
 
     #endregion
     #region Patrouille
+    public void FindRoomManager()
+    {
+        if (!inPatrol)
+        {
+            StartCoroutine(FindRoom());
+        }
+        else
+        {
+            StopCoroutine(FindRoom());
+        }
+    }
     public IEnumerator FindRoom()
     {
         pathwayCountdownCoroutine = null;
@@ -139,16 +151,17 @@ public class Alien : MonoBehaviour
         }
         else
         {
-            Debug.Log("Le monstre patrouille aléatoirement");
+            Debug.Log("Le monstre patrouille alï¿½atoirement");
             int rdmRoom = Random.Range(0, rooms.Count);
             actualRoom = rdmRoom;
+            Debug.Log(actualRoom);
             enemyNavMesh.destination = rooms[actualRoom].transform.position;
         }
         while (inPatrol)
         {
             float distanceToDestination = Vector3.Distance(transform.position, enemyNavMesh.destination);
 
-            if (distanceToDestination < 0.5f)  // Tolérance de 0.5 unités
+            if (distanceToDestination < 0.5f)  // Tolï¿½rance de 0.5 unitï¿½s
             {
                 if (pathwayCountdownCoroutine == null)
                 {
@@ -160,19 +173,11 @@ public class Alien : MonoBehaviour
             {
                 isArrived = false;
             }
-
-            if (pathwayCountdown <= 0)
-            {
-                pathwayCountdown = pathwayTiming;
-                inPatrol = false;
-            }
-
             if (isArrived)
             {
                 enemyNavMesh.destination = rooms[actualRoom].transform.GetChild(Random.Range(0, rooms[actualRoom].transform.childCount)).position;
                 isArrived = false;
             }
-
             yield return null;
         }
     }
@@ -187,7 +192,23 @@ public class Alien : MonoBehaviour
             yield return new WaitForSeconds(1);
         }
     }
+
+
+    #endregion
+    #region Hunt
+    public void Killing()
+    {
+        Debug.Log("Je te tue agougagou");
+
+        losingCanva.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    public IEnumerator StopHunt()
+    {
+        yield return new WaitForSeconds(escapeTiming);
+        huntState.Change();
+    }
 }
-    
 
 #endregion
