@@ -12,9 +12,10 @@ public class PatrolState : AlienState
     public override void EnterState()
     {
         Debug.Log("Entre dans l'état de Patrouille");
+        if(alien.rooms.Count <= 0)
         alien.rooms.AddRange(GameObject.FindGameObjectsWithTag("Room"));
 
-        alien.FindRoomManager();    
+        alien.FindRoomManager();
     }
 
     public override void ExitState()
@@ -29,7 +30,7 @@ public class PatrolState : AlienState
         {
             alien.inPatrol = false;
             alien.pathwayCountdown = alien.pathwayTiming;
-            alien.FindRoomManager();
+            EnterState();
         }
 
         if(alien.FOV.canSeePlayer)

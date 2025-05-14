@@ -154,7 +154,7 @@ public class Alien : MonoBehaviour
             int rdmRoom = Random.Range(0, rooms.Count);
             actualRoom = rdmRoom;
             Debug.Log(actualRoom);
-            enemyNavMesh.destination = rooms[actualRoom].transform.position;
+            enemyNavMesh.SetDestination(rooms[actualRoom].transform.position);
         }
         while (inPatrol)
         {
