@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Mirror;
 
-public class Alien : MonoBehaviour
+public class Alien : NetworkBehaviour
 {
     #region State Machine Variables
     public AlienStateMachine StateMachine { get; set; }
@@ -19,7 +20,7 @@ public class Alien : MonoBehaviour
     #region components
     public NavMeshAgent enemyNavMesh;
     public FieldOfView FOV;
-    Animator animator;
+    public Animator animator;
     Rigidbody _rb;
     public List<GameObject> rooms = new List<GameObject>();
     public List<GameObject> roomsAroundPlayer = new List<GameObject>();
@@ -29,8 +30,9 @@ public class Alien : MonoBehaviour
 
     #region other variables
     Coroutine pathwayCountdownCoroutine;
-
+    
     public bool inPatrol = false;
+    public float enemyRange;
     bool isArrived = false;
     int actualRoom;
     public int pathwayCountdown = 20;
@@ -193,15 +195,25 @@ public class Alien : MonoBehaviour
     }
 
 
-    #endregion
-    #region Hunt
+#endregion
+#region Hunt
+    
     public void Killing()
     {
         Debug.Log("Je te tue agougagou");
 
+        animator.SetBool("canKill", true);
+        StartCoroutine(Kill());
+    }
+
+    public IEnumerator Kill()
+    {
+        yield return new WaitForSeconds(3);
         losingCanva.SetActive(true);
         Time.timeScale = 0;
     }
+
+
 
     public IEnumerator StopHunt()
     {
@@ -209,5 +221,6 @@ public class Alien : MonoBehaviour
         huntState.Change();
     }
 }
+
 
 #endregion
