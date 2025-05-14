@@ -40,6 +40,6 @@ public class HuntState : AlienState
 
     public void Change()
     {
-        stateMachine.ChangeState(alien.patrolState);
+        stateMachine.ChangeState(alien.searchingState);
     }
 }
