@@ -1,18 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Rendering;
-using UnityEngine.Rendering.PostProcessing;
+using Mirror;
 
-public class Alien : MonoBehaviour
+public class Alien : NetworkBehaviour
 {
     #region State Machine Variables
     public AlienStateMachine StateMachine { get; set; }
     public PatrolState patrolState { get; set; }
     public HuntState huntState { get; set; }
+    public SearchingState searchingState { get; set; }
 
     #endregion
 
@@ -22,7 +20,7 @@ public class Alien : MonoBehaviour
     #region components
     public NavMeshAgent enemyNavMesh;
     public FieldOfView FOV;
-    Animator animator;
+    public Animator animator;
     Rigidbody _rb;
     public List<GameObject> rooms = new List<GameObject>();
     public List<GameObject> roomsAroundPlayer = new List<GameObject>();
@@ -32,8 +30,9 @@ public class Alien : MonoBehaviour
 
     #region other variables
     Coroutine pathwayCountdownCoroutine;
-
+    
     public bool inPatrol = false;
+    public float enemyRange;
     bool isArrived = false;
     int actualRoom;
     public int pathwayCountdown = 20;
@@ -56,6 +55,8 @@ public class Alien : MonoBehaviour
         StateMachine = new AlienStateMachine();
         patrolState = new PatrolState(this, StateMachine);
         huntState = new HuntState(this, StateMachine);
+        searchingState = new SearchingState(this, StateMachine);
+        
     }
 
     private void Update()
@@ -155,7 +156,7 @@ public class Alien : MonoBehaviour
             int rdmRoom = Random.Range(0, rooms.Count);
             actualRoom = rdmRoom;
             Debug.Log(actualRoom);
-            enemyNavMesh.destination = rooms[actualRoom].transform.position;
+            enemyNavMesh.SetDestination(rooms[actualRoom].transform.position);
         }
         while (inPatrol)
         {
@@ -194,15 +195,25 @@ public class Alien : MonoBehaviour
     }
 
 
-    #endregion
-    #region Hunt
+#endregion
+#region Hunt
+    
     public void Killing()
     {
         Debug.Log("Je te tue agougagou");
 
+        animator.SetBool("canKill", true);
+        StartCoroutine(Kill());
+    }
+
+    public IEnumerator Kill()
+    {
+        yield return new WaitForSeconds(3);
         losingCanva.SetActive(true);
         Time.timeScale = 0;
     }
+
+
 
     public IEnumerator StopHunt()
     {
@@ -210,5 +221,6 @@ public class Alien : MonoBehaviour
         huntState.Change();
     }
 }
+
 
 #endregion

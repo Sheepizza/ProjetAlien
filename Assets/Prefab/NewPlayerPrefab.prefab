@@ -1944,8 +1944,6 @@ GameObject:
   - component: {fileID: 5471046472665248213}
   - component: {fileID: 4295971365903292515}
   - component: {fileID: 2223365544333320761}
-  - component: {fileID: 745968862471413458}
-  - component: {fileID: 3194981590991466509}
   - component: {fileID: 1279426979257140779}
   - component: {fileID: 916128826854130387}
   - component: {fileID: 8645088777507707834}
@@ -2003,7 +2001,6 @@ MonoBehaviour:
   - {fileID: 8399587129757680863}
   - {fileID: 6183290204418594286}
   - {fileID: 8678001934344443476}
-  - {fileID: 0}
   playerModel: {fileID: 5341329110181189468}
   J1PlayerIdentity: 0
   J2PlayerIdentity: 0
@@ -2089,49 +2086,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   lightsDatas: {fileID: 11400000, guid: 1149a2a1166f555448921923275db8e9, type: 2}
---- !u!114 &745968862471413458
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5805139498350548469}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d704eed438d3cbc46b7409a962d258e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
-  pickUpRange: 2
-  handPosition: {fileID: 888154049988539939}
-  playerCamera: {fileID: 8399587129757680863}
-  pickableTags:
-  - PickUp
-  - Knife
-  - Arm
-  - CellPickUp
-  - RepairTool
---- !u!114 &3194981590991466509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5805139498350548469}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e662f22db070bec458cc4d77035017aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
-  pickUpRange: 2
-  brokenTags:
-  - Broken
-  miniGame: {fileID: 2729682265321353427, guid: 9da99730e01a32b46b20fa4518109b96, type: 3}
 --- !u!114 &1279426979257140779
 MonoBehaviour:
   m_ObjectHideFlags: 0
