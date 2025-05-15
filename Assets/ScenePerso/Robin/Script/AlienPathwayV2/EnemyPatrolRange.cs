@@ -6,16 +6,17 @@ using UnityEngine;
 
 public class EnemyPatrolRange : NetworkBehaviour
 {
-    public AlienMovement alienMovement;
+    int player = 0;
+
     // Start is called before the first frame update
     void Update()
     {
-        if(alienMovement == null)
+        if(player == 0)
         {
-            if (isServer && isLocalPlayer)
-            alienMovement = GameObject.Find("MonsterCancerServer").GetComponent<AlienMovement>();
-            else if (isClient)
-            alienMovement = GameObject.Find("MonsterCancerClient").GetComponent<AlienMovement>();
+            if (isServer)
+                player = 1;
+            else
+                player = 2;
         }
     }
 
@@ -23,18 +24,28 @@ public class EnemyPatrolRange : NetworkBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Room" && alienMovement != null)
+        if (other.tag == "Room" && player == 1)
         {
-            alienMovement.roomsAroundPlayer.Add(other.gameObject);
+            GameManager.Instance.J1Rooms.Add(other.gameObject);
+            return;
         }
-
+        else if (other.tag == "Room")
+        {
+            GameManager.Instance.J2Rooms.Add(other.gameObject);
+        }
     }
 
     void OnTriggerExit(Collider other)
     {
-        if(other.tag == "Room" && alienMovement != null)
+        if (other.tag == "Room" && player == 1)
         {
-            alienMovement.roomsAroundPlayer.Remove(other.gameObject);
+            GameManager.Instance.J1Rooms.Remove(other.gameObject);
+            return;
+        }
+        else if (other.tag == "Room")
+        {
+            Debug.Log($"{other.gameObject} has been removed");
+            GameManager.Instance.J2Rooms.Remove(other.gameObject);
         }
     }
 }

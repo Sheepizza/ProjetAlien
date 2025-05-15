@@ -41,7 +41,7 @@ public class AmbiantSoundsManager : MonoBehaviour
     {
         if(goPlaySound == true && coroutine == null  )
         {
-            Debug.Log("Try Start Coroutine");
+            //Debug.Log("Try Start Coroutine");
             coroutine = StartCoroutine(SoundCoolDown());
         }
     }
@@ -49,12 +49,12 @@ public class AmbiantSoundsManager : MonoBehaviour
     public void StartAmbiantSound()
     {
         goPlaySound = true;
-        Debug.Log(goPlaySound);
+        //Debug.Log(goPlaySound);
     }
 
     public IEnumerator SoundCoolDown()
     {
-        Debug.Log("Coroutine Start");
+        //Debug.Log("Coroutine Start");
         if(goPlaySound)
         {
             while(currentTime < Timelimit)
@@ -62,9 +62,9 @@ public class AmbiantSoundsManager : MonoBehaviour
                 currentTime += Time.deltaTime;
                 yield return new WaitForSeconds(Time.deltaTime);
             }
-            Debug.Log("IcanPLay");
+            //Debug.Log("IcanPLay");
             int randomNumber = Random.Range(0, 5);
-            Debug.Log(randomNumber );
+            //Debug.Log(randomNumber );
             if(randomNumber == 1)
             {
                 PlayRandomSound();
@@ -76,17 +76,17 @@ public class AmbiantSoundsManager : MonoBehaviour
 
     void PlayRandomSound()
     {
-        Debug.Log("TryToPlay");
+        //Debug.Log("TryToPlay");
         int RandomSoundNumber = Random.Range(0, ambiantSoundsDatas.ambiantSound.Count);
-        Debug.Log(RandomSoundNumber);
+        //Debug.Log(RandomSoundNumber);
         for(int i = 0; i < ambiantSoundsDatas.ambiantSound.Count; i++)
         {
             if(RandomSoundNumber == i)
             {
                 currentClip = audioSources[i];
-                Debug.Log(currentClip.clip.name);
+                //Debug.Log(currentClip.clip.name);
                 currentClip.Play();
-                Debug.Log("SoundIsPlayed");
+                //Debug.Log("SoundIsPlayed");
             }
         }
     }
