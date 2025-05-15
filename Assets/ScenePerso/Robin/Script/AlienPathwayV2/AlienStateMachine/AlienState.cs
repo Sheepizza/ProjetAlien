@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class AlienState
+public abstract class AlienState
 {
     public AlienState(Alien alien, AlienStateMachine stateMachine)
     {
@@ -13,11 +9,9 @@ public class AlienState
     protected Alien alien;
     protected AlienStateMachine stateMachine;
 
-    public virtual void EnterState() {}
-    public virtual void ExitState() {}
-    public virtual void FrameUpdate() {}
-    public virtual void PhysicsUpdate() {}
-
-
+    public abstract void EnterState();
+    public abstract void ExitState();
+    public abstract void FrameUpdate();
+    public abstract void PhysicsUpdate();
 
 }

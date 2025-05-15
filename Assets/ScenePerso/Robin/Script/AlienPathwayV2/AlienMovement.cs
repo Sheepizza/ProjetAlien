@@ -170,11 +170,6 @@ IEnumerator Hunting()
     {
         enemyNavMesh.destination = playerRef.transform.position;
         yield return null;
-
-        if(FOV.canKill == true)
-        {
-            Killing();
-        }
     }
 }
 
@@ -189,7 +184,14 @@ IEnumerator StopingHunt()
 
 }
 
+[Command(requiresAuthority = false)]
 public void Killing()
+{
+    KillingRpc();
+}
+
+[ClientRpc]
+void KillingRpc()
 {
     Debug.Log("Je te tue agougagou");
 

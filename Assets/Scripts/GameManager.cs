@@ -26,6 +26,7 @@ public class GameManager : NetworkBehaviour
     static GameManager instance = null;
     public static GameManager Instance => instance;
     public MinimapCursor minimapCursor;
+    public AmbiantSoundsManager ambiantSoundsManager;
 
     [Header("Datas"), SerializeField]
     BreakAtStart BrokenObjects;
@@ -61,6 +62,7 @@ public class GameManager : NetworkBehaviour
         J1.GetComponentInChildren<PickUpManager>().SetupLDManager();
         J2.GetComponentInChildren<PickUpManager>().SetupLDManager();
         BreakObjects();
+        GoAmbiantSound();
     }
 
     void BreakObjects()
@@ -76,5 +78,17 @@ public class GameManager : NetworkBehaviour
     {
         _j1.gameObject.name = "Player1";
         _j2.gameObject.name = "Player2";
+    }
+
+    [Command(requiresAuthority = false)]
+    void GoAmbiantSound()
+    {
+        RpcGoAmbiantSound();
+    }
+
+    [ClientRpc]
+    void RpcGoAmbiantSound()
+    {
+        ambiantSoundsManager.goPlaySound = true;
     }
 }
