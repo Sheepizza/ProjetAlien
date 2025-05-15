@@ -18,6 +18,10 @@ public class Alien : NetworkBehaviour
     #endregion
 
     #region components
+
+    AudioSource footstepAudio;
+    public AudioClip[] audioClips;
+    public AudioSource alienScream;
     public NavMeshAgent enemyNavMesh;
     public FieldOfView FOV;
     public Animator animator;
@@ -42,6 +46,7 @@ public class Alien : NetworkBehaviour
 
     private void Start()
     {
+        footstepAudio = GetComponent<AudioSource>();
         enemyNavMesh = GetComponent<NavMeshAgent>();
         FOV = GetComponent<FieldOfView>();
         animator = GetComponent<Animator>();
@@ -49,6 +54,9 @@ public class Alien : NetworkBehaviour
         losingCanva.SetActive(false);
 
         StateMachine.Initialize(patrolState);
+
+        
+        //alienScream.clip = DiegeticSoundManager.Instance.diegeticsSounds["Alien_Scream"].audioClip;
     }
     private void Awake()
     {
@@ -61,6 +69,19 @@ public class Alien : NetworkBehaviour
 
     private void Update()
     {
+        if(!footstepAudio.isPlaying)
+        {
+            int actualClip = 5;
+            int rdmClip = Random.Range(0, audioClips.Length);
+            
+            if(actualClip != rdmClip)
+            {
+                actualClip = rdmClip;
+                footstepAudio.clip = audioClips[rdmClip];
+                footstepAudio.Play();
+            }
+        }
+
         if (playerRef == null)
         {
             if (name == "MonsterCancerServer")
