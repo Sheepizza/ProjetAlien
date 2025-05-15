@@ -23,13 +23,16 @@ public class HuntState : AlienState
     {
         alien.enemyNavMesh.destination = alien.playerRef.transform.position;
 
-        if(alien.FOV.canKill)
-        {
-            alien.Killing();
-        }
         if(!alien.FOV.canSeePlayer)
         {
             alien.StartCoroutine(alien.StopHunt());
+        }
+
+        float distanceToPlayer = Vector3.Distance(alien.transform.position, alien.playerRef.transform.position);
+        if(distanceToPlayer < alien.enemyRange)
+        {
+            
+            alien.Killing();
         }
     }
 
