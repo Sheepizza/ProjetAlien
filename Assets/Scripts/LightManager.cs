@@ -7,25 +7,54 @@ using UnityEngine;
 
 public class LightManager : NetworkBehaviour
 {
+    #region CamVariables
+    public CamDatas camDatas;
+    [SerializeField]
+    public List<string> keyCamLists;
+    public List<GameObject> camScreens;
+
+    public LightToCamLink lightToCamLink;
+    #endregion
+
+    #region LightVariables
     public DictionariesDatas lightsDatas;
+
     Dictionary<string, string> ButtonsLights;
 
     GameObject _lightParent;
 
     bool _canUse = true;
+    #endregion
 
     public override void OnStartLocalPlayer()
     {
         if (isServer && isLocalPlayer)
         {
             ButtonsLights = lightsDatas.GetJ1Dictionary();
+            GameObject ScreenListObject = GameObject.Find("CamScreensJ1");
+            Debug.Log("Voici " + ScreenListObject);
+            for (int i = 0; i < camDatas.J1BC.Count; i++)
+            {
+                keyCamLists.Add(camDatas.J1BC[i].key);
+                if (i <= 9)
+                    camScreens.Add(ScreenListObject.transform.GetChild(i).gameObject);
+                //Debug.Log(camScreens[i]);
+            }
+            CmdSetUpScreens();
         }
         else if (isLocalPlayer)
         {
             ButtonsLights = lightsDatas.GetJ2Dictionary();
+            GameObject ScreenListObject = GameObject.Find("CamScreensJ2");
+            for (int i = 0; i < camDatas.J2BC.Count; i++)
+            {
+                keyCamLists.Add(camDatas.J2BC[i].key);
+                if (i <= 4)
+                    camScreens.Add(ScreenListObject.transform.GetChild(i).gameObject);
+            }
+            CmdSetUpScreens();
         }
     }
-
     public void ChangeLightState(string key)
     {
         if (ButtonsLights != null && ButtonsLights.ContainsKey(key) && _canUse)
@@ -39,6 +68,7 @@ public class LightManager : NetworkBehaviour
                     Debug.Log(_lightParent.transform.GetChild(0).gameObject);
                     GameObject.Find(key).GetComponent<IsActivate>().IsActive = !_isButtonActive;
                     CmdChangeLightPos(_lightParent.transform.GetChild(0).gameObject, _isButtonActive);
+                    ScreenSwitch(key, _isButtonActive);
                     _canUse = false;
                 }
             }
@@ -108,6 +138,72 @@ public class LightManager : NetworkBehaviour
         foreach (var _light in _dico.Values)
         {
             GameObject.Find(_light).transform.GetChild(0).gameObject.SetActive(false);
+        }
+    }
+
+
+    [Command]
+    public void CmdSetUpScreens()
+    {
+        RpcSetUpScreens();
+    }
+
+    [ClientRpc]
+    public void RpcSetUpScreens()
+    {
+        for (int i = 0; i < camScreens.Count; i++)
+        {
+            camScreens[i].GetComponent<MeshRenderer>().material = camDatas.CamMaterialJ1[camDatas.CamMaterialJ1.Count-1];
+        }
+    }
+
+    public void ScreenSwitch(string key, bool _isActive)
+    {
+        Debug.Log("Entering ScreenSwitch");
+        if (_isActive)
+        {
+            ScreenOff(key);
+        }
+        else if (!_isActive)
+        {
+            ScreenOn(key);
+        }
+        //Ajouter la condition
+    }
+
+    public void ScreenOn(string key)
+    {
+        Debug.Log("Entering ScreenOn");
+        for (int i = 0; i < lightToCamLink.J1LinkList.Count; i++)
+        {
+            if (key == lightToCamLink.J1LinkList[i].lightKey)
+            {
+                Debug.Log("Checking Pass - " + lightToCamLink.J1LinkList[i].lightKey);
+                for (int j = 0; j < lightToCamLink.J1LinkList[i].CamNumber.Count; j++)
+                {
+                    camScreens[lightToCamLink.J1LinkList[i].ScreensNumbers[j]].GetComponent<MeshRenderer>().material = camDatas.CamMaterialJ1[lightToCamLink.J1LinkList[i].CamNumber[j]];
+                    Debug.Log("Material applied - " + camDatas.CamMaterialJ1[lightToCamLink.J1LinkList[i].CamNumber[j]] + " on " + camScreens[lightToCamLink.J1LinkList[i].ScreensNumbers[j]]);
+                }
+            }
+            //Si le numéro de light correspond au numéro de texure
+            //Appliquer la texture d'écran actif
+        }
+    }
+    
+    public void ScreenOff(string key)
+    {
+        Debug.Log("Entering ScreenOff");
+        for (int i = 0; i < lightToCamLink.J1LinkList.Count; i++)
+        {
+            if (key == lightToCamLink.J1LinkList[i].lightKey)
+            {
+                for (int j = 0; j < lightToCamLink.J1LinkList[i].CamNumber.Count; j++)
+                {
+                    camScreens[lightToCamLink.J1LinkList[i].ScreensNumbers[j]].GetComponent<MeshRenderer>().material = camDatas.CamMaterialJ1[camDatas.CamMaterialJ1.Count-1];
+                }
+            }
+            //Si le numéro de light correspond au numéro de texure
+            //Appliquer la texture noire
         }
     }
 }
