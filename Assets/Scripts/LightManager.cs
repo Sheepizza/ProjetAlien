@@ -173,16 +173,16 @@ public class LightManager : NetworkBehaviour
 
     public void ScreenOn(string key)
     {
-        Debug.Log("Entering ScreenOn");
+        //Debug.Log("Entering ScreenOn");
         for (int i = 0; i < lightToCamLink.J1LinkList.Count; i++)
         {
             if (key == lightToCamLink.J1LinkList[i].lightKey)
             {
-                Debug.Log("Checking Pass - " + lightToCamLink.J1LinkList[i].lightKey);
+                //Debug.Log("Checking Pass - " + lightToCamLink.J1LinkList[i].lightKey);
                 for (int j = 0; j < lightToCamLink.J1LinkList[i].CamNumber.Count; j++)
                 {
                     camScreens[lightToCamLink.J1LinkList[i].ScreensNumbers[j]].GetComponent<MeshRenderer>().material = camDatas.CamMaterialJ1[lightToCamLink.J1LinkList[i].CamNumber[j]];
-                    Debug.Log("Material applied - " + camDatas.CamMaterialJ1[lightToCamLink.J1LinkList[i].CamNumber[j]] + " on " + camScreens[lightToCamLink.J1LinkList[i].ScreensNumbers[j]]);
+                    //Debug.Log("Material applied - " + camDatas.CamMaterialJ1[lightToCamLink.J1LinkList[i].CamNumber[j]] + " on " + camScreens[lightToCamLink.J1LinkList[i].ScreensNumbers[j]]);
                 }
             }
             //Si le numéro de light correspond au numéro de texure
@@ -192,7 +192,7 @@ public class LightManager : NetworkBehaviour
     
     public void ScreenOff(string key)
     {
-        Debug.Log("Entering ScreenOff");
+        //Debug.Log("Entering ScreenOff");
         for (int i = 0; i < lightToCamLink.J1LinkList.Count; i++)
         {
             if (key == lightToCamLink.J1LinkList[i].lightKey)
