@@ -8,7 +8,6 @@ public class BreakManager : NetworkBehaviour
     public BreakDatas DoorBreakDatas;
 
     Vector3 startPos;
-    float t = 0;
 
     [SyncVar(hook = "ChangeState")]
     public bool IsBreak = false;
@@ -32,7 +31,7 @@ public class BreakManager : NetworkBehaviour
         Debug.Log(gameObject + " " + IsBreak);
         if (!IsBreak)
         {
-            t = 0;
+            //t = 0;
             //CMDOpenDoorOnRepair();
         }
     }
@@ -72,7 +71,8 @@ public class BreakManager : NetworkBehaviour
             transform.tag = "Untagged";
             GetComponent<Outline>().OutlineWidth = 0; 
             GetComponent<Outline>().enabled = false;
-            transform.position = startPos;
+            CMDOpenDoorOnRepair();
+            //transform.position = startPos;
         }
     }
 
@@ -85,21 +85,40 @@ public class BreakManager : NetworkBehaviour
     [ClientRpc]
     void RPCOpenDoorOnRepair()
     {
-        t = 0;
-        StartCoroutine(OpenDoorOnRepair());
+        StartCoroutine(OpenDoorOnRepair(this.gameObject));
     }
 
-    IEnumerator OpenDoorOnRepair()
+    IEnumerator OpenDoorOnRepair(GameObject _door)
     {
-        Debug.Log("Start");
-        while (t < .5f)
+        Debug.Log("J'ouvre" + _door.name);
+        Vector3 _startPos = _door.transform.position;
+        float _elapsedTime = 0f;
+        int _direction = 1;
+
+        while (_elapsedTime < 1f)
         {
-            Debug.Log(t);
-            t += Time.deltaTime;
-            transform.position = Vector3.Lerp(startPos + Vector3.down * 3, startPos, t / .5f);
+            _door.transform.position = Vector3.Lerp(_startPos, _startPos + Vector3.up * 3 * _direction, _elapsedTime / 1);
+            _elapsedTime += Time.deltaTime;
             yield return null;
         }
-        Debug.Log("End");
-        transform.position = startPos;
+
+        _door.transform.position = _startPos + (Vector3.up * 3 * _direction) / 2;
     }
+
+    /*public IEnumerator DoOpen(GameObject _door)
+    {
+        Debug.Log("J'ouvre" + _door.name);
+        Vector3 _startPos = _door.transform.position;
+        float _elapsedTime = 0f;
+        int _direction = 1;
+
+        while (_elapsedTime < 1f)
+        {
+            _door.transform.position = Vector3.Lerp(_startPos, _startPos + Vector3.up * 3 * _direction, _elapsedTime / 1);
+            _elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        _door.transform.position = _startPos + Vector3.up * 3 * _direction;
+    }*/
 }
