@@ -1,8 +1,6 @@
 using Mirror;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class LightManager : NetworkBehaviour
@@ -159,47 +157,77 @@ public class LightManager : NetworkBehaviour
 
     public void ScreenSwitch(string key, bool _isActive)
     {
+        string playerName = gameObject.transform.parent.gameObject.name;
+        List<LinkLightCam> playerLinkList =  new List<LinkLightCam>();
+        List<Material> materialList = new List<Material>();
+        if (playerName == "Player1")
+        {
+            for (int i = 0; i < lightToCamLink.J1LinkList.Count; i++)
+            {
+                playerLinkList.Add(lightToCamLink.J1LinkList[i]);
+            }
+            for (int i = 0; i < camDatas.CamMaterialJ1.Count; i++)
+            {
+                materialList.Add(camDatas.CamMaterialJ1[i]);
+            }
+        }
+        else if (playerName == "Player2")
+        {
+            for (int i = 0; i < lightToCamLink.J2LinkList.Count; i++)
+            {
+                playerLinkList.Add(lightToCamLink.J2LinkList[i]);
+            }
+            for (int i = 0; i < camDatas.CamMaterialJ2.Count; i++)
+            {
+                materialList.Add(camDatas.CamMaterialJ2[i]);
+            }
+        }
+        else
+        {
+            Debug.Log("Cam Error : No Player Found.");
+        }
+
         Debug.Log("Entering ScreenSwitch");
         if (_isActive)
         {
-            ScreenOff(key);
+            ScreenOff(key, playerLinkList, materialList);
         }
         else if (!_isActive)
         {
-            ScreenOn(key);
+            ScreenOn(key, playerLinkList, materialList);
         }
         //Ajouter la condition
     }
 
-    public void ScreenOn(string key)
+    public void ScreenOn(string key, List<LinkLightCam> playerLinkList, List<Material> materialList)
     {
         //Debug.Log("Entering ScreenOn");
-        for (int i = 0; i < lightToCamLink.J1LinkList.Count; i++)
-        {
-            if (key == lightToCamLink.J1LinkList[i].lightKey)
+            for (int i = 0; i < playerLinkList.Count; i++)
             {
-                //Debug.Log("Checking Pass - " + lightToCamLink.J1LinkList[i].lightKey);
-                for (int j = 0; j < lightToCamLink.J1LinkList[i].CamNumber.Count; j++)
+                if (key == playerLinkList[i].lightKey)
                 {
-                    camScreens[lightToCamLink.J1LinkList[i].ScreensNumbers[j]].GetComponent<MeshRenderer>().material = camDatas.CamMaterialJ1[lightToCamLink.J1LinkList[i].CamNumber[j]];
-                    //Debug.Log("Material applied - " + camDatas.CamMaterialJ1[lightToCamLink.J1LinkList[i].CamNumber[j]] + " on " + camScreens[lightToCamLink.J1LinkList[i].ScreensNumbers[j]]);
+                    //Debug.Log("Checking Pass - " + lightToCamLink.J1LinkList[i].lightKey);
+                    for (int j = 0; j < playerLinkList[i].CamNumber.Count; j++)
+                    {
+                        camScreens[playerLinkList[i].ScreensNumbers[j]].GetComponent<MeshRenderer>().material = materialList[playerLinkList[i].CamNumber[j]];
+                        //Debug.Log("Material applied - " + camDatas.CamMaterialJ1[lightToCamLink.J1LinkList[i].CamNumber[j]] + " on " + camScreens[lightToCamLink.J1LinkList[i].ScreensNumbers[j]]);
+                    }
                 }
+                //Si le numéro de light correspond au numéro de texure
+                //Appliquer la texture d'écran actif
             }
-            //Si le numéro de light correspond au numéro de texure
-            //Appliquer la texture d'écran actif
-        }
     }
     
-    public void ScreenOff(string key)
+    public void ScreenOff(string key, List<LinkLightCam> playerLinkList, List<Material> materialList)
     {
         //Debug.Log("Entering ScreenOff");
-        for (int i = 0; i < lightToCamLink.J1LinkList.Count; i++)
+        for (int i = 0; i < playerLinkList.Count; i++)
         {
-            if (key == lightToCamLink.J1LinkList[i].lightKey)
+            if (key == playerLinkList[i].lightKey)
             {
-                for (int j = 0; j < lightToCamLink.J1LinkList[i].CamNumber.Count; j++)
+                for (int j = 0; j < playerLinkList[i].CamNumber.Count; j++)
                 {
-                    camScreens[lightToCamLink.J1LinkList[i].ScreensNumbers[j]].GetComponent<MeshRenderer>().material = camDatas.CamMaterialJ1[camDatas.CamMaterialJ1.Count-1];
+                    camScreens[playerLinkList[i].ScreensNumbers[j]].GetComponent<MeshRenderer>().material = materialList[camDatas.CamMaterialJ1.Count-1];
                 }
             }
             //Si le numéro de light correspond au numéro de texure
