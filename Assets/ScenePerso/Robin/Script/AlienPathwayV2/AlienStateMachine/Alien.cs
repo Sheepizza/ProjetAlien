@@ -11,6 +11,7 @@ public class Alien : NetworkBehaviour
     public PatrolState patrolState { get; set; }
     public HuntState huntState { get; set; }
     public SearchingState searchingState { get; set; }
+    public BaladeState baladeState { get; set; }
 
     #endregion
 
@@ -64,7 +65,7 @@ public class Alien : NetworkBehaviour
         patrolState = new PatrolState(this, StateMachine);
         huntState = new HuntState(this, StateMachine);
         searchingState = new SearchingState(this, StateMachine);
-        
+        baladeState = new BaladeState(this, StateMachine);
     }
 
     private void Update()

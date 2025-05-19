@@ -24,7 +24,7 @@ public class SearchingState : AlienState
 
     public override void FrameUpdate()
     {
-        alien.enemyNavMesh.SetDestination(alien.)
+       
     }
 
     public override void PhysicsUpdate()
