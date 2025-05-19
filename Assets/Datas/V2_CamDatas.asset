@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09369927b6d885c40ae43eacc3014188, type: 3}
+  m_Name: V2_CamDatas
+  m_EditorClassIdentifier: 
+  J1BC:
+  - key: J1C1
+    value: 0
+  - key: J1C2
+    value: 1
+  - key: J1C3
+    value: 2
+  - key: J1C4
+    value: 3
+  - key: J1C5
+    value: 4
+  - key: J1C6
+    value: 5
+  - key: J1C7
+    value: 7
+  - key: J1C8
+    value: 8
+  - key: J1C9
+    value: 9
+  - key: J1C10
+    value: 10
+  - key: Black
+    value: 11
+  J2BC:
+  - key: J2C1
+    value: 0
+  - key: J2C2
+    value: 1
+  - key: J2C3
+    value: 2
+  - key: J2C4
+    value: 3
+  - key: J2C5
+    value: 4
+  - key: Black
+    value: 5
+  CamMaterialJ1:
+  - {fileID: 2100000, guid: 5d21099f2f032044a9b64d05b3de4048, type: 2}
+  - {fileID: 2100000, guid: 88b9a0497f607904caf239cbe5d2091f, type: 2}
+  - {fileID: 2100000, guid: dc723d81b0d56c547b97b369b4bae306, type: 2}
+  - {fileID: 2100000, guid: 575ed783fcabbd34bafacf5857e2ce88, type: 2}
+  - {fileID: 2100000, guid: 273888fa822a7ae439bfed843e7424bd, type: 2}
+  - {fileID: 2100000, guid: e15fc4f8aa8f3ed47aa37061908c6dbe, type: 2}
+  - {fileID: 2100000, guid: d23021ef53b2c864e8b95200ebc7c7eb, type: 2}
+  - {fileID: 2100000, guid: 870eb71bd2209254f8cd23372b51a567, type: 2}
+  - {fileID: 2100000, guid: e71b4f69faae7f44f9a06c967f2b4160, type: 2}
+  - {fileID: 2100000, guid: 51bd70743ea7bb24e8387a16b46542a2, type: 2}
+  - {fileID: 2100000, guid: 43502de526bb96f4fb95ee5655c9866d, type: 2}
+  CamMaterialJ2:
+  - {fileID: 2100000, guid: 3e95014c187d1144496f4a7bb747f2b8, type: 2}
+  - {fileID: 2100000, guid: d6fc0af23e05e8940a3153dc4e709220, type: 2}
+  - {fileID: 2100000, guid: 9b85a1e734f869a4186e17bdff84b03c, type: 2}
+  - {fileID: 2100000, guid: def3c570c818e1e4aa6c69556cb15a7c, type: 2}
+  - {fileID: 2100000, guid: 2db329fdda946034baeb43d8443c116f, type: 2}
+  - {fileID: 2100000, guid: 43502de526bb96f4fb95ee5655c9866d, type: 2}
