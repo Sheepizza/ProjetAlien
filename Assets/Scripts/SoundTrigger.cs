@@ -15,9 +15,8 @@ public class SoundTrigger : MonoBehaviour
             if (sonAJouer != null)
             {
                 sonAJouer.Play();
-                Destroy(other.gameObject);
+                Destroy(gameObject);
             }
-
         }
     }
 }
