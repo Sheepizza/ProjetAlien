@@ -32,9 +32,22 @@ public class LDObjectManager : NetworkBehaviour
         }
     }
 
+    public bool IsKey(GameObject _gameObject)
+    {
+        objectName = _gameObject.name;
+        for (int i = 0; i < _LDObjectDatas.LDOBjectList.Count; i++)
+        {
+            if (_LDObjectDatas.LDOBjectList[i].name == objectName)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void CheckInteraction(string _targetObjectName)
     {
-        Debug.Log("Entering Check");
+        /*Debug.Log("Entering Check");
         if(objectInHand != null)
         {
             targetName = _targetObjectName;
@@ -55,7 +68,9 @@ public class LDObjectManager : NetworkBehaviour
             {
                 InteractionPass();
             }
-        }
+        }*/
+
+
 
     }
 
