@@ -2101,6 +2101,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  camDatas: {fileID: 11400000, guid: d02e779b75247d9479802b3d374c5112, type: 2}
+  keyCamLists: []
+  camScreens: []
+  lightToCamLink: {fileID: 11400000, guid: 90be438abf14cb941a1130aa9453ad8c, type: 2}
   lightsDatas: {fileID: 11400000, guid: 1149a2a1166f555448921923275db8e9, type: 2}
 --- !u!114 &1279426979257140779
 MonoBehaviour:
