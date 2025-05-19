@@ -33,12 +33,12 @@ public class Alien : NetworkBehaviour
     #endregion
 
     #region other variables
-    Coroutine pathwayCountdownCoroutine;
+    public Coroutine pathwayCountdownCoroutine;
     
     public bool inPatrol = false;
     public float enemyRange;
-    bool isArrived = false;
-    int actualRoom;
+    public bool isArrived = false;
+    public int actualRoom;
     public int pathwayCountdown = 20;
     public int pathwayTiming;
     public int escapeTiming;
@@ -162,7 +162,6 @@ public class Alien : NetworkBehaviour
     }
     public IEnumerator FindRoom()
     {
-        pathwayCountdownCoroutine = null;
         inPatrol = true;
         if (roomsAroundPlayer.Count != 0)
         {
@@ -178,34 +177,22 @@ public class Alien : NetworkBehaviour
             actualRoom = rdmRoom;
             Debug.Log(actualRoom);
             enemyNavMesh.SetDestination(rooms[actualRoom].transform.position);
-        }
-        while (inPatrol)
-        {
+        }  
             float distanceToDestination = Vector3.Distance(transform.position, enemyNavMesh.destination);
 
             if (distanceToDestination < 0.5f)  // Tol�rance de 0.5 unit�s
             {
-                if (pathwayCountdownCoroutine == null)
-                {
-                    pathwayCountdownCoroutine = StartCoroutine(PathwayCountdown());
-                }
                 isArrived = true;
             }
             else
             {
                 isArrived = false;
-            }
-            if (isArrived)
-            {
-                enemyNavMesh.destination = rooms[actualRoom].transform.GetChild(Random.Range(0, rooms[actualRoom].transform.childCount)).position;
-                isArrived = false;
-            }
-            yield return null;
-        }
+            }      
+        yield return new WaitForSeconds(0);
     }
 
 
-    IEnumerator PathwayCountdown()
+    public IEnumerator PathwayCountdown()
     {
         //Debug.Log("Debut Patrouille ma gueule");
         while (pathwayCountdown > 0)
