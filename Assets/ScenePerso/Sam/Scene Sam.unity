@@ -4258,7 +4258,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -4909,6 +4909,10 @@ PrefabInstance:
       value: 4273011198
       objectReference: {fileID: 0}
     - target: {fileID: 2428393231039641732, guid: c359e284b90ba174aa958338b6af16c7, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2428393231039641732, guid: c359e284b90ba174aa958338b6af16c7, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -4943,6 +4947,10 @@ PrefabInstance:
     - target: {fileID: 2648718096940772874, guid: c359e284b90ba174aa958338b6af16c7, type: 3}
       propertyPath: sceneId
       value: 1908329330
+      objectReference: {fileID: 0}
+    - target: {fileID: 2822948589416358479, guid: c359e284b90ba174aa958338b6af16c7, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2822948589416358479, guid: c359e284b90ba174aa958338b6af16c7, type: 3}
       propertyPath: m_IsActive
@@ -5235,6 +5243,10 @@ PrefabInstance:
     - target: {fileID: 7423933451167057106, guid: c359e284b90ba174aa958338b6af16c7, type: 3}
       propertyPath: sceneId
       value: 3667810392
+      objectReference: {fileID: 0}
+    - target: {fileID: 7456532892688932497, guid: c359e284b90ba174aa958338b6af16c7, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7465465408309444300, guid: c359e284b90ba174aa958338b6af16c7, type: 3}
       propertyPath: sceneId

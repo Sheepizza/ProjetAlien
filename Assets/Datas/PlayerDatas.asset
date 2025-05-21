@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fc20a64b39188e4da1fa64f0efe3f61, type: 3}
   m_Name: PlayerDatas
   m_EditorClassIdentifier: 
-  Speed: 5
+  Speed: 53.5
   InitRatio: 1
   SprintRatio: 2
   CrouchRatio: 0.5
   LyingRatio: 0.25
-  SprintTimer: 100
-  SprintIdleReload: 0
-  SprintBaseReload: 0
+  SprintTimer: 5
+  SprintIdleReload: 1
+  SprintBaseReload: 2
   GravityMultiplier: 10
