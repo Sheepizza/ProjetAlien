@@ -1,4 +1,5 @@
 using Mirror;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : NetworkBehaviour
@@ -12,6 +13,7 @@ public class GameManager : NetworkBehaviour
     [SerializeField]
     [SyncVar]
     public uint J1Identity;
+    public List<GameObject> J1Rooms;
 
     [SerializeField]
     [SyncVar]
@@ -22,6 +24,11 @@ public class GameManager : NetworkBehaviour
     [SerializeField]
     [SyncVar]
     public uint J2Identity;
+    [SyncVar]
+    public List<GameObject> J2Rooms;
+
+    [SyncVar]
+    public List<string> Keys;
 
     static GameManager instance = null;
     public static GameManager Instance => instance;
@@ -90,5 +97,10 @@ public class GameManager : NetworkBehaviour
     void RpcGoAmbiantSound()
     {
         ambiantSoundsManager.goPlaySound = true;
+    }
+
+    public void AddKey(string _key)
+    {
+        Keys.Add(_key);
     }
 }

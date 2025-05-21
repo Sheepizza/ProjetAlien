@@ -1,4 +1,5 @@
 using Mirror;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PickUpManager : NetworkBehaviour
@@ -8,6 +9,8 @@ public class PickUpManager : NetworkBehaviour
     GameObject _pickedGO;
     [Header("Animator"), SerializeField]
     Animator animator;
+
+    List<GameObject> keysInHand = new List<GameObject>();
 
     [ClientRpc]
     public void SetupLDManager()
@@ -40,7 +43,16 @@ public class PickUpManager : NetworkBehaviour
     void RPCPickUp(string _GOname)
     {
         _pickedGO = GameObject.Find(_GOname);
-        _LDObjectManager.GiveObjectTag(_pickedGO);
+
+        if (_LDObjectManager.IsKey(_pickedGO))
+        {
+            keysInHand.Add(_pickedGO);
+            _pickedGO = null;
+            _pickedGO.SetActive(false);
+            return;
+        }
+
+        //_LDObjectManager.GiveObjectTag(_pickedGO);
         _pickedGO.transform.SetParent(HandPos);
         _pickedGO.transform.localPosition = Vector3.zero;
         _pickedGO.transform.localRotation = Quaternion.identity;
@@ -63,12 +75,25 @@ public class PickUpManager : NetworkBehaviour
         if(_pickedGO)
         {
             _pickedGO.transform.SetParent(null);
-            _LDObjectManager.DropObject();
+            //_LDObjectManager.DropObject();
             _pickedGO.GetComponent<Collider>().enabled = true;
             _pickedGO.GetComponent<Rigidbody>().isKinematic = false;
             _pickedGO = null;
         }
 
         animator.SetBool("Holding", false);
+    }
+
+    public void ShareKeys()
+    {
+        if (keysInHand.Count == 0)
+        {
+            return;
+        }
+
+        foreach (var key in keysInHand)
+        {
+            GameManager.Instance.AddKey(key.name);
+        }
     }
 }
