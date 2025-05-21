@@ -12,4 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de6401be497490746bef7cfa685d5c2d, type: 3}
   m_Name: DiegeticsSounds
   m_EditorClassIdentifier: 
-  AudiosStruct: []
+  AudiosStruct:
+  - Key: Footstep_Player
+    AudioClip: {fileID: 8300000, guid: cab91460377987040bcca50de8384a4d, type: 3}
+    Range: 5
+  - Key: Footstep_Alien1
+    AudioClip: {fileID: 8300000, guid: ef187329b911d7d4f945317b3c236917, type: 3}
+    Range: 10
+  - Key: Alien_Scream
+    AudioClip: {fileID: 8300000, guid: 083f61c31fcb20d4ca2e1a6ce24fbd68, type: 3}
+    Range: 10
+  - Key: Footstep_Alien2
+    AudioClip: {fileID: 8300000, guid: 6908dd32403c2ac4e87f06134b050120, type: 3}
+    Range: 10
+  - Key: Footstep_Alien3
+    AudioClip: {fileID: 8300000, guid: 2b7134110ae7c4d429d41b14fd365506, type: 3}
+    Range: 10
+  - Key: Footstep_Alien4
+    AudioClip: {fileID: 8300000, guid: e9b77eb9295956947861ffce962e2660, type: 3}
+    Range: 10

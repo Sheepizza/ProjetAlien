@@ -25,12 +25,11 @@ public class PatrolState : AlienState
 
     public override void FrameUpdate()
     {
-
         if(alien.pathwayCountdown <= 0)
         {
             alien.inPatrol = false;
-            alien.pathwayCountdown = alien.pathwayTiming;
-            EnterState();
+            alien.pathwayCountdownCoroutine = null;
+            alien.FindRoomManager();
         }
 
         if(alien.FOV.canSeePlayer)

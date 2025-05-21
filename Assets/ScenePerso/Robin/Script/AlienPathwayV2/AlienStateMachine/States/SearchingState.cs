@@ -11,17 +11,20 @@ public class SearchingState : AlienState
 
     public override void EnterState()
     {
-        
+        if (alien.pathwayCountdownCoroutine == null)
+            {
+                alien.pathwayCountdownCoroutine = alien.StartCoroutine(alien.PathwayCountdown());
+            }
     }
 
     public override void ExitState()
     {
-        
+        alien.pathwayCountdownCoroutine = null;
     }
 
     public override void FrameUpdate()
     {
-        
+       
     }
 
     public override void PhysicsUpdate()
