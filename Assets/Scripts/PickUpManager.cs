@@ -83,4 +83,17 @@ public class PickUpManager : NetworkBehaviour
 
         animator.SetBool("Holding", false);
     }
+
+    public void ShareKeys()
+    {
+        if (keysInHand.Count == 0)
+        {
+            return;
+        }
+
+        foreach (var key in keysInHand)
+        {
+            GameManager.Instance.AddKey(key.name);
+        }
+    }
 }

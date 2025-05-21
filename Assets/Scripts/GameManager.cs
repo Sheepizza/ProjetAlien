@@ -27,6 +27,9 @@ public class GameManager : NetworkBehaviour
     [SyncVar]
     public List<GameObject> J2Rooms;
 
+    [SyncVar]
+    public List<string> Keys;
+
     static GameManager instance = null;
     public static GameManager Instance => instance;
     public MinimapCursor minimapCursor;
@@ -94,5 +97,10 @@ public class GameManager : NetworkBehaviour
     void RpcGoAmbiantSound()
     {
         ambiantSoundsManager.goPlaySound = true;
+    }
+
+    public void AddKey(string _key)
+    {
+        Keys.Add(_key);
     }
 }

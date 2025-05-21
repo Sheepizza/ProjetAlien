@@ -19,6 +19,13 @@ public class LDObjectManager : NetworkBehaviour
     public string ResultName;
     public GameObject ResultObject;
 
+    PickUpManager pickUpManager;
+
+    private void Start()
+    {
+        pickUpManager = GetComponent<PickUpManager>();
+    }
+
     public void GiveObjectTag(GameObject _takenObject)
     {
         objectInHand = _takenObject;
@@ -104,5 +111,13 @@ public class LDObjectManager : NetworkBehaviour
     public void DestroyObject()
     {
         Destroy(objectInHand);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "ControlRoom")
+        {
+            pickUpManager.ShareKeys();
+        }
     }
 }
