@@ -7,6 +7,10 @@ public class ControlRoomEvent : MonoBehaviour
 {
     public int randomNumber;
     public int AlienFrequenceAttack;
+    public AudioSource AlienDanger;
+    public GameManager gameManager;
+    public GameObject monstre;
+    public Alien alienScript;
 
     public bool alienAttack = false; 
     public bool playerDanger = false;
@@ -18,6 +22,8 @@ public class ControlRoomEvent : MonoBehaviour
 
     public void Start()
     {
+        /*monstre = gameManager.J1.transform.GetChild(gameManager.J1.transform.childCount-1).gameObject;
+        monstre.SetActive (false);*/
         canvaDeath.enabled = false;
         StartCoroutine(AlienEvent());
     }
@@ -66,14 +72,15 @@ public class ControlRoomEvent : MonoBehaviour
     
     IEnumerator AlienAttack()
     {
-        //Animation Lights
-        lightsWarning.SetBool("Warning", true);  
-        Debug.Log("Ti va mourir");
-        yield return new WaitForSeconds(5);
-        //Animation Alien
+        lightsWarning.SetBool("Warning", true);
+        AlienDanger.Play();
+        yield return new WaitForSeconds(21);
+
         if (playerDanger == true)
         {
             Debug.Log("Tié mort");
+            /*monstre.SetActive(true);*/
+            alienScript.StartCoroutine(alienScript.Kill());
             canvaDeath.enabled = true;
             //TUER JOUEUR
         }
