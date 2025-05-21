@@ -4243,6 +4243,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c3a3dc208f932e46865047b0ee612c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &887900320
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 887900314}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.3633404, y: 1, z: 1}
+  m_Center: {x: -1.1816702, y: 0, z: 4.08}
 --- !u!1 &893691850
 GameObject:
   m_ObjectHideFlags: 0
@@ -4915,6 +4936,10 @@ PrefabInstance:
       propertyPath: lightsWarning
       value: 
       objectReference: {fileID: 1045786201}
+    - target: {fileID: 2568251290393386649, guid: c359e284b90ba174aa958338b6af16c7, type: 3}
+      propertyPath: AlienFrequenceAttack
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 2648718096940772874, guid: c359e284b90ba174aa958338b6af16c7, type: 3}
       propertyPath: sceneId
       value: 1908329330
@@ -5267,17 +5292,25 @@ PrefabInstance:
       propertyPath: lightsWarning
       value: 
       objectReference: {fileID: 1045786203}
+    - target: {fileID: 8247618455868502290, guid: c359e284b90ba174aa958338b6af16c7, type: 3}
+      propertyPath: AlienFrequenceAttack
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8295118528177069178, guid: c359e284b90ba174aa958338b6af16c7, type: 3}
+      propertyPath: m_Size.x
+      value: 0.761837
+      objectReference: {fileID: 0}
     - target: {fileID: 8295118528177069178, guid: c359e284b90ba174aa958338b6af16c7, type: 3}
       propertyPath: m_Size.y
       value: 0.69906497
       objectReference: {fileID: 0}
     - target: {fileID: 8295118528177069178, guid: c359e284b90ba174aa958338b6af16c7, type: 3}
       propertyPath: m_Center.x
-      value: 7.021303
+      value: 23.57609
       objectReference: {fileID: 0}
     - target: {fileID: 8295118528177069178, guid: c359e284b90ba174aa958338b6af16c7, type: 3}
       propertyPath: m_Center.y
-      value: -0.15046762
+      value: -0.15046763
       objectReference: {fileID: 0}
     - target: {fileID: 8327177769831830729, guid: c359e284b90ba174aa958338b6af16c7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5362,6 +5395,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4369286345046984986, guid: c359e284b90ba174aa958338b6af16c7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 887900317}
+    - targetCorrespondingSourceObject: {fileID: 4369286345046984986, guid: c359e284b90ba174aa958338b6af16c7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 887900320}
   m_SourcePrefab: {fileID: 100100000, guid: c359e284b90ba174aa958338b6af16c7, type: 3}
 --- !u!95 &1045786201 stripped
 Animator:
