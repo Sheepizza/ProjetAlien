@@ -10,6 +10,8 @@ public class RepairManager : NetworkBehaviour
     public string RepairGOName = "RepairGun";
     public GameObject Hand;
 
+    ParticleSystem repairGunParticleSystem;
+
     bool _canRepair = false;
     bool _actualRepair = false;
 
@@ -25,10 +27,12 @@ public class RepairManager : NetworkBehaviour
         {
             if (Hand.transform.GetChild(0).name == "RepairGun" && !_canRepair)
             {
+                repairGunParticleSystem = Hand.transform.GetChild(0).GetComponentInChildren<ParticleSystem>();
                 _canRepair = true;
             }
             else if (Hand.transform.GetChild(0).name != "RepairGun" && _canRepair)
             {
+                repairGunParticleSystem = null;
                 _canRepair = false;
             }
         }
@@ -47,11 +51,13 @@ public class RepairManager : NetworkBehaviour
                 _GObreakManager = GameObject.Find(HighlightManager.Instance.GetObjectName()).GetComponent<BreakManager>();
                 if (Input.GetKeyDown(KeyCode.E) && !_actualRepair)
                 {
+                    repairGunParticleSystem.Play();
                     _GObreakManager.StartCoroutine(nameof(_GObreakManager.Repair));
                     _actualRepair = true;
                 }
                 else if (Input.GetKeyUp(KeyCode.E) && _actualRepair)
-                { 
+                {
+                    repairGunParticleSystem.Stop();
                     _GObreakManager.StopAllCoroutines();
                     _actualRepair = false;
                 }
@@ -62,6 +68,7 @@ public class RepairManager : NetworkBehaviour
             _GObreakManager.StopAllCoroutines();
             _GObreakManager = null;
             _actualRepair = false;
+            repairGunParticleSystem.Stop();
         }
 
         if (Input.GetKeyDown(KeyCode.Y))

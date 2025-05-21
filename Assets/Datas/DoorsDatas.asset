@@ -37,4 +37,22 @@ MonoBehaviour:
     value: J1D_K
   - key: J1D_12
     value: J1D_L
-  J2BD: []
+  J2BD:
+  - key: J2D_1
+    value: J2D_B
+  - key: J2D_2
+    value: J2D_C
+  - key: J2D_3
+    value: J2D_D
+  - key: J2D_4
+    value: J2D_E
+  - key: J2D_5
+    value: J2D_F
+  - key: J2D_6
+    value: J2D_G
+  - key: J2D_7
+    value: J2D_H
+  - key: J2D_8
+    value: J2D_I
+  - key: J2D_9
+    value: J2D_J

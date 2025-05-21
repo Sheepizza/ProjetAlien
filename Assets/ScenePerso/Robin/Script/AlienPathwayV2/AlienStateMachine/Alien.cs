@@ -75,10 +75,14 @@ public class Alien : NetworkBehaviour
         }
 
         StateMachine._CurrentState.FrameUpdate();
+
+        Debug.Log($"Current State : {StateMachine._CurrentState}");
     }
 
     private void FixedUpdate()
     {
+        Debug.Log($"Alien Destination : {enemyNavMesh.destination}");
+        Debug.Log($"Is in patrol : {inPatrol}");
         StateMachine._CurrentState.PhysicsUpdate();
     }
 
@@ -148,15 +152,15 @@ public class Alien : NetworkBehaviour
             Debug.Log("Le monstre patrouille autour du joueur");
             int pathChosen = Random.Range(0, roomsAroundPlayer.Count);
             actualRoom = pathChosen;
-            enemyNavMesh.destination = roomsAroundPlayer[actualRoom].transform.position;
+            //enemyNavMesh.destination = roomsAroundPlayer[actualRoom].transform.position;
         }
         else
         {
             Debug.Log("Le monstre patrouille al�atoirement");
             int rdmRoom = Random.Range(0, rooms.Count);
             actualRoom = rdmRoom;
-            Debug.Log(actualRoom);
-            enemyNavMesh.SetDestination(rooms[actualRoom].transform.position);
+            Debug.Log(rooms[actualRoom]);
+            //enemyNavMesh.SetDestination(rooms[actualRoom].transform.position);
         }
         while (inPatrol)
         {
@@ -176,8 +180,9 @@ public class Alien : NetworkBehaviour
             }
             if (isArrived)
             {
-                enemyNavMesh.destination = rooms[actualRoom].transform.GetChild(Random.Range(0, rooms[actualRoom].transform.childCount)).position;
                 isArrived = false;
+                enemyNavMesh.destination = rooms[actualRoom].transform.GetChild(Random.Range(0, rooms[actualRoom].transform.childCount)).position;
+                Debug.Log($"Alien Destination : {enemyNavMesh.destination}");
             }
             yield return null;
         }

@@ -36,7 +36,7 @@ public class PlayerInteraction : MonoBehaviour
 
                 case "CamButton":
                     Debug.Log(HighlightManager.Instance.GetObjectName());
-                    _camManager.ChangeCam(HighlightManager.Instance.GetObjectName());
+                    //_camManager.ChangeCam(HighlightManager.Instance.GetObjectName());
                     //Tu mets ta fonction de cam manager, t'as acc�s au nom et au tag dans l'highlightmanager, et au ID dans le GameManager (fait une fonction pour r�cup)
                     break;
 
