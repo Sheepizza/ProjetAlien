@@ -6,6 +6,7 @@ using Mirror;
 
 public class Alien : NetworkBehaviour
 {
+    // OUIN OUIN ROBIN
     #region State Machine Variables
     public AlienStateMachine StateMachine { get; set; }
     public PatrolState patrolState { get; set; }
@@ -34,7 +35,7 @@ public class Alien : NetworkBehaviour
 
     #region other variables
     public Coroutine pathwayCountdownCoroutine;
-    
+    Coroutine resetCoroutine;
     public bool inPatrol = false;
     public float enemyRange;
     public bool isArrived = false;
@@ -166,6 +167,7 @@ public class Alien : NetworkBehaviour
     public IEnumerator FindRoom()
     {
         inPatrol = true;
+        resetCoroutine = null;
         if (roomsAroundPlayer.Count != 0)
         {
             Debug.Log("Le monstre patrouille autour du joueur");
@@ -181,29 +183,41 @@ public class Alien : NetworkBehaviour
             Debug.Log(actualRoom);
             enemyNavMesh.SetDestination(rooms[actualRoom].transform.position);
         }  
+
+        while(inPatrol)
+        {
             float distanceToDestination = Vector3.Distance(transform.position, enemyNavMesh.destination);
 
-            while(inPatrol)
+            if (distanceToDestination < 0.5f)  // Tol�rance de 0.5 unit�s
             {
-                if (distanceToDestination < 0.5f)  // Tol�rance de 0.5 unit�s
-                {
-                    isArrived = true;
-                }
-                else
-                {
-                    isArrived = false;
-                }
-                if (isArrived)
-                {
-                    isArrived = false;
-                    enemyNavMesh.destination = rooms[actualRoom].transform.GetChild(Random.Range(0, rooms[actualRoom].transform.childCount)).position;
-                    Debug.Log($"Alien Destination : {enemyNavMesh.destination}");
-                }
+                isArrived = true;
+                pathwayCountdownCoroutine = StartCoroutine(PathwayCountdown());
+            }
+            else
+            {
+                isArrived = false;
+                if(resetCoroutine == null)
+                resetCoroutine = StartCoroutine(ResetCoroutine());
+            }
+            if (isArrived)
+            {
+                isArrived = false;
+                enemyNavMesh.destination = rooms[actualRoom].transform.GetChild(Random.Range(0, rooms[actualRoom].transform.childCount)).position;
+                Debug.Log($"Alien Destination : {enemyNavMesh.destination}");
             }
             yield return null;
         }
+    }
     
 
+    public IEnumerator ResetCoroutine()
+    {
+        yield return new WaitForSeconds(30);
+        StopCoroutine(FindRoom());
+        inPatrol = false;
+        pathwayCountdownCoroutine = null;
+        StartCoroutine(FindRoom());
+    }
 
     public IEnumerator PathwayCountdown()
     {

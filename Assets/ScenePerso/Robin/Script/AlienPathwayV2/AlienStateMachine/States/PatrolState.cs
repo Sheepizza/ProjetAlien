@@ -28,6 +28,7 @@ public class PatrolState : AlienState
         if(alien.pathwayCountdown <= 0)
         {
             alien.inPatrol = false;
+            alien.pathwayCountdownCoroutine = null;
             alien.FindRoomManager();
         }
 
