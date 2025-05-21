@@ -44,6 +44,7 @@ public class DoorManager : NetworkBehaviour
                 {
                     CmdChangeDoorPos(_door, !_isButtonActive);
                     GameObject.Find(key).GetComponent<IsActivate>().IsActive = !_isButtonActive;
+                    GameObject.Find(key).GetComponent<IsActivate>().UpdateColor();
                     _canUse = false;
                 }
             }

@@ -30,15 +30,15 @@ MonoBehaviour:
   - key: J1L_8
     value: J1L_H
   J2BD:
-  - key: J1L_1
-    value: J1L_A
-  - key: J1L_2
-    value: J1L_B
-  - key: J1L_3
-    value: J1L_C
-  - key: J1L_4
-    value: J1L_D
-  - key: J1L_5
-    value: J1L_E
-  - key: J1L_6
-    value: J1L_F
+  - key: J2L_1
+    value: J2L_A
+  - key: J2L_2
+    value: J2L_B
+  - key: J2L_3
+    value: J2L_C
+  - key: J2L_4
+    value: J2L_D
+  - key: J2L_5
+    value: J2L_E
+  - key: J2L_6
+    value: J2L_F

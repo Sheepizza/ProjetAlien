@@ -132,7 +132,7 @@ public class LightManager : NetworkBehaviour
         }
 
         _dico = lightsDatas.GetJ2Dictionary();
-
+        Debug.Log(_dico);
         foreach (var _light in _dico.Values)
         {
             GameObject.Find(_light).transform.GetChild(0).gameObject.SetActive(false);

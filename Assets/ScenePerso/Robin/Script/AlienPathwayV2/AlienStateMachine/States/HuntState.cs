@@ -12,6 +12,11 @@ public class HuntState : AlienState
     public override void EnterState()
     {
         Debug.Log("Je chasse");
+        if(alien.alienScream.clip == null)
+        {
+            alien.alienScream.clip = DiegeticSoundManager.Instance.diegeticsSounds["Alien_Scream"].audioClip;
+        }
+        alien.alienScream.Play();
     }
 
     public override void ExitState()

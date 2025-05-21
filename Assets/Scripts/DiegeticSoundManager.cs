@@ -8,7 +8,7 @@ public class DiegeticSoundManager : MonoBehaviour
     [SerializeField]
     DiegeticsSoundsDatas diegeticsSoundsDatas;
 
-    static Dictionary<string, (AudioClip audioClip, float range)> diegeticsSounds = new Dictionary<string, (AudioClip audioClip, float range)>();
+    public Dictionary<string, (AudioClip audioClip, float range)> diegeticsSounds = new Dictionary<string, (AudioClip audioClip, float range)>();
 
     private static DiegeticSoundManager instance = null;
     public static DiegeticSoundManager Instance => instance;

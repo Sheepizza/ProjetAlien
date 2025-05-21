@@ -6,6 +6,7 @@ using Mirror;
 
 public class Alien : NetworkBehaviour
 {
+    // OUIN OUIN ROBIN
     #region State Machine Variables
     public AlienStateMachine StateMachine { get; set; }
     public PatrolState patrolState { get; set; }
@@ -18,6 +19,10 @@ public class Alien : NetworkBehaviour
     #endregion
 
     #region components
+
+    AudioSource footstepAudio;
+    public AudioClip[] audioClips;
+    public AudioSource alienScream;
     public NavMeshAgent enemyNavMesh;
     public FieldOfView FOV;
     public Animator animator;
@@ -29,12 +34,12 @@ public class Alien : NetworkBehaviour
     #endregion
 
     #region other variables
-    Coroutine pathwayCountdownCoroutine;
-    
+    public Coroutine pathwayCountdownCoroutine;
+    Coroutine resetCoroutine;
     public bool inPatrol = false;
     public float enemyRange;
-    bool isArrived = false;
-    int actualRoom;
+    public bool isArrived = false;
+    public int actualRoom;
     public int pathwayCountdown = 20;
     public int pathwayTiming;
     public int escapeTiming;
@@ -42,6 +47,7 @@ public class Alien : NetworkBehaviour
 
     private void Start()
     {
+        footstepAudio = GetComponent<AudioSource>();
         enemyNavMesh = GetComponent<NavMeshAgent>();
         FOV = GetComponent<FieldOfView>();
         animator = GetComponent<Animator>();
@@ -49,6 +55,9 @@ public class Alien : NetworkBehaviour
         losingCanva.SetActive(false);
 
         StateMachine.Initialize(patrolState);
+
+        
+        //alienScream.clip = DiegeticSoundManager.Instance.diegeticsSounds["Alien_Scream"].audioClip;
     }
     private void Awake()
     {
@@ -56,11 +65,23 @@ public class Alien : NetworkBehaviour
         patrolState = new PatrolState(this, StateMachine);
         huntState = new HuntState(this, StateMachine);
         searchingState = new SearchingState(this, StateMachine);
-        
     }
 
     private void Update()
     {
+        if(!footstepAudio.isPlaying)
+        {
+            int actualClip = 5;
+            int rdmClip = Random.Range(0, audioClips.Length);
+            
+            if(actualClip != rdmClip)
+            {
+                actualClip = rdmClip;
+                footstepAudio.clip = audioClips[rdmClip];
+                footstepAudio.Play();
+            }
+        }
+
         if (playerRef == null)
         {
             if (name == "MonsterCancerServer")
@@ -145,38 +166,38 @@ public class Alien : NetworkBehaviour
     }
     public IEnumerator FindRoom()
     {
-        pathwayCountdownCoroutine = null;
         inPatrol = true;
+        resetCoroutine = null;
         if (roomsAroundPlayer.Count != 0)
         {
             Debug.Log("Le monstre patrouille autour du joueur");
             int pathChosen = Random.Range(0, roomsAroundPlayer.Count);
             actualRoom = pathChosen;
-            //enemyNavMesh.destination = roomsAroundPlayer[actualRoom].transform.position;
+            enemyNavMesh.destination = roomsAroundPlayer[actualRoom].transform.position;
         }
         else
         {
             Debug.Log("Le monstre patrouille al�atoirement");
             int rdmRoom = Random.Range(0, rooms.Count);
             actualRoom = rdmRoom;
-            Debug.Log(rooms[actualRoom]);
-            //enemyNavMesh.SetDestination(rooms[actualRoom].transform.position);
-        }
-        while (inPatrol)
+            Debug.Log(actualRoom);
+            enemyNavMesh.SetDestination(rooms[actualRoom].transform.position);
+        }  
+
+        while(inPatrol)
         {
             float distanceToDestination = Vector3.Distance(transform.position, enemyNavMesh.destination);
 
             if (distanceToDestination < 0.5f)  // Tol�rance de 0.5 unit�s
             {
-                if (pathwayCountdownCoroutine == null)
-                {
-                    pathwayCountdownCoroutine = StartCoroutine(PathwayCountdown());
-                }
                 isArrived = true;
+                pathwayCountdownCoroutine = StartCoroutine(PathwayCountdown());
             }
             else
             {
                 isArrived = false;
+                if(resetCoroutine == null)
+                resetCoroutine = StartCoroutine(ResetCoroutine());
             }
             if (isArrived)
             {
@@ -187,9 +208,18 @@ public class Alien : NetworkBehaviour
             yield return null;
         }
     }
+    
 
+    public IEnumerator ResetCoroutine()
+    {
+        yield return new WaitForSeconds(30);
+        StopCoroutine(FindRoom());
+        inPatrol = false;
+        pathwayCountdownCoroutine = null;
+        StartCoroutine(FindRoom());
+    }
 
-    IEnumerator PathwayCountdown()
+    public IEnumerator PathwayCountdown()
     {
         //Debug.Log("Debut Patrouille ma gueule");
         while (pathwayCountdown > 0)

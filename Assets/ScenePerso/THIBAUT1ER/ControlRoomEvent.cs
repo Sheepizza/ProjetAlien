@@ -9,7 +9,7 @@ public class ControlRoomEvent : MonoBehaviour
     public int AlienFrequenceAttack;
     public AudioSource AlienDanger;
     public GameManager gameManager;
-    public GameObject monstre;
+    //public GameObject monstre;
     public Alien alienScript;
 
     public bool alienAttack = false; 
@@ -48,7 +48,7 @@ public class ControlRoomEvent : MonoBehaviour
         yield return new WaitForSeconds(10);
         int randomNumber = Random.Range(0, AlienFrequenceAttack);
 
-        Debug.Log("Tia tiré" + randomNumber);
+        Debug.Log("Tia tirï¿½" + randomNumber);
         switch (randomNumber)
         {
             case 0:
@@ -78,10 +78,10 @@ public class ControlRoomEvent : MonoBehaviour
 
         if (playerDanger == true)
         {
-            Debug.Log("Tié mort");
+            Debug.Log("Tiï¿½ mort");
             /*monstre.SetActive(true);*/
             alienScript.StartCoroutine(alienScript.Kill());
-            canvaDeath.enabled = true;
+            //canvaDeath.enabled = true;
             //TUER JOUEUR
         }
         lightsWarning.SetBool("Warning", false);
