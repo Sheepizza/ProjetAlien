@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f00fe49399691745a2f7004a8ad19cb, type: 3}
+  m_Name: LightToCamLink
+  m_EditorClassIdentifier: 
+  J1LinkList:
+  - lightKey: J1L_1
+    ScreensNumbers: 00000000
+    CamNumber: 00000000
+  - lightKey: J1L_2
+    ScreensNumbers: 01000000
+    CamNumber: 01000000
+  - lightKey: J1L_3
+    ScreensNumbers: 02000000
+    CamNumber: 03000000
+  - lightKey: J1L_4
+    ScreensNumbers: 
+    CamNumber: 
+  - lightKey: J1L_5
+    ScreensNumbers: 03000000
+    CamNumber: 05000000
+  - lightKey: J1L_6
+    ScreensNumbers: 0400000005000000
+    CamNumber: 0800000009000000
+  - lightKey: J1L_7
+    ScreensNumbers: 06000000
+    CamNumber: 07000000
+  - lightKey: J1L_8
+    ScreensNumbers: 0700000008000000
+    CamNumber: 0200000004000000
+  J2LinkList:
+  - lightKey: J2L_1
+    ScreensNumbers: 
+    CamNumber: 
+  - lightKey: J2L_2
+    ScreensNumbers: 
+    CamNumber: 
+  - lightKey: J2L_3
+    ScreensNumbers: 
+    CamNumber: 
+  - lightKey: J2L_4
+    ScreensNumbers: 
+    CamNumber: 
+  - lightKey: J2L_5
+    ScreensNumbers: 
+    CamNumber: 

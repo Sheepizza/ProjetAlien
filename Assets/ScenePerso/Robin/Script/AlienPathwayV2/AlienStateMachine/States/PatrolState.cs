@@ -25,14 +25,10 @@ public class PatrolState : AlienState
 
     public override void FrameUpdate()
     {
-
-        if(alien.isArrived && alien.roomsAroundPlayer.Count != 0)
+        if(alien.pathwayCountdown <= 0)
         {
-            stateMachine.ChangeState(alien.searchingState);
-        }
-        else if(alien.isArrived && alien.roomsAroundPlayer.Count == 0)
-        {
-            stateMachine.ChangeState(alien.baladeState);
+            alien.inPatrol = false;
+            alien.FindRoomManager();
         }
 
         if(alien.FOV.canSeePlayer)

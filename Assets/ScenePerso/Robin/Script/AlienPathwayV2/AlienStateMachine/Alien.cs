@@ -11,7 +11,6 @@ public class Alien : NetworkBehaviour
     public PatrolState patrolState { get; set; }
     public HuntState huntState { get; set; }
     public SearchingState searchingState { get; set; }
-    public BaladeState baladeState { get; set; }
 
     #endregion
 
@@ -65,7 +64,6 @@ public class Alien : NetworkBehaviour
         patrolState = new PatrolState(this, StateMachine);
         huntState = new HuntState(this, StateMachine);
         searchingState = new SearchingState(this, StateMachine);
-        baladeState = new BaladeState(this, StateMachine);
     }
 
     private void Update()
@@ -97,10 +95,14 @@ public class Alien : NetworkBehaviour
         }
 
         StateMachine._CurrentState.FrameUpdate();
+
+        Debug.Log($"Current State : {StateMachine._CurrentState}");
     }
 
     private void FixedUpdate()
     {
+        Debug.Log($"Alien Destination : {enemyNavMesh.destination}");
+        Debug.Log($"Is in patrol : {inPatrol}");
         StateMachine._CurrentState.PhysicsUpdate();
     }
 
@@ -181,16 +183,26 @@ public class Alien : NetworkBehaviour
         }  
             float distanceToDestination = Vector3.Distance(transform.position, enemyNavMesh.destination);
 
-            if (distanceToDestination < 0.5f)  // Tol�rance de 0.5 unit�s
+            while(inPatrol)
             {
-                isArrived = true;
+                if (distanceToDestination < 0.5f)  // Tol�rance de 0.5 unit�s
+                {
+                    isArrived = true;
+                }
+                else
+                {
+                    isArrived = false;
+                }
+                if (isArrived)
+                {
+                    isArrived = false;
+                    enemyNavMesh.destination = rooms[actualRoom].transform.GetChild(Random.Range(0, rooms[actualRoom].transform.childCount)).position;
+                    Debug.Log($"Alien Destination : {enemyNavMesh.destination}");
+                }
             }
-            else
-            {
-                isArrived = false;
-            }      
-        yield return new WaitForSeconds(0);
-    }
+            yield return null;
+        }
+    
 
 
     public IEnumerator PathwayCountdown()

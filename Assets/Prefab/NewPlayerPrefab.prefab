@@ -452,6 +452,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2741911874565494174}
   - component: {fileID: 8774506584622669348}
+  - component: {fileID: 1759978499831735731}
   m_Layer: 6
   m_Name: PlayerPatrolRange
   m_TagString: Untagged
@@ -495,6 +496,21 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 15
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1759978499831735731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017246125642733396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c2b0c74b6a22e746a0b02baa2711a24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
 --- !u!1 &1070249447160024023
 GameObject:
   m_ObjectHideFlags: 0
@@ -2085,6 +2101,10 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  camDatas: {fileID: 11400000, guid: d02e779b75247d9479802b3d374c5112, type: 2}
+  keyCamLists: []
+  camScreens: []
+  lightToCamLink: {fileID: 11400000, guid: 90be438abf14cb941a1130aa9453ad8c, type: 2}
   lightsDatas: {fileID: 11400000, guid: 1149a2a1166f555448921923275db8e9, type: 2}
 --- !u!114 &1279426979257140779
 MonoBehaviour:
