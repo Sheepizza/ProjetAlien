@@ -43,12 +43,12 @@ public class PickUpManager : NetworkBehaviour
     void RPCPickUp(string _GOname)
     {
         _pickedGO = GameObject.Find(_GOname);
-
         if (_LDObjectManager.IsKey(_pickedGO))
         {
             keysInHand.Add(_pickedGO);
+            _pickedGO.GetComponent<MeshRenderer>().enabled = false;
+            _pickedGO.GetComponent<Collider>().enabled = false;
             _pickedGO = null;
-            _pickedGO.SetActive(false);
             return;
         }
 
@@ -95,5 +95,7 @@ public class PickUpManager : NetworkBehaviour
         {
             GameManager.Instance.AddKey(key.name);
         }
+
+        keysInHand.Clear();
     }
 }
