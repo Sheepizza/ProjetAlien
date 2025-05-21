@@ -24,6 +24,7 @@ TagManager:
   - RepairTool
   - DispenserButton
   - LevelDesign
+  - ControlRoom
   layers:
   - Default
   - TransparentFX
