@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using Mirror;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class LDObjectManager : NetworkBehaviour
@@ -9,7 +6,7 @@ public class LDObjectManager : NetworkBehaviour
     public LDObjectDatas _LDObjectDatas;
     public LDTargetDatas _LDTargetDatas;
     public UniqueDoorOpen _uniqueDoorOpen;
- 
+
     public GameObject objectInHand;
     public string objectName;
     public string targetName;
@@ -30,9 +27,9 @@ public class LDObjectManager : NetworkBehaviour
     {
         objectInHand = _takenObject;
         objectName = objectInHand.name;
-        for(int i = 0; i < _LDObjectDatas.LDOBjectList.Count; i++)
+        for (int i = 0; i < _LDObjectDatas.LDOBjectList.Count; i++)
         {
-            if(_LDObjectDatas.LDOBjectList[i].name == objectName)
+            if (_LDObjectDatas.LDOBjectList[i].name == objectName)
             {
                 objectTag = _LDObjectDatas.LDOBjectList[i].Tag;
             }
@@ -46,7 +43,6 @@ public class LDObjectManager : NetworkBehaviour
         {
             if (_LDObjectDatas.LDOBjectList[i].name == objectName)
             {
-                Debug.Log($"GameObject Name : {objectName}\nLD Object Name : {_LDObjectDatas.LDOBjectList[i].name}");
                 return true;
             }
         }
@@ -55,28 +51,46 @@ public class LDObjectManager : NetworkBehaviour
 
     public void CheckInteraction(string _targetObjectName)
     {
-        /*Debug.Log("Entering Check");
-        if(objectInHand != null)
-        {
-            targetName = _targetObjectName;
 
-            for(int i = 0; i < _LDTargetDatas.LDTargetList.Count; i++)
+        targetName = _targetObjectName;
+
+        for (int i = 0; i < _LDTargetDatas.LDTargetList.Count; i++)
+        {
+            if (_LDTargetDatas.LDTargetList[i].name == targetName)
             {
-                if(_LDTargetDatas.LDTargetList[i].name == targetName)
+                targetTag = _LDTargetDatas.LDTargetList[i].Tag;
+                ResultName = _LDTargetDatas.LDTargetList[i].ResultName;
+            }
+        }
+        if (targetTag == null)
+        {
+            targetName = null;
+        }
+
+        else
+        {
+            foreach (var key in GameManager.Instance.Keys)
+            {
+                foreach (var obj in _LDObjectDatas.LDOBjectList)
                 {
-                    targetTag = _LDTargetDatas.LDTargetList[i].Tag;
-                    ResultName = _LDTargetDatas.LDTargetList[i].ResultName;
+                    if (obj.name == key)
+                    {
+                        objectTag = obj.Tag;
+                    }
                 }
             }
-            if(targetTag == null)
-            {
-                targetName = null;
-            }
-            else if(targetTag == objectTag)
+
+            if (targetTag == objectTag)
             {
                 InteractionPass();
             }
+        }
+
+        /*else if (targetTag == objectTag)
+        {
+            InteractionPass();
         }*/
+
 
 
 
@@ -90,7 +104,7 @@ public class LDObjectManager : NetworkBehaviour
         targetName = null;
         targetTag = null;
     }
-    
+
     public void InteractionPass()
     {
         Debug.Log("Interaction Pass");
@@ -112,13 +126,5 @@ public class LDObjectManager : NetworkBehaviour
     public void DestroyObject()
     {
         Destroy(objectInHand);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "ControlRoom")
-        {
-            pickUpManager.ShareKeys();
-        }
     }
 }
