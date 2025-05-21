@@ -46,6 +46,7 @@ public class LDObjectManager : NetworkBehaviour
         {
             if (_LDObjectDatas.LDOBjectList[i].name == objectName)
             {
+                Debug.Log($"GameObject Name : {objectName}\nLD Object Name : {_LDObjectDatas.LDOBjectList[i].name}");
                 return true;
             }
         }
