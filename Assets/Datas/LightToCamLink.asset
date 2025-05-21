@@ -39,17 +39,20 @@ MonoBehaviour:
     CamNumber: 0200000004000000
   J2LinkList:
   - lightKey: J2L_1
-    ScreensNumbers: 
-    CamNumber: 
+    ScreensNumbers: 00000000
+    CamNumber: 00000000
   - lightKey: J2L_2
-    ScreensNumbers: 
-    CamNumber: 
+    ScreensNumbers: 01000000
+    CamNumber: 01000000
   - lightKey: J2L_3
-    ScreensNumbers: 
-    CamNumber: 
+    ScreensNumbers: 02000000
+    CamNumber: 02000000
   - lightKey: J2L_4
     ScreensNumbers: 
     CamNumber: 
   - lightKey: J2L_5
-    ScreensNumbers: 
-    CamNumber: 
+    ScreensNumbers: 03000000
+    CamNumber: 03000000
+  - lightKey: J2L_6
+    ScreensNumbers: 04000000
+    CamNumber: 04000000
