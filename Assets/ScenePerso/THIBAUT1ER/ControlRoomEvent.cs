@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Mirror;
 
-public class ControlRoomEvent : MonoBehaviour
+public class ControlRoomEvent : NetworkBehaviour
 {
     public int randomNumber;
     public int AlienFrequenceAttack;
     public AudioSource AlienDanger;
-    public GameManager gameManager;
+
     //public GameObject monstre;
     public Alien alienScript;
 
@@ -25,10 +26,14 @@ public class ControlRoomEvent : MonoBehaviour
         /*monstre = gameManager.J1.transform.GetChild(gameManager.J1.transform.childCount-1).gameObject;
         monstre.SetActive (false);*/
         canvaDeath.enabled = false;
+    }
+
+    public void StartAlienEvent()
+    {
         StartCoroutine(AlienEvent());
     }
-   
-    void OnTriggerStay(Collider other)
+
+    void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
@@ -54,7 +59,8 @@ public class ControlRoomEvent : MonoBehaviour
             case 0:
                 if (playerDanger == true)
                 {
-                    StartCoroutine(AlienAttack());
+                    CommandLaunchAttack();
+                    Debug.Log("LaunchAttackCommandRequested");
                 }
                 else
                 {
@@ -69,9 +75,24 @@ public class ControlRoomEvent : MonoBehaviour
         
     }
 
-    
+    [Command(requiresAuthority = false)]
+    void CommandLaunchAttack()
+    {
+        Debug.Log("CommandSend");
+        RpcLaunchAttack();
+    }
+
+    [ClientRpc]
+    void RpcLaunchAttack()
+    {
+        Debug.Log("ClientRpc");
+        StartCoroutine(AlienAttack());
+    }
+
+
     IEnumerator AlienAttack()
     {
+        Debug.Log("Alien is attacking");
         lightsWarning.SetBool("Warning", true);
         AlienDanger.Play();
         yield return new WaitForSeconds(21);
@@ -80,7 +101,7 @@ public class ControlRoomEvent : MonoBehaviour
         {
             Debug.Log("Ti� mort");
             /*monstre.SetActive(true);*/
-            alienScript.StartCoroutine(alienScript.Kill());
+            //alienScript.StartCoroutine(alienScript.Kill());
             //canvaDeath.enabled = true;
             //TUER JOUEUR
         }

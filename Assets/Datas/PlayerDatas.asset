@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fc20a64b39188e4da1fa64f0efe3f61, type: 3}
   m_Name: PlayerDatas
   m_EditorClassIdentifier: 
-  Speed: 53.5
+  Speed: 3.5
   InitRatio: 1
   SprintRatio: 2
   CrouchRatio: 0.5

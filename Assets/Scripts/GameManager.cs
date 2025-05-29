@@ -35,6 +35,9 @@ public class GameManager : NetworkBehaviour
     public MinimapCursor minimapCursor;
     public AmbiantSoundsManager ambiantSoundsManager;
 
+    public ControlRoomEvent controlRoomEventJ1;
+    public ControlRoomEvent controlRoomEventJ2;
+
     [Header("Datas"), SerializeField]
     BreakAtStart BrokenObjects;
     private void Awake()
@@ -70,6 +73,8 @@ public class GameManager : NetworkBehaviour
         J2.GetComponentInChildren<PickUpManager>().SetupLDManager();
         BreakObjects();
         GoAmbiantSound();
+        controlRoomEventJ1.StartAlienEvent();
+        controlRoomEventJ2.StartAlienEvent();
     }
 
     void BreakObjects()

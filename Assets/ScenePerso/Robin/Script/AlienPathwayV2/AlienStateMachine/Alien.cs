@@ -97,13 +97,13 @@ public class Alien : NetworkBehaviour
 
         StateMachine._CurrentState.FrameUpdate();
 
-        Debug.Log($"Current State : {StateMachine._CurrentState}");
+        //Debug.Log($"Current State : {StateMachine._CurrentState}");
     }
 
     private void FixedUpdate()
     {
-        Debug.Log($"Alien Destination : {enemyNavMesh.destination}");
-        Debug.Log($"Is in patrol : {inPatrol}");
+        //Debug.Log($"Alien Destination : {enemyNavMesh.destination}");
+        //Debug.Log($"Is in patrol : {inPatrol}");
         StateMachine._CurrentState.PhysicsUpdate();
     }
 
@@ -121,10 +121,10 @@ public class Alien : NetworkBehaviour
 
         foreach (Collider source in soundSources)
         {
-            Debug.Log(source);
+            //Debug.Log(source);
             Sound sound = source.GetComponent<Sound>();
 
-            Debug.Log("Le son est jou� ?" + sound.audioSource.isPlaying);
+            //Debug.Log("Le son est jou� ?" + sound.audioSource.isPlaying);
 
             if (sound != null)
             {
@@ -170,17 +170,17 @@ public class Alien : NetworkBehaviour
         resetCoroutine = null;
         if (roomsAroundPlayer.Count != 0)
         {
-            Debug.Log("Le monstre patrouille autour du joueur");
+            //Debug.Log("Le monstre patrouille autour du joueur");
             int pathChosen = Random.Range(0, roomsAroundPlayer.Count);
             actualRoom = pathChosen;
             enemyNavMesh.destination = roomsAroundPlayer[actualRoom].transform.position;
         }
         else
         {
-            Debug.Log("Le monstre patrouille al�atoirement");
+            //Debug.Log("Le monstre patrouille al�atoirement");
             int rdmRoom = Random.Range(0, rooms.Count);
             actualRoom = rdmRoom;
-            Debug.Log(actualRoom);
+            //Debug.Log(actualRoom);
             enemyNavMesh.SetDestination(rooms[actualRoom].transform.position);
         }  
 
@@ -203,7 +203,7 @@ public class Alien : NetworkBehaviour
             {
                 isArrived = false;
                 enemyNavMesh.destination = rooms[actualRoom].transform.GetChild(Random.Range(0, rooms[actualRoom].transform.childCount)).position;
-                Debug.Log($"Alien Destination : {enemyNavMesh.destination}");
+                //Debug.Log($"Alien Destination : {enemyNavMesh.destination}");
             }
             yield return null;
         }
