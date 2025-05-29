@@ -4846,7 +4846,7 @@ PrefabInstance:
       objectReference: {fileID: 315067629}
     - target: {fileID: 2568251290393386649, guid: c359e284b90ba174aa958338b6af16c7, type: 3}
       propertyPath: AlienFrequenceAttack
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2648718096940772874, guid: c359e284b90ba174aa958338b6af16c7, type: 3}
       propertyPath: sceneId
@@ -4958,7 +4958,7 @@ PrefabInstance:
       objectReference: {fileID: 315067629}
     - target: {fileID: 8247618455868502290, guid: c359e284b90ba174aa958338b6af16c7, type: 3}
       propertyPath: AlienFrequenceAttack
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8354775213419721761, guid: c359e284b90ba174aa958338b6af16c7, type: 3}
       propertyPath: sceneId
